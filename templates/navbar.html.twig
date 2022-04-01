@@ -1,0 +1,48 @@
+<!-- Navigation -->
+<div>
+    <!--<nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a href="{{ path('home') }}"  class="navbar-brand">Inici</a>
+            <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <div class="navbar-nav">
+                    <a href="{{ path('elemento_list') }}" class="nav-item nav-link active">Elementos</a>
+                    <a href="{{ path('bakugan_list') }}" class="nav-item nav-link active">Bakugans</a>
+                    <a href="{{ path('p_login') }}" class="nav-item nav-link active">P.Login</a>
+
+                    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                        <a href="{{ path('app_logout') }}" class="nav-item nav-link active">Logout</a>
+                    {% else %}
+                        <a href="{{ path('login') }}" class="nav-item nav-link active">Login</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </nav>-->
+{% block stylesheets %}
+    <link href="{{ asset('css/navbar.css') }}" type="text/css" rel="stylesheet" />
+{% endblock %}
+    <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a href="{{ path('home') }}"  class="navbar-brand"><img class="img-fluid" id="logo-navbar" src="{{ asset('./img/fondos/logo5.png') }}"></a>
+            <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <div class="navbar-nav">
+                    <a href="{{ path('elemento_list') }}" class="nav-item nav-link active">Elementos</a>
+                    <a href="{{ path('bakugan_list') }}" class="nav-item nav-link active">Bakugans</a>
+                    <a href="{{ path('p_login') }}" class="nav-item nav-link active">P.Login</a>
+
+                    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                        <a href="{{ path('app_logout') }}" class="nav-item nav-link active">Logout</a>
+                    {% else %}
+                        <a href="{{ path('login') }}" class="nav-item nav-link active">Login</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </nav>
+</div>

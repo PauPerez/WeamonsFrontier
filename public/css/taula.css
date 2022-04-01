@@ -1,0 +1,12 @@
+table, th, td {
+  border: 1px solid black;
+}
+th, td {
+  padding: 15px;
+}
+img[a] {
+  max-height: 400px;
+}
+body {
+  margin: 10px;
+}

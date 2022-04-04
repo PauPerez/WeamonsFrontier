@@ -20,6 +20,16 @@ use App\Entity\Elemento;
 class PruebasController extends AbstractController
 {
     /**
+     * @Route("/pruebas/register", name="register")
+     */
+    public function register(): Response
+    {
+        return $this->render('pruebas/register.html.twig', [
+            'controller_name' => 'PruebasController',
+        ]);
+    }
+
+    /**
      * @Route("/pruebas/login", name="login")
      */
     public function login(): Response

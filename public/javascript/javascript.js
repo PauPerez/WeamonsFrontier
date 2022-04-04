@@ -1,5 +1,5 @@
-function mostrarContrasenya() {
-    var tipo = document.getElementById("password");
+function mostrarContrasenya(id) {
+    var tipo = document.getElementById(id);
     if (tipo.type == "password") {
         tipo.type = "text";
     } else {

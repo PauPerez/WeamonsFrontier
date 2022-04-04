@@ -20,7 +20,7 @@ use App\Entity\Elemento;
 class PruebasController extends AbstractController
 {
     /**
-     * @Route("/pruebas/login", name="p_login")
+     * @Route("/pruebas/login", name="login")
      */
     public function login(): Response
     {

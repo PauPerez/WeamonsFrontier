@@ -39,4 +39,14 @@ class PruebasController extends AbstractController
         ]);
     }
 
+    /**
+     * @Route("/pruebas/principal", name="principal")
+     */
+    public function principal(): Response
+    {
+        return $this->render('pruebas/principal.html.twig', [
+            'controller_name' => 'PruebasController',
+        ]);
+    }
+
 }

@@ -7,14 +7,13 @@
 {% endblock %}
 {% block body %}
     <div class="container">
-        <div class="div-login">
+        <div class="div_login">
                 <form action="{{ path('login') }}" method="post">
                     <div class="row align-items-center g-3">
-                        <img class="img-fluid" id="logo-login" src="{{ asset('./img/fondos/logo5.png') }}">
+                        <img class="img-fluid" id="logo_login" src="{{ asset('./img/fondos/logo5.png') }}">
                         <div class="col-md-auto col-12">
                             <label for="username" class="form-label">Nombre de usuario</label><br>
                             <input type="text" class="form-control" id="username" aria-describedby="usernameHelp">
-                            <div id="usernameHelp" class="form-text">We'll never share your username with anyone else.</div>
                         </div>
                         <div class="col-md-auto col-12">
                             <label for="password" class="form-label">Contraseña</label><br>
@@ -32,7 +31,7 @@
                             </div>
                         </div>
                         <button type="submit" class="btn btn-primary">Login</button>
-                        <p>¿No tienes una cuenta? &nbsp;<a href="">Haz clic aquí</a></p>
+                        <p>¿No tienes una cuenta? &nbsp;<a href="{{ path('register') }}">Haz clic aquí</a></p>
                     </div>
                 </form>
 

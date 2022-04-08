@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Llistat d'moviments{% endblock %}
+{% block body %}
+        <h1>Llistat d'moviments</h1>
+        <a href="{{ path('moviment_new') }}">+ Nou moviment</a>
+        <br><br>
+        {% for message in app.flashes('notice') %}
+              <strong><i> {{ message }} </i></strong>
+        {% endfor %}
+
+          <table style="margin-top: 20px;margin-bottom: 10px;">
+              <thead>
+                  <tr>
+                      <th>Tipus</th><th>Nom</th><th>Acció</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  {% for moviment in moviments %}
+                      <tr>
+                          <td>{{ moviment.getTipus.Nom }}</td><td>{{ moviment.Nom }}</td><td>{{ moviment.Accio }}</td>
+                      </tr>
+                  {% else %}
+                      <tr>
+                          <td colspan="5">No hi ha moviment.</td>
+                      </tr>
+                  {% endfor %}
+              </tbody>
+          </table>
+
+          <br>
+
+{% endblock %}

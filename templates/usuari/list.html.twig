@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Llistat d'Usuaris{% endblock %}
+{% block body %}
+        <h1>Llistat d'Usuaris</h1>
+        <a href="{{ path('usuari_new') }}">+ Nou usuari</a>
+        <br><br>
+        {% for message in app.flashes('notice') %}
+              <strong><i> {{ message }} </i></strong>
+        {% endfor %}
+
+          <table style="margin-top: 20px;margin-bottom: 10px;">
+              <thead>
+                  <tr>
+                      <th>Username</th><th>Nom</th><th>Cognoms</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  {% for usuari in usuaris %}
+                      <tr>
+                          <td>{{ usuari.Username }}</td><td>{{ usuari.Rol }}</td><td><img src="{{ asset('img/' ~ usuari.Img) }}" style="width:200px"></td>
+                      </tr>
+                  {% else %}
+                      <tr>
+                          <td colspan="5">No hi ha usuaris.</td>
+                      </tr>
+                  {% endfor %}
+              </tbody>
+          </table>
+
+          <br>
+
+{% endblock %}

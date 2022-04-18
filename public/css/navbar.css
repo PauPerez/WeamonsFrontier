@@ -29,6 +29,7 @@
 nav {
     /*background: #222;*/
     position: fixed;
+    z-index: 1;
 }
 
 .menu {

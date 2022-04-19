@@ -1,0 +1,98 @@
+.relleno {
+    width: 500px;
+    height: 500px;
+}
+
+.inicio_principal {
+    /*margin-top: 4em;*/
+    background-image: url(../img/fondos/principal2.jpg);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center center;
+    height: 70vh;
+    text-align: center;
+}
+
+.logo_principal {
+    max-width: 20em;
+    position: absolute;
+    text-align: center;
+    /*top: 50vh;
+    left: 50vw;
+    margin-top: 12vh;
+	margin-left: -18%;*/
+    margin-top: 20vh;
+	margin-left: -10em;
+}
+
+.padre_principal {
+    background-image: url(../img/fondos/fondoprincipal10.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center center;
+
+    position: relative;
+    width: 100vmin;
+    height: 100vmin;
+}
+
+.padre_principal h1 {
+    text-align: center;
+    font-size: 4em;
+    color: #e9ba2d;
+}
+
+/*.p1 {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 50px;
+}*/
+
+.principal_principal {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    transform: translateX(-50%);
+    background-color: green;
+}
+
+.imagen {
+    top: 60%;
+    left: -80%;
+    background-color: blue;
+}
+
+.imagen img {
+    width: 100%;
+}
+
+.info {
+    top: 52%;
+    left: 40%;
+    background-color: red;
+}
+
+.texto {
+    width: 30vw;
+    height: 30vw;
+    padding: 2em;
+    background-color: #261e1c;
+    position: relative;
+    top: -20em;
+}
+
+.texto h2 {
+    color: rgba(255, 255, 255, 0.404);
+}
+
+.texto p {
+    color: white;
+}
+
+.vacio {
+    background-color: blue;
+    width: 60%;
+    height: 2em;
+}

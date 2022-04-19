@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello LoginController!{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="{{ asset('css/principal.css') }}" type="text/css" rel="stylesheet" />
+{% endblock %}
+{% block body %}
+    <div class="inicio_principal">
+        <img class="img-fluid logo_principal" src="{{ asset('./img/fondos/logo7.png') }}">
+    </div>
+    <div class="padre_principal">
+    <h1>WEAMON FRONTIERS</h1>
+        <div class="principal_principal">
+            <div class="imagen">
+                <img class="" src="{{ asset('./img/fondos/fondoprincipal9.jpg') }}">
+            </div>
+            <div class="info">
+                <div class="vacio">
+                </div>
+                <div class="texto">
+                    <h2>PRESENTACIÓN</h2>
+                    <!--<p>Combate contra monstruos gigantescos en escenarios épicos.
+
+                    Tu tarea es aceptar misiones de caza de monstruos en una gran variedad de hábitats.
+                    Abátelos y recibe materiales que podrás utilizar para crear armas y armaduras más poderosas con las que enfrentarte a monstruos aún más peligrosos.
+
+                    Monster Hunter: World es la última entrega de la serie.
+                    En ella podrás disfrutar de la mejor experiencia de juego, utilizando todos los recursos a tu alcance para acechar monstruos en un nuevo mundo rebosante de emociones y sorpresas.</p>-->
+                    <!--<p>Combate con tu equipo de Weamons contra el equipo contrario en un combate por turnos épico.</p>
+                    <p>Tu tarea es llegar hasta lo mas alto en la clasificación de jugadores para llegar a ser el mejor.</p>
+                    <p>En Weamons Frontiers podrás disfrutar </p>
+                    <p></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="relleno"></div>
+    <div class="relleno"></div>
+    <div class="relleno"></div>
+    <div class="relleno"></div>
+{% endblock %}

@@ -68,6 +68,76 @@ class UsuariController extends AbstractController
             'title' => 'Nou usuari',
         ));
     }
+
+    /**
+     * @Route("/usuari/delete/{id}", name="usuari_delete", requirements={"id"="\d+"})
+     */
+    public function delete($id, Request $request)
+    {
+        $usuariRepository = $this->getDoctrine()
+        ->getRepository(Usuari::class);
+        $usuari = $usuariRepository
+            ->find($id);
+
+        $status = $usuariRepository
+            ->remove($usuari);
+
+        if (($status >= 200) && ($status < 300)) {
+          $this->addFlash(
+            'notice',
+            'usuari '.$usuari->getCodi().' eliminat!'
+          );
+        } else {
+          $this->addFlash(
+            'notice',
+            'ERROR '.$status
+          );
+        }
+        return $this->redirectToRoute('usuari_list');
+    }
+
+    /**
+     * @Route("/usuari/edit/{id<\d+>}", name="usuari_edit")
+     */
+    public function edit($id, Request $request)
+    {
+        $usuariRepository = $this->getDoctrine()
+        ->getRepository(Usuari::class);
+        $usuari = $usuariRepository
+            ->find($id);
+
+        //podem personalitzar el text del botó passant una opció 'submit' al builder de la classe usuariType
+        $form = $this->createForm(UsuariType::class, $usuari, array('submit'=>'Desar'));
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            // recollim els camps del formulari en l'objecte usuari
+            $usuari = $form->getData();
+
+            $status = $usuariRepository
+                ->add($usuari);
+
+            if (($status >= 200) && ($status < 300)) {
+            	$this->addFlash(
+                'notice',
+                'usuari '.$usuari->getCodi().' desat!'
+              );
+            } else {
+              $this->addFlash(
+                'notice',
+                'ERROR '.$status
+              );
+            }
+
+            return $this->redirectToRoute('usuari_list');
+        }
+
+        return $this->render('usuari/usuari.html.twig', array(
+            'form' => $form->createView(),
+            'title' => 'Editar usuari',
+        ));
+    }
 }
 
    

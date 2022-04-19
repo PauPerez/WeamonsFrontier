@@ -1,6 +1,9 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Llistat d'Usuaris{% endblock %}
+{% block javascripts %}
+  <script src="{{ asset('js/backoffice.js') }}" type="text/javascript"></script>
+{% endblock %}
 {% block body %}
         <h1>Llistat d'Usuaris</h1>
         <a href="{{ path('usuari_new') }}">+ Nou usuari</a>
@@ -19,6 +22,10 @@
                   {% for usuari in usuaris %}
                       <tr>
                           <td>{{ usuari.Username }}</td><td>{{ usuari.Rol }}</td><td><img src="{{ asset('img/' ~ usuari.Img) }}" style="width:200px"></td>
+                          <td>
+                            <a href="{{ path('usuari_edit', {'id': usuari.id}) }}">Editar</a>
+                            <a href="{{ path('usuari_delete', {'id': usuari.id}) }}" onclick="return eliminar('{{ usuari.username }}')">Eliminar</a>
+                          </td>
                       </tr>
                   {% else %}
                       <tr>

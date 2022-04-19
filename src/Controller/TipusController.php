@@ -61,5 +61,75 @@ class TipusController extends AbstractController
             'title' => 'Nou tipus',
         ));
     }
+
+    /**
+     * @Route("/tipus/delete/{id}", name="tipus_delete", requirements={"id"="\d+"})
+     */
+    public function delete($id, Request $request)
+    {
+        $tipusRepository = $this->getDoctrine()
+        ->getRepository(Tipus::class);
+        $tipus = $tipusRepository
+            ->find($id);
+
+        $status = $tipusRepository
+            ->remove($tipus);
+
+        if (($status >= 200) && ($status < 300)) {
+          $this->addFlash(
+            'notice',
+            'tipus '.$tipus->getCodi().' eliminat!'
+          );
+        } else {
+          $this->addFlash(
+            'notice',
+            'ERROR '.$status
+          );
+        }
+        return $this->redirectToRoute('tipus_list');
+    }
+
+    /**
+     * @Route("/tipus/edit/{id<\d+>}", name="tipus_edit")
+     */
+    public function edit($id, Request $request)
+    {
+        $tipusRepository = $this->getDoctrine()
+        ->getRepository(Tipus::class);
+        $tipus = $tipusRepository
+            ->find($id);
+
+        //podem personalitzar el text del botó passant una opció 'submit' al builder de la classe tipusType
+        $form = $this->createForm(TipusType::class, $tipus, array('submit'=>'Desar'));
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            // recollim els camps del formulari en l'objecte tipus
+            $tipus = $form->getData();
+
+            $status = $tipusRepository
+                ->add($tipus);
+
+            if (($status >= 200) && ($status < 300)) {
+            	$this->addFlash(
+                'notice',
+                'tipus '.$tipus->getCodi().' desat!'
+              );
+            } else {
+              $this->addFlash(
+                'notice',
+                'ERROR '.$status
+              );
+            }
+
+            return $this->redirectToRoute('tipus_list');
+        }
+
+        return $this->render('tipus/tipus.html.twig', array(
+            'form' => $form->createView(),
+            'title' => 'Editar tipus',
+        ));
+    }
 }
 ?>

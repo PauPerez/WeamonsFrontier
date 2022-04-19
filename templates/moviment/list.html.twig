@@ -1,6 +1,9 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Llistat d'moviments{% endblock %}
+{% block javascripts %}
+  <script src="{{ asset('js/backoffice.js') }}" type="text/javascript"></script>
+{% endblock %}
 {% block body %}
         <h1>Llistat d'moviments</h1>
         <a href="{{ path('moviment_new') }}">+ Nou moviment</a>
@@ -19,6 +22,10 @@
                   {% for moviment in moviments %}
                       <tr>
                           <td>{{ moviment.getTipus.Nom }}</td><td>{{ moviment.Nom }}</td><td>{{ moviment.Accio }}</td>
+                          <td>
+                            <a href="{{ path('moviment_edit', {'id': moviment.id}) }}">Editar</a>
+                            <a href="{{ path('moviment_delete', {'id': moviment.id}) }}" onclick="return eliminar('{{ moviment.nom }}')">Eliminar</a>
+                          </td>
                       </tr>
                   {% else %}
                       <tr>

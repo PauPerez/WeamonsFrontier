@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Llistat d'tipuss{% endblock %}
+{% block body %}
+        <h1>Llistat d'tipuss</h1>
+        <a href="{{ path('tipus_new') }}">+ Nou tipus</a>
+        <br><br>
+        {% for message in app.flashes('notice') %}
+              <strong><i> {{ message }} </i></strong>
+        {% endfor %}
+
+          <table style="margin-top: 20px;margin-bottom: 10px;">
+              <thead>
+                  <tr>
+                      <th>Nom</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  {% for tipus in tipuses %}
+                      <tr>
+                          <td>{{ tipus.Nom }}</td>
+                      </tr>
+                  {% else %}
+                      <tr>
+                          <td colspan="5">No hi ha tipus.</td>
+                      </tr>
+                  {% endfor %}
+              </tbody>
+          </table>
+
+          <br>
+
+{% endblock %}

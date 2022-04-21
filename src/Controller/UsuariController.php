@@ -138,8 +138,29 @@ class UsuariController extends AbstractController
             'title' => 'Editar usuari',
         ));
     }
+
+    /**
+    * @Route("/pruebas/registration", name="registration")
+    */
+    public function register()
+    {
+      $usuari = new Usuari();
+      $usuari->setUsername($_POST['username']);
+      $usuari->setPassword($_POST['password']);
+      $usuari->setRol("F2P");
+      // recollim els camps del formulari en l'objecte usuari
+      
+
+      /*$brochureFile = $_POST['img'];
+      if ($brochureFile) {
+          $brochureFileName = $fileUploader->upload($brochureFile, $usuari->getUsername());
+          $usuari->setImg($brochureFileName);
+      }*/
+      $entityManager = $this->getDoctrine()->getManager();
+      $entityManager->persist($usuari);
+      $entityManager->flush();
+
+      return $this->redirectToRoute('principal');
+    }
 }
-
-   
-
 ?>

@@ -7,10 +7,15 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use App\Service\FileUploader;
+use Symfony\Component\HttpFoundation\Cookie;
 
 use App\Entity\Usuari;
 use App\Repository\UsuariRepository;
 use App\Form\UsuariType;
+
+use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mime\Email;
+use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 
 class UsuariController extends AbstractController
 {
@@ -142,25 +147,77 @@ class UsuariController extends AbstractController
     /**
     * @Route("/pruebas/registration", name="registration")
     */
-    public function register()
+    public function register(MailerInterface $mailer): Response
     {
+      // Recollim els camps del formulari en l'objecte usuari
       $usuari = new Usuari();
       $usuari->setUsername($_POST['username']);
+      $usuari->setMail($_POST['email']);
       $usuari->setPassword($_POST['password']);
       $usuari->setRol("F2P");
-      // recollim els camps del formulari en l'objecte usuari
-      
+      $usuari->setImg("avatares/trainer_male_C.png");
+      $usuari->setVerified(false);
 
-      /*$brochureFile = $_POST['img'];
-      if ($brochureFile) {
-          $brochureFileName = $fileUploader->upload($brochureFile, $usuari->getUsername());
-          $usuari->setImg($brochureFileName);
-      }*/
+      // Enviem email de confirmacio de creacio
+      $email = (new TemplatedEmail())
+          ->from('hello@example.com')
+          ->to($_POST['email'])
+          ->subject('Verifica el compte!')
+          ->text('Sending emails is fun again!')
+          //->html('<p>See Twig integration for better HTML integration!</p>');
+          ->htmlTemplate('pruebas/verificarCuenta.html.twig');
+
+      $mailer->send($email);
+      
+      // Guardem les dades a la base de dades
       $entityManager = $this->getDoctrine()->getManager();
       $entityManager->persist($usuari);
       $entityManager->flush();
 
       return $this->redirectToRoute('principal');
+    }
+
+    /**
+    * @Route("/pruebas/accountVerified", name="accountVerified")
+    */
+    public function accountVerified(): Response
+    {
+
+      return $this->redirectToRoute('principal');
+    }
+
+    /**
+    * @Route("/pruebas/authentication", name="authentication")
+    */
+    public function authentication(): Response
+    {
+      $usuaris = $this->getDoctrine()
+        ->getRepository(Usuari::class)
+        ->findAll();
+      
+      $trobat = false;
+      $correcte = false;
+      $user = new Usuari();
+      foreach ($usuaris as $posicion=>$usuari)
+        if ($usuari->getVerified()) {
+          if ($usuari->getUsername() == $_POST['username'] || $usuari->getMail() == $_POST['username'])
+          $trobat = true;
+
+          if ($trobat == true && $usuari->getPassword() == $_POST['password']) {
+            $correcte = true;
+            $user = $usuari;
+          }
+        }
+
+      if ($correcte) {
+        $stringUser = serialize($user);
+        $response = $this->redirectToRoute('principal');
+        $response->headers->setCookie(Cookie::create('Authetication', $stringUser, time() + 3600));
+        return $response;
+      } else {
+        return $this->redirectToRoute('login');
+      }
+        
     }
 }
 ?>

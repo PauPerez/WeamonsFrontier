@@ -19,6 +19,7 @@ class UsuariType extends AbstractType
     {
         $builder
             ->add('Username', TextType::class)
+            ->add('Mail', TextType::class)
             ->add('Password', PasswordType::class)
             ->add('Rol', TextType::class)
             ->add('Img', FileType::class, [

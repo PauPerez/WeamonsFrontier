@@ -49,6 +49,16 @@ class Usuari
      */
     private $equips;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $Mail;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $Verified;
+
     public function __construct()
     {
         $this->historials = new ArrayCollection();
@@ -164,6 +174,30 @@ class Usuari
                 $equip->setUsuari(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getMail(): ?string
+    {
+        return $this->Mail;
+    }
+
+    public function setMail(string $Mail): self
+    {
+        $this->Mail = $Mail;
+
+        return $this;
+    }
+
+    public function getVerified(): ?bool
+    {
+        return $this->Verified;
+    }
+
+    public function setVerified(bool $Verified): self
+    {
+        $this->Verified = $Verified;
 
         return $this;
     }

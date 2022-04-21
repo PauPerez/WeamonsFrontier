@@ -1,0 +1,173 @@
+.relleno {
+    width: 500px;
+    height: 500px;
+}
+
+body {
+    background-color: rgb(4, 34, 43);
+}
+
+.inicio_principal {
+    background-image: url(../img/fondos/principal7.jpg);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center center;
+    height: 70vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.logo_principal {
+    max-width: 20em;
+    max-height: 20em;
+    min-width: 10em;
+    min-height: 10em;
+}
+
+.separarador_principal {
+    width: 100%;
+    height: 15vh;
+    background-color: rgb(4, 20, 26);
+}
+
+.animado_arriba_principal {
+    opacity: 0;
+    transition: all 0.5s;
+}
+
+.mostrarArriba {
+    animation: mostrarArriba 1s;
+}
+
+@keyframes mostrarArriba {
+    0% {
+        transform: translateY(-90px);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+
+.animado_abajo_principal {
+    opacity: 0;
+    transition: all 0.5s;
+}
+
+.mostrarAbajo {
+    animation: mostrarAbajo 1s;
+}
+
+@keyframes mostrarAbajo {
+    0% {
+        transform: translateY(90px);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+
+.cuentas_principal {
+    margin-right: 5vw;
+    margin-left: 5vw;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10vh;
+}
+
+.combates_principal {
+    margin-right: 5vw;
+    margin-left: 5vw;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10vh;
+}
+
+.weadex_principal {
+    margin-right: 5vw;
+    margin-left: 5vw;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.div_imagen_principal  {
+    margin-top: 4em;
+    width: 60%;
+    min-width: 40em;
+}
+
+.div_imagen_principal img {
+    width: 100%;
+    border: 2px rgb(29, 214, 205) solid;
+    border-radius: 20px;
+}
+
+.div_texto_principal {
+    margin-top: 4em;
+    width: 40%;
+    min-width: 20em;
+    padding: 3em;
+}
+
+.titulo_principal {
+    color: white;
+    font-style: italic;
+    font-weight: bold;
+    font-size: 2.5em;
+}
+
+.resaltar_titulo_principal, .resaltar_titulo_principal:hover {
+    color: rgb(29, 214, 205);
+    text-decoration: none;
+}
+
+.texto_principal {
+    color: rgb(167, 168, 181);
+    font-size: 1.25em;
+}
+
+.botones_principal {
+    background-color: rgb(29, 214, 205);
+    height: 3em;
+    font-weight: bold;
+    color: rgb(4, 34, 43);
+    border-color: rgb(29, 214, 205);
+}
+
+.botones_principal:hover {
+    background-color: rgb(22, 47, 54);
+    color: rgb(29, 214, 205);
+    border-color: rgb(4, 34, 43);
+}
+
+/* Tablet and mobile */
+@media all and (max-width: 1200px) {
+    .cuentas_principal {
+        margin-bottom: 0vh;
+    }
+
+    .combates_principal {
+        margin-bottom: 0vh;
+    }
+
+    .div_imagen_principal  {
+        margin-top: 4em;
+        width: 100%;
+        min-width: 20em;
+    }
+
+    .div_texto_principal {
+        margin-top: 4em;
+        width: 100%;
+        padding: 3em;
+        min-width: 10em;
+        text-align: center;
+    }
+}

@@ -6,23 +6,23 @@ body {
     background-position-y: 0em;
 }
 
+.padre_login {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .container {
     background-color: rgb(21, 63, 71);
     border: solid rgb(65, 154, 172);
     border-radius: 2%;
     max-width: 25em;
     opacity: 0.9;
-    position: absolute;
-    top: 50vh;
-    left: 50vw;
-    margin-top: -18em;
-	margin-left: -12.5em;
 }
 
 .div_login {
     margin: 20px;
-    display: flex;
-    justify-content: center;
 }
 
 #logo_login {

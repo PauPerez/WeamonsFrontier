@@ -49,4 +49,14 @@ class PruebasController extends AbstractController
         ]);
     }
 
+    /**
+     * @Route("/pruebas/weadex", name="weadex")
+     */
+    public function weadex(): Response
+    {
+        return $this->render('pruebas/weadex.html.twig', [
+            'controller_name' => 'PruebasController',
+        ]);
+    }
+
 }

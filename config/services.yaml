@@ -22,11 +22,7 @@ services:
             - '../src/Kernel.php'
 
     # add more service definitions when explicit configuration is needed
-<<<<<<< HEAD
-    # please note that last definitions always *replace* previous ones
-=======
     # please note that last definitions always *replace* previous ones
     App\Service\FileUploader:
         arguments:
             $targetDirectory: '%img_directory%'
->>>>>>> eb78ce3149b46dfa42eca35cc39c60da7241673d

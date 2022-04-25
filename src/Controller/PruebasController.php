@@ -60,7 +60,30 @@ class PruebasController extends AbstractController
     /**
      * @Route("/pruebas/weadex", name="weadex")
      */
-    public function weadex(): Response
+    public function weadex($currentPage = 1)
+    {
+
+    $em = $this->getDoctrine()->getManager();
+
+
+    $limit = 1;
+    $weamons = $this->getDoctrine()
+        ->getRepository(Weamon::class)
+        ->getAllWeamons($currentPage, $limit);
+    $weamonsResultado = $weamons['paginator'];
+    $weamonsQueryCompleta =  $weamons['query'];
+
+    $maxPages = ceil($weamons['paginator']->count() / $limit);
+
+    return $this->render('pruebas/weadex.html.twig', array(
+            'weamons' => $weamonsResultado,
+            'maxPages'=>$maxPages,
+            'thisPage' => $currentPage,
+            'all_items' => $weamonsQueryCompleta
+        ) );
+    }
+    
+     /*public function weadex(): Response
     {
         $weamons = $this->getDoctrine()
             ->getRepository(Weamon::class)
@@ -70,6 +93,6 @@ class PruebasController extends AbstractController
             'controller_name' => 'PruebasController',
             'weamons' => $weamons,
         ]);
-    }
+    }*/
 
 }

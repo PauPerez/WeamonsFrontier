@@ -4,3 +4,8 @@
 app_logout:
     path: /logout
     methods: GET
+
+inmueble_index:
+     path:     /{currentPage}/index
+     defaults: { _controller: "WeamonController.php" }
+     methods:  GET

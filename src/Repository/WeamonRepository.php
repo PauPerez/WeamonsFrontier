@@ -7,6 +7,7 @@ use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 
 /**
  * @method Weamon|null find($id, $lockMode = null, $lockVersion = null)
@@ -43,6 +44,28 @@ class WeamonRepository extends ServiceEntityRepository
         if ($flush) {
             $this->_em->flush();
         }
+    }
+
+    public function paginate($dql, $page = 1, $limit = 3)
+    {
+        $paginator = new Paginator($dql);
+        $paginator->getQuery()
+            ->setFirstResult($limit * ($page - 1)) // Offset
+            ->setMaxResults($limit); // Limit
+
+        return $paginator;
+    }
+
+    public function getAllWeamons($currentPage = 1, $limit = 3)
+    {
+        // Create our query
+        $query = $this->createQueryBuilder('p')
+            ->getQuery();
+
+
+        $paginator = $this->paginate($query, $currentPage, $limit);
+
+        return array('paginator' => $paginator, 'query' => $query);
     }
 
     // /**

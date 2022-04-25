@@ -19,4 +19,27 @@
     <div class="relleno"></div>
     <div class="relleno"></div>
     <div class="relleno"></div>
+    {% if maxPages > 1 %}
+        <ul>
+            {%if thisPage > 1 %}
+                <li >
+                    <a href="{{ path('inmueble_index', {currentPage: thisPage-1 < 1 ? 1 : thisPage-1}) }}">«</a>
+                </li>
+            {% endif %}
+
+            {# Render each page number #}
+            {% for i in 1..maxPages %}
+                <li>
+                    <a href="{{ path('inmueble_index', {currentPage: i}) }}">{{ i }}</a>
+                </li>
+            {% endfor %}
+
+            {# `»` arrow #}
+            {%if thisPage < maxPages %}
+                <li>
+                    <a href="{{ path('inmueble_index', {currentPage: thisPage+1 <= maxPages ? thisPage+1 : thisPage}) }}">»</a>
+                </li>
+            {% endif %}
+        </ul>
+    {% endif %}
 {% endblock %}

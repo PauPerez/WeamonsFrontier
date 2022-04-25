@@ -18,11 +18,11 @@ class UsuariType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('Username', TextType::class)
-            ->add('Mail', TextType::class)
-            ->add('Password', PasswordType::class)
-            ->add('Rol', TextType::class)
-            ->add('Img', FileType::class, [
+            ->add('username', TextType::class)
+            ->add('mail', TextType::class)
+            ->add('password', PasswordType::class)
+            ->add('rol', TextType::class)
+            ->add('img', FileType::class, [
                 'label' => 'Imatge de perfil',
                 'mapped' => false,
                 'required' => false,

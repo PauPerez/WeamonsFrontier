@@ -10,6 +10,7 @@ use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\String\Slugger\SluggerInterface;
 use App\Services\FileUploader;
+use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 use App\Form\BakuganType;
 use App\Form\ElementoType;
@@ -32,10 +33,19 @@ class PruebasController extends AbstractController
     /**
      * @Route("/pruebas/login", name="login")
      */
-    public function login(): Response
+    public function login(AuthenticationUtils $authenticationUtils): Response
     {
+        // get the login error if there is one
+        $error = $authenticationUtils->getLastAuthenticationError();
+        if ($error != null)
+            $error = "* Credenciales invalidas!";
+
+        // last username entered by the user
+        $lastUsername = $authenticationUtils->getLastUsername();
+
         return $this->render('pruebas/login.html.twig', [
-            'controller_name' => 'PruebasController',
+            'last_username' => $lastUsername,
+            'error' => $error
         ]);
     }
 

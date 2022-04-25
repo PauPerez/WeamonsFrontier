@@ -4,11 +4,16 @@
         <ul class="menu">
             <li class="logo"><a href="{{ path('login') }}" class="logo_navbar"><img class="img-fluid logo_navbar" src="{{ asset('./img/fondos/logo8.png') }}"></a></li>
             <li class="item item_link"><a href="{{ path('principal') }}">HOME</a></li>
-            <li class="item item_link"><a href="{{ path('gmail') }}">PERFIL</a></li>
+            <li class="item item_link"><a href="{{ path('principal') }}">PERFIL</a></li>
             <li class="item item_link"><a href="#">COMBATIR</a></li>
             <li class="item item_link"><a href="{{ path('weadex') }}">WEADEX</a></li>
-            <li class="item button"><a href="{{ path('login') }}">Log In</a></li>
-            <li class="item button secondary"><a href="{{ path('register') }}">Sign Up</a></li>
+            
+            {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                <li class="item button"><a href="{{ path('app_logout') }}">Logout</a></li>
+            {% else %}
+                <li class="item button"><a href="{{ path('login') }}">Log In</a></li>
+                <li class="item button secondary"><a href="{{ path('register') }}">Sign Up</a></li>
+            {% endif %}
             <li class="toggle"><a href="#"> <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/></svg> </a></li>
         </ul>
     </nav>

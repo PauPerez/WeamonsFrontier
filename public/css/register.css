@@ -39,14 +39,14 @@ body {
     color: rgb(36, 202, 235);
 }
 
-.div_register input[type="text"], .div_register input[type="password"] {
+.div_register input[type="text"], .div_register input[type="password"], .div_register input[type="email"] {
     background-color: rgb(13, 44, 49);
     color: white;
     border-color: rgb(65, 154, 172);
     opacity: 0.8;
 }
 
-.div_register input[type="text"]:focus, .div_register input[type="password"]:focus {
+.div_register input[type="text"]:focus, .div_register input[type="password"]:focus, .div_register input[type="email"] {
     background-color: rgb(13, 44, 49);
     color: white;
 }

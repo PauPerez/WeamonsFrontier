@@ -30,6 +30,11 @@ class Equip
      */
     private $Weamons;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Usuari::class, inversedBy="equips")
+     */
+    private $usuari;
+
     public function __construct()
     {
         $this->Weamons = new ArrayCollection();

@@ -15,7 +15,7 @@ class TipusController extends AbstractController
 {
 
     /**
-     * @Route("/tipus/list", name="tipus_list")
+     * @Route("/admin/tipus/list", name="tipus_list")
      */
     public function list()
     {
@@ -25,11 +25,11 @@ class TipusController extends AbstractController
 
         //codi de prova per visualitzar l'array de tipuss
 
-        return $this->render('tipus/list.html.twig', ['tipuses' => $tipus]);
+        return $this->render('admin/tipus/list.html.twig', ['tipuses' => $tipus]);
     }
 
     /**
-    * @Route("/tipus/new", name="tipus_new")
+    * @Route("/admin/tipus/new", name="tipus_new")
     */
     public function new(Request $request)
     {
@@ -56,14 +56,14 @@ class TipusController extends AbstractController
             return $this->redirectToRoute('tipus_list');
         }
 
-        return $this->render('tipus/tipus.html.twig', array(
+        return $this->render('admin/tipus/tipus.html.twig', array(
             'form' => $form->createView(),
             'title' => 'Nou tipus',
         ));
     }
 
     /**
-     * @Route("/tipus/delete/{id}", name="tipus_delete", requirements={"id"="\d+"})
+     * @Route("/admin/tipus/delete/{id}", name="tipus_delete", requirements={"id"="\d+"})
      */
     public function delete($id, Request $request)
     {
@@ -90,7 +90,7 @@ class TipusController extends AbstractController
     }
 
     /**
-     * @Route("/tipus/edit/{id<\d+>}", name="tipus_edit")
+     * @Route("/admin/tipus/edit/{id<\d+>}", name="tipus_edit")
      */
     public function edit($id, Request $request)
     {
@@ -126,7 +126,7 @@ class TipusController extends AbstractController
             return $this->redirectToRoute('tipus_list');
         }
 
-        return $this->render('tipus/tipus.html.twig', array(
+        return $this->render('admin/tipus/tipus.html.twig', array(
             'form' => $form->createView(),
             'title' => 'Editar tipus',
         ));

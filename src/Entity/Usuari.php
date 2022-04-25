@@ -6,11 +6,13 @@ use App\Repository\UsuariRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity(repositoryClass=UsuariRepository::class)
  */
-class Usuari
+class Usuari implements UserInterface, PasswordAuthenticatedUserInterface
 {
     /**
      * @ORM\Id
@@ -20,44 +22,51 @@ class Usuari
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=180, unique=true)
      */
-    private $Username;
+    private $email;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $Password;
+    private $username;
+
+    /**
+     * @ORM\Column(type="json")
+     */
+    private $roles = [];
+
+    /**
+     * @var string The hashed password
+     * @ORM\Column(type="string")
+     */
+    private $password;
+
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $Rol;
+    private $img;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $Img;
-
-    /**
-     * @ORM\OneToMany(targetEntity=Historial::class, mappedBy="Usuari", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity=Historial::class, mappedBy="usuari")
      */
     private $historials;
 
     /**
-     * @ORM\OneToMany(targetEntity=Equip::class, mappedBy="Usuari", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity=Equip::class, mappedBy="usuari")
      */
     private $equips;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $Mail;
-
-    /**
      * @ORM\Column(type="boolean")
      */
-    private $Verified;
+    private $is_verified;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $verificationToken;
 
     public function __construct()
     {
@@ -70,50 +79,111 @@ class Usuari
         return $this->id;
     }
 
+    public function getEmail(): ?string
+    {
+        return $this->email;
+    }
+
+    public function setEmail(string $email): self
+    {
+        $this->email = $email;
+
+        return $this;
+    }
+
     public function getUsername(): ?string
     {
-        return $this->Username;
+        return $this->username;
     }
 
-    public function setUsername(string $Username): self
+    public function setUsername(string $username): self
     {
-        $this->Username = $Username;
+        $this->username = $username;
 
         return $this;
     }
 
-    public function getPassword(): ?string
+    /**
+     * A visual identifier that represents this user.
+     *
+     * @see UserInterface
+     */
+    public function getUserIdentifier(): string
     {
-        return $this->Password;
+        return (string) $this->email;
     }
 
-    public function setPassword(string $Password): self
+    public function getRoles(): array
     {
-        $this->Password = $Password;
+        $roles = $this->roles;
+        // guarantee every user at least has ROLE_USER
+        $roles[] = 'ROLE_USER';
+
+        return array_unique($roles);
+    }
+
+    public function setRoles(array $roles): self
+    {
+        $this->roles = $roles;
 
         return $this;
     }
 
-    public function getRol(): ?string
+    /*public function getRol(): ?string
     {
-        return $this->Rol;
+        return $this->rol;
     }
 
-    public function setRol(string $Rol): self
+    public function setRol(string $rol): self
     {
-        $this->Rol = $Rol;
+        $this->rol = $rol;
 
         return $this;
+    }*/
+
+    /**
+     * @see PasswordAuthenticatedUserInterface
+     */
+    public function getPassword(): string
+    {
+        return $this->password;
+    }
+
+    public function setPassword(string $password): self
+    {
+        $this->password = $password;
+
+        return $this;
+    }
+
+    /**
+     * Returning a salt is only needed, if you are not using a modern
+     * hashing algorithm (e.g. bcrypt or sodium) in your security.yaml.
+     *
+     * @see UserInterface
+     */
+    public function getSalt(): ?string
+    {
+        return null;
+    }
+
+    /**
+     * @see UserInterface
+     */
+    public function eraseCredentials()
+    {
+        // If you store any temporary, sensitive data on the user, clear it here
+        // $this->plainPassword = null;
     }
 
     public function getImg(): ?string
     {
-        return $this->Img;
+        return $this->img;
     }
 
-    public function setImg(string $Img): self
+    public function setImg(string $img): self
     {
-        $this->Img = $Img;
+        $this->img = $img;
 
         return $this;
     }
@@ -178,26 +248,26 @@ class Usuari
         return $this;
     }
 
-    public function getMail(): ?string
+    public function getIsVerified(): ?bool
     {
-        return $this->Mail;
+        return $this->is_verified;
     }
 
-    public function setMail(string $Mail): self
+    public function setIsVerified(bool $is_verified): self
     {
-        $this->Mail = $Mail;
+        $this->is_verified = $is_verified;
 
         return $this;
     }
 
-    public function getVerified(): ?bool
+    public function getVerificationToken(): ?string
     {
-        return $this->Verified;
+        return $this->verificationToken;
     }
 
-    public function setVerified(bool $Verified): self
+    public function setVerificationToken(?string $verificationToken): self
     {
-        $this->Verified = $Verified;
+        $this->verificationToken = $verificationToken;
 
         return $this;
     }

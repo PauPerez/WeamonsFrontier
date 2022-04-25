@@ -1,7 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <style type="text/css">
+        .boton {
+            color: blue;
+        }
+    </style>
+{% endblock %}
+
 {% block body %}
-    {% apply inky_to_html|inline_css("{{ asset('css/principal.css') }}") %}
-        <container>
-            <button class="btn btn-primary botones_principal" href="http://localhost/M14/WeamonsFrontier/public/index.php/pruebas/weadex">Crear cuenta</button>
-        </container>
-    {% endapply %}
+    <container>
+        <img class="img-fluid" id="logo_login" src="{{ email.image('@img/fondos/logo5.png') }}">
+        <a class="boton" href="{{ link }}pruebas/accountVerified?email={{ mail }}&token={{ token }}">Crear cuenta</a>
+    </container>
 {% endblock %}

@@ -16,7 +16,7 @@ class WeamonController extends AbstractController
 {
 
     /**
-     * @Route("/weamon/list", name="weamon_list")
+     * @Route("/admin/weamon/list", name="weamon_list")
      */
     public function list()
     {
@@ -27,11 +27,11 @@ class WeamonController extends AbstractController
         //codi de prova per visualitzar l'array de weamons
         //dump($weamons);exit();
 
-        return $this->render('weamon/list.html.twig', ['weamons' => $weamons]);
+        return $this->render('admin/weamon/list.html.twig', ['weamons' => $weamons]);
     }
 
     /**
-    * @Route("/weamon/new", name="weamon_new")
+    * @Route("/admin/weamon/new", name="weamon_new")
     */
     public function new(Request $request, FileUploader $fileUploader)
     {
@@ -63,14 +63,14 @@ class WeamonController extends AbstractController
             return $this->redirectToRoute('weamon_list');
         }
 
-        return $this->render('weamon/weamon.html.twig', array(
+        return $this->render('admin/weamon/weamon.html.twig', array(
             'form' => $form->createView(),
             'title' => 'Nou weamon',
         ));
     }
 
     /**
-     * @Route("/weamon/delete/{id}", name="weamon_delete", requirements={"id"="\d+"})
+     * @Route("/admin/weamon/delete/{id}", name="weamon_delete", requirements={"id"="\d+"})
      */
     public function delete($id, Request $request)
     {
@@ -97,7 +97,7 @@ class WeamonController extends AbstractController
     }
 
     /**
-     * @Route("/weamon/edit/{id<\d+>}", name="weamon_edit")
+     * @Route("/admin/weamon/edit/{id<\d+>}", name="weamon_edit")
      */
     public function edit($id, Request $request)
     {
@@ -133,7 +133,7 @@ class WeamonController extends AbstractController
             return $this->redirectToRoute('weamon_list');
         }
 
-        return $this->render('weamon/weamon.html.twig', array(
+        return $this->render('admin/weamon/weamon.html.twig', array(
             'form' => $form->createView(),
             'title' => 'Editar weamon',
         ));

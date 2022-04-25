@@ -12,11 +12,9 @@ use Symfony\Component\String\Slugger\SluggerInterface;
 use App\Services\FileUploader;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
-use App\Form\BakuganType;
-use App\Form\ElementoType;
+use App\Form\WeamonType;
 
-use App\Entity\Bakugan;
-use App\Entity\Elemento;
+use App\Entity\Weamon;
 
 class PruebasController extends AbstractController
 {
@@ -64,8 +62,13 @@ class PruebasController extends AbstractController
      */
     public function weadex(): Response
     {
+        $weamons = $this->getDoctrine()
+            ->getRepository(Weamon::class)
+            ->findAll();
+
         return $this->render('pruebas/weadex.html.twig', [
             'controller_name' => 'PruebasController',
+            'weamons' => $weamons,
         ]);
     }
 

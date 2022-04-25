@@ -47,6 +47,21 @@ class WeamonType extends AbstractType
                     ])
                 ],
             ])
+            ->add('ImgB', FileType::class, [
+                'label' => 'Back sprite del weamon',
+                'mapped' => false,
+                'required' => false,
+                'constraints' => [
+                    new File([
+                        'maxSize' => '1024k',
+                        'mimeTypes' => [
+                            'image/png',
+                            'image/jpeg'
+                        ],
+                        'mimeTypesMessage' => "Només s'accepten imatges png/jpeg de 1024k o menys",
+                    ])
+                ],
+            ])
             ->add('save', SubmitType::class, array('label' => $options['submit']))
         ;
     }

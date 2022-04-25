@@ -9,13 +9,11 @@
 {% block body %}
     {{ include('navbar.html.twig') }}
     <div class="weamons_weadex">
-        <!--% for bakugan in bakugans %}-->
+        {% for weamon in weamons %}
             <div class="weamon_weadex">
-                <!--<img a src="{ asset ('img/uploads/' ~ bakugan.imagen) }}" class="img-fluid">-->
+                <img a src="{{ asset ('img/' ~ weamon.Img) }}" class="img-fluid">
             </div>
-        <!--% endfor %}-->
-        <div class="weamon_weadex"></div>
-        <div class="weamon_weadex"></div>
+        {% endfor %}
     </div>
     <div class="relleno"></div>
     <div class="relleno"></div>

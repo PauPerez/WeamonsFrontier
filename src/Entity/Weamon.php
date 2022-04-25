@@ -60,6 +60,11 @@ class Weamon
      */
     private $Moviments;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $ImgB;
+
     public function __construct()
     {
         $this->Moviments = new ArrayCollection();
@@ -174,6 +179,18 @@ class Weamon
     public function removeMoviment(Moviment $moviment): self
     {
         $this->Moviments->removeElement($moviment);
+
+        return $this;
+    }
+
+    public function getImgB(): ?string
+    {
+        return $this->ImgB;
+    }
+
+    public function setImgB(string $ImgB): self
+    {
+        $this->ImgB = $ImgB;
 
         return $this;
     }

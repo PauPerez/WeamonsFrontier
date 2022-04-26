@@ -1,0 +1,51 @@
+{% block stylesheets %}
+    <style type="text/css">
+        .navigation_button {
+            min-width: 50px;
+            margin: 1px;
+            color: rgb(4, 34, 43);
+            border: 2px solid rgb(4, 34, 43);
+            border-radius: 5px;
+            background-color: #006c97;
+        }
+    </style>
+{% endblock %}
+
+{# default Sliding pagination control implementation #}
+{% if pageCount > 1 %}
+    <div class="pagination">
+        {% if first is defined and current != first %}
+            <span class="first">
+                <button class="navigation_button" onclick="location.href='{{ path(route, query|merge({(pageParameterName): first})) }}'">&lt;&lt;</button>
+            </span>
+        {% endif %}
+
+        {% if previous is defined %}
+            <span class="previous">
+                <button class="navigation_button" onclick="location.href='{{ path(route, query|merge({(pageParameterName): previous})) }}'">&lt;</button>
+            </span>
+        {% endif %}
+
+        {% for page in pagesInRange %}
+            {% if page != current %}
+                <span class="page">
+                    <button class="navigation_button" onclick="location.href='{{ path(route, query|merge({(pageParameterName): page})) }}'">{{ page }}</button>
+                </span>
+            {% else %}
+                <button class="navigation_button" style="color: white;">{{ page }}</button>
+            {% endif %}
+        {% endfor %}
+
+        {% if next is defined %}
+            <span class="next">
+                <button class="navigation_button" onclick="location.href='{{ path(route, query|merge({(pageParameterName): next})) }}'">&gt;</button>
+            </span>
+        {% endif %}
+
+        {% if last is defined and current != last %}
+            <span class="last">
+                <button class="navigation_button" onclick="location.href='{{ path(route, query|merge({(pageParameterName): last})) }}'">&gt;&gt;</button> 
+            </span>
+        {% endif %}
+    </div>
+{% endif %}

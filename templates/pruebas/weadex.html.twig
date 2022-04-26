@@ -4,42 +4,26 @@
 {% block stylesheets %}
     {{ parent() }}
     <link href="{{ asset('css/weadex.css') }}" type="text/css" rel="stylesheet" />
-    <script src="{{ asset('javascript/animado.js') }}"></script>
 {% endblock %}
 {% block body %}
     {{ include('navbar.html.twig') }}
-    <div class="weamons_weadex">
-        {% for weamon in weamons %}
-            <div class="weamon_weadex">
-                <img a src="{{ asset ('img/' ~ weamon.Img) }}" class="img-fluid">
-            </div>
-        {% endfor %}
-    </div>
-    <div class="relleno"></div>
-    <div class="relleno"></div>
-    <div class="relleno"></div>
-    <div class="relleno"></div>
-    {% if maxPages > 1 %}
-        <ul>
-            {%if thisPage > 1 %}
-                <li >
-                    <a href="{{ path('inmueble_index', {currentPage: thisPage-1 < 1 ? 1 : thisPage-1}) }}">«</a>
-                </li>
-            {% endif %}
-
-            {# Render each page number #}
-            {% for i in 1..maxPages %}
-                <li>
-                    <a href="{{ path('inmueble_index', {currentPage: i}) }}">{{ i }}</a>
-                </li>
+    <div class="padre_weadex">
+        <div class="weamons_weadex">
+            {% for weamon in weamons %}
+                <div class="weamon_weadex">
+                    <div class="weamon_img_weadex">
+                        <img a src="{{ asset ('img/' ~ weamon.Img) }}" class="img-fluid">
+                    </div>
+                    <div class="weamon_info_weadex">
+                        <p class="weamon_id_weadex">N.º{{ weamon.id }}</p>
+                        <p class="weamon_nombre_weadex">{{ weamon.nom }}</p>
+                        <label class="weamon_tipo_{{ weamon.tipus.nom }}_weadex">{{ weamon.tipus.nom }}</label>
+                    </div>
+                </div>
             {% endfor %}
-
-            {# `»` arrow #}
-            {%if thisPage < maxPages %}
-                <li>
-                    <a href="{{ path('inmueble_index', {currentPage: thisPage+1 <= maxPages ? thisPage+1 : thisPage}) }}">»</a>
-                </li>
-            {% endif %}
-        </ul>
-    {% endif %}
+        </div>
+        <div class="navigation">
+            {{ knp_pagination_render(weamons) }}
+        </div>
+    </div>
 {% endblock %}

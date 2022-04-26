@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\String\Slugger\SluggerInterface;
 use App\Services\FileUploader;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
+use Knp\Component\Pager\PaginatorInterface;
 
 use App\Form\WeamonType;
 
@@ -60,39 +61,26 @@ class PruebasController extends AbstractController
     /**
      * @Route("/pruebas/weadex", name="weadex")
      */
-    public function weadex($currentPage = 1)
+    public function weadex(Request $request, PaginatorInterface $paginator)
     {
-
-    $em = $this->getDoctrine()->getManager();
-
-
-    $limit = 1;
-    $weamons = $this->getDoctrine()
-        ->getRepository(Weamon::class)
-        ->getAllWeamons($currentPage, $limit);
-    $weamonsResultado = $weamons['paginator'];
-    $weamonsQueryCompleta =  $weamons['query'];
-
-    $maxPages = ceil($weamons['paginator']->count() / $limit);
-
-    return $this->render('pruebas/weadex.html.twig', array(
-            'weamons' => $weamonsResultado,
-            'maxPages'=>$maxPages,
-            'thisPage' => $currentPage,
-            'all_items' => $weamonsQueryCompleta
-        ) );
-    }
-    
-     /*public function weadex(): Response
-    {
-        $weamons = $this->getDoctrine()
+        $allWeamons = $this->getDoctrine()
             ->getRepository(Weamon::class)
             ->findAll();
-
+        
+        // Paginate the results of the query
+        $weamons = $paginator->paginate(
+            // Doctrine Query, not results
+            $allWeamons,
+            // Define the page parameter
+            $request->query->getInt('page', 1),
+            // Items per page
+            12
+        );
+        
+        // Render the twig view
         return $this->render('pruebas/weadex.html.twig', [
-            'controller_name' => 'PruebasController',
-            'weamons' => $weamons,
+            'weamons' => $weamons
         ]);
-    }*/
+    }
 
 }

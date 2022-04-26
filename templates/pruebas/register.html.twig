@@ -4,53 +4,50 @@
 {% block stylesheets %}
     {{ parent() }}
     <link href="{{ asset('css/register.css') }}" type="text/css" rel="stylesheet" />
+    <script src="{{ asset('javascript/register.js') }}"></script>
 {% endblock %}
 {% block body %}
     <div class="padre_register">
         <div class="container">
             <div class="div_register">
-                    <form action="{{ path('registration') }}" method="post">
-                        <div class="row align-items-center g-3">
-                            <img class="img-fluid" id="logo_register" src="{{ asset('./img/fondos/logo5.png') }}">
-                            <div class="col-md-auto col-12">
-                                <label for="username" class="form-label">Nombre de usuario</label><br>
-                                <input type="text" name="username" class="form-control" id="username" aria-describedby="usernameHelp">
-                                <div id="usernameHelp" class="form-text">Nombre de usuario de mínimo 4 letras.</div>
-                            </div>
-                            <div class="col-md-auto col-12">
-                                <label for="email" class="form-label">E-mail de usuario</label><br>
-                                <input type="email" name="email" class="form-control" id="email">
-                            </div>
-                            <div class="col-md-auto col-12">
-                                <label for="password" class="form-label">Contraseña</label><br>
-                                <div class="costat">
-                                    <input type="password" name="password" class="form-control" id="password" >
-                                    <a onclick="mostrarContrasenya('password')" class="btn"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye-slash-fill" viewBox="0 0 16 16">
-                                    <path d="m10.79 12.912-1.614-1.615a3.5 3.5 0 0 1-4.474-4.474l-2.06-2.06C.938 6.278 0 8 0 8s3 5.5 8 5.5a7.029 7.029 0 0 0 2.79-.588zM5.21 3.088A7.028 7.028 0 0 1 8 2.5c5 0 8 5.5 8 5.5s-.939 1.721-2.641 3.238l-2.062-2.062a3.5 3.5 0 0 0-4.474-4.474L5.21 3.089z"/>
-                                    <path d="M5.525 7.646a2.5 2.5 0 0 0 2.829 2.829l-2.83-2.829zm4.95.708-2.829-2.83a2.5 2.5 0 0 1 2.829 2.829zm3.171 6-12-12 .708-.708 12 12-.708.708z"/></svg></a>
-                                </div>
-                                <div id="passwordHelp" class="form-text">Contraseña de mínimo una letra mayúscula, una letra minúscula y un número.</div>
-                            </div>
-                            <div class="col-md-auto col-12">
-                                <label for="confPassword" class="form-label">Confirmar Contraseña</label><br>
-                                <div class="costat">
-                                    <input type="password" name="confPassword" class="form-control" id="confPassword" >
-                                    <a onclick="mostrarContrasenya('confPassword')" class="btn"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye-slash-fill" viewBox="0 0 16 16">
-                                    <path d="m10.79 12.912-1.614-1.615a3.5 3.5 0 0 1-4.474-4.474l-2.06-2.06C.938 6.278 0 8 0 8s3 5.5 8 5.5a7.029 7.029 0 0 0 2.79-.588zM5.21 3.088A7.028 7.028 0 0 1 8 2.5c5 0 8 5.5 8 5.5s-.939 1.721-2.641 3.238l-2.062-2.062a3.5 3.5 0 0 0-4.474-4.474L5.21 3.089z"/>
-                                    <path d="M5.525 7.646a2.5 2.5 0 0 0 2.829 2.829l-2.83-2.829zm4.95.708-2.829-2.83a2.5 2.5 0 0 1 2.829 2.829zm3.171 6-12-12 .708-.708 12 12-.708.708z"/></svg></a>
-                                </div>
-                                <div id="passwordConfHelp" class="form-text">Repetir la contraseña introducida anteriormente.</div>
-                            </div>
-                            <div class="col-md-auto col-12">
-                                <div class="mb-3 form-check">
-                                    <input type="checkbox" name="acceptTerms" class="form-check-input" id="acceptTerms">
-                                    <label class="form-check-label" for="acceptTerms">Acepto las Condiciones de uso y la Política de privacidad de Weamon Frontiers.</label>
-                                </div>
-                            </div>
-                            <button type="submit" class="btn btn-primary">Registrar-se</button>
-                            <p>¿Ya tienes una cuenta? &nbsp;<a href="{{ path('login') }}">Haz clic aquí</a></p>
+                <form name="register" action="{{ path('registration') }}" method="post">
+                    <img class="img-fluid" id="logo_register" src="{{ asset('./img/fondos/logo5.png') }}">
+                    <div class="div_username_login">
+                        <label for="username" class="form-label">Nombre de usuario</label><br>
+                        <input type="text" name="username" class="form-control" id="username">
+                        <span class="error" id="usernameError" style="color: red;"></span>
+                    </div>
+                    <div class="div_email_login">
+                        <label for="email" class="form-label">E-mail de usuario</label><br>
+                        <input type="email" name="email" class="form-control" id="email">
+                        <span class="error" id="emailError" style="color: red;"></span>
+                    </div>
+                    <div class="div_password_login">
+                        <label for="password" class="form-label">Contraseña</label><br>
+                        <input type="password" name="password" class="form-control" id="password" >
+                        <a onclick="mostrarContrasenya('password')" class="btn"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye-slash-fill" viewBox="0 0 16 16">
+                        <path d="m10.79 12.912-1.614-1.615a3.5 3.5 0 0 1-4.474-4.474l-2.06-2.06C.938 6.278 0 8 0 8s3 5.5 8 5.5a7.029 7.029 0 0 0 2.79-.588zM5.21 3.088A7.028 7.028 0 0 1 8 2.5c5 0 8 5.5 8 5.5s-.939 1.721-2.641 3.238l-2.062-2.062a3.5 3.5 0 0 0-4.474-4.474L5.21 3.089z"/>
+                        <path d="M5.525 7.646a2.5 2.5 0 0 0 2.829 2.829l-2.83-2.829zm4.95.708-2.829-2.83a2.5 2.5 0 0 1 2.829 2.829zm3.171 6-12-12 .708-.708 12 12-.708.708z"/></svg></a>
+                        <span class="error" id="passwordError" style="color: red;"></span>
+                    </div>
+                    <div class="div_password_login">
+                        <label for="confPassword" class="form-label">Confirmar Contraseña</label><br>
+                        <input type="password" name="confPassword" class="form-control" id="confPassword" >
+                        <a onclick="mostrarContrasenya('confPassword')" class="btn"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye-slash-fill" viewBox="0 0 16 16">
+                        <path d="m10.79 12.912-1.614-1.615a3.5 3.5 0 0 1-4.474-4.474l-2.06-2.06C.938 6.278 0 8 0 8s3 5.5 8 5.5a7.029 7.029 0 0 0 2.79-.588zM5.21 3.088A7.028 7.028 0 0 1 8 2.5c5 0 8 5.5 8 5.5s-.939 1.721-2.641 3.238l-2.062-2.062a3.5 3.5 0 0 0-4.474-4.474L5.21 3.089z"/>
+                        <path d="M5.525 7.646a2.5 2.5 0 0 0 2.829 2.829l-2.83-2.829zm4.95.708-2.829-2.83a2.5 2.5 0 0 1 2.829 2.829zm3.171 6-12-12 .708-.708 12 12-.708.708z"/></svg></a>
+                        <span class="error" id="confPasswordError" style="color: red;"></span>
+                    </div>
+                    <div class="div_terms_login">
+                        <div class="mb-3 form-check">
+                            <input type="checkbox" name="terms" class="form-check-input" id="terms">
+                            <label class="form-check-label" for="terms">Acepto las Condiciones de uso y la Política de privacidad de Weamon Frontiers.</label>
+                            <span class="error" id="termsError" style="color: red;"></span>
                         </div>
-                    </form>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Registrar-se</button>
+                    <p>¿Ya tienes una cuenta? &nbsp;<a href="{{ path('login') }}">Haz clic aquí</a></p>
+             </form>
             </div>
         </div>
     </div>

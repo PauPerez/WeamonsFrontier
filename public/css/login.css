@@ -22,13 +22,25 @@ body {
 }
 
 .div_login {
-    margin: 20px;
+    margin-right: 20px;
+    margin-left: 20px;
 }
 
 #logo_login {
-    max-width: 25em;
+    max-width: 100%;
     display:block;
     margin:auto;
+    margin-top: 10px;
+}
+
+.div_username_login {
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+.div_password_login {
+    position: relative;
+    margin-bottom: 5px;
 }
 
 .div_login label, .div_login p {
@@ -37,6 +49,10 @@ body {
 
 .div_login a {
     color: rgb(36, 202, 235);
+}
+
+.div_username_login input, .div_password_login input {
+    margin-bottom: 5px;
 }
 
 .div_login input[type="text"], .div_login input[type="password"] {
@@ -53,22 +69,16 @@ body {
 
 svg {
     color: rgb(25, 159, 185);
-}
-
-.div_login input[type="checkbox"] {
-    background-color: rgb(13, 44, 49);
-}
-
-.div_login input[type="checkbox"]:checked {
-    background-color: rgb(26, 94, 107);
-}
-
-.costat {
-    display: flex;
-    align-items: Center;
+    position: absolute;
+    top: 52%;
+    transform: translateY(-50%);
+    left: unset;
+    right: 12px;
 }
 
 .div_login button[type="submit"] {
+    width: 100%;
     background-color: rgb(35, 119, 136);
     border: 1px solid rgb(13, 44, 49);
+    margin-bottom: 10px;
 }

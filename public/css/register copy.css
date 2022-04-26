@@ -22,33 +22,13 @@ body {
 }
 
 .div_register {
-    margin-right: 20px;
-    margin-left: 20px;
+    margin: 20px;
 }
 
 #logo_register {
-    max-width: 80%;
+    max-width: 12em;
     display:block;
     margin:auto;
-    margin-top: 10px;
-}
-
-.div_username_login {
-    margin-top: 20px;
-    margin-bottom: 10px;
-}
-
-.div_email_login {
-    margin-bottom: 10px;
-}
-
-.div_password_login {
-    position: relative;
-    margin-bottom: 5px;
-}
-
-.div_terms_login {
-    margin-bottom: 10px;
 }
 
 .div_register label, .div_register p {
@@ -58,12 +38,6 @@ body {
 .div_register a {
     color: rgb(36, 202, 235);
 }
-
-/* CAMBIAR*/
-.div_username_login input, .div_password_login input {
-    margin-bottom: 5px;
-}
-/**/
 
 .div_register input[type="text"], .div_register input[type="password"], .div_register input[type="email"] {
     background-color: rgb(13, 44, 49);
@@ -79,11 +53,6 @@ body {
 
 svg {
     color: rgb(25, 159, 185);
-    position: absolute;
-    top: 52%;
-    transform: translateY(-50%);
-    left: unset;
-    right: 12px;
 }
 
 .div_register input[type="checkbox"] {
@@ -94,9 +63,12 @@ svg {
     background-color: rgb(26, 94, 107);
 }
 
+.costat {
+    display: flex;
+    align-items: Center;
+}
+
 .div_register button[type="submit"] {
-    width: 100%;
     background-color: rgb(35, 119, 136);
     border: 1px solid rgb(13, 44, 49);
-    margin-bottom: 10px;
 }

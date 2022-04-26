@@ -49,6 +49,11 @@ class Usuari
      */
     private $equips;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $mail;
+
     public function __construct()
     {
         $this->historials = new ArrayCollection();
@@ -164,6 +169,18 @@ class Usuari
                 $equip->setUsuari(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getMail(): ?string
+    {
+        return $this->mail;
+    }
+
+    public function setMail(string $mail): self
+    {
+        $this->mail = $mail;
 
         return $this;
     }

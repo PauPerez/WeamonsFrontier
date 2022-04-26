@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Weamon Frontier
+{% endblock %}
+{% block stylesheets %}
+	<link href="{{ asset('css/Battle.css') }}" type="text/css" rel="stylesheet"/>
+{% endblock %}
+{% block javascripts %}
+	<script src="{{ asset('javascripts/Battle.js') }}"/>
+{% endblock %}
+{% block body %}
+	<div id="battle" class="battle">
+		<div id="{{ weamons[0].id }}" class="weamon">
+			<p class="nom" pos="jugador">{{ weamons[0].nom }}</p>
+			<p class="tipus" tipus="{{ weamons[0].tipus.nom }}" pos="jugador">{{ weamons[0].tipus.nom }}</p>
+			<div pos="jugador" class="health-bar" data-total="{{ weamons[0].vida }}" data-value="{{ weamons[0].vida }}">
+				<div class="bar">
+					<div class="hit"></div>
+				</div>
+			</div>
+			<div class="battle_hero">
+				<img src="{{ asset("Battlers/" ~ weamons[0].imgb) }}" alt="jugador">
+			</div>
+		</div>
+		<div id="1e" class="weamon">
+			<p class="nom" pos="enemic">{{ weamons[1].nom }}</p>
+			<p class="tipus" tipus="{{ weamons[1].tipus.nom }}" pos="enemic">{{ weamons[1].tipus.nom }}</p>
+			<div pos="enemic" class="health-bar" data-total="{{ weamons[1].vida }}" data-value="{{ weamons[1].vida }}">
+				<div class="bar">
+					<div class="hit"></div>
+				</div>
+			</div>
+			<div class="battle_enemy">
+			<img src="{{ asset("Battlers/" ~ weamons[1].img) }}" alt="enemic">
+		</div>
+		</div>
+		
+
+	</div>
+	<div id="atacMenu" weamon="{{ weamons[0].id }}" class="textMenu" style="display:flex">
+		{% for moviment in weamons[0].getMoviments %}
+			<button atac="{{ weamons[0].atac }}" class="moviment">{{ moviment.nom }}</button>
+		{% endfor %}
+	</div>
+	<div id="textMenu" class="textMenu" style="display:none">
+		<p>Weasur usa WeadaMassiva!!</p>
+	</div>
+	<p id="activeEnemy" hidden>1e</p>
+	<p id="activeWeamon" hidden>{{ weamons[0].id }}</p>
+	<p id="deadEnemies" hidden>3</p>
+	
+
+{% endblock %}

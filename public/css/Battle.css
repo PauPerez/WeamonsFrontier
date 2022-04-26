@@ -1,0 +1,182 @@
+.battle{
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    border:7px groove black;
+    width: 800px;
+    height: 500px;
+    background-image:url(http://localhost/TREBALL_EN_GRUP/prueba/public/Battlebacks/battlebgBosque.png);
+    background-size: cover;
+    image-rendering: pixelated;
+}
+
+.textMenu{
+    position:absolute;
+    top:512px;
+    left:0;
+    width: 800px;
+    height: 120px;
+    background-color: antiquewhite;
+    border: 7px black solid;
+    font-weight: bold;
+    text-align: center;
+    vertical-align:middle;
+    font-size: 20px;
+}
+
+.health-bar {
+    z-index: 1;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    width: 200px;
+    height: 20px;
+    padding: 5px;
+    background: #ddd;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    position: absolute;
+}
+
+.health-bar[pos="jugador"]{
+    bottom:50%;
+    left:4%;
+}
+
+.health-bar[pos="enemic"]{
+    top:25%;
+    right:10%;
+}
+
+.bar {
+background: rgb(79, 204, 68);
+width: 100%;
+height: 10px;
+position: relative;
+
+transition: width .5s linear;
+}
+
+.hit {
+background: rgba(255,255,255,0.6);
+position: absolute;
+top: 0;
+right: 0;
+bottom: 0;
+width: 0px;
+
+transition: width .5s linear;
+}
+
+.nom{
+    position: absolute;
+    white-space: nowrap;
+    background: var(--menu-font-color);
+    color: #fff;
+    font-size: 17px;
+    padding-left: 2px;
+    padding-right: 2px;
+    margin: 0;
+    z-index: 1;
+}
+
+.nom[pos="jugador"]{
+    left: 4%;
+    top: 40%;
+}
+
+.nom[pos="enemic"]{
+    right: 21%;
+    top: 20%;
+}
+
+.tipus{
+    position: absolute;
+    font-size: 12px;
+    width: auto;
+    padding: 2px;
+    border-radius: 15%;
+    z-index: 1;
+}
+
+.tipus[pos="jugador"]{
+    left: 21%;
+    top: 38%;
+}
+
+.tipus[pos="enemic"]{
+    right: 10%;
+    top: 18%;
+}
+
+.tipus[tipus="weaverde"]{
+    color: lime;
+    background-color: darkgreen;
+    border: 1px solid green;
+}
+
+.tipus[tipus="quemawea"]{
+    color: red;
+    background-color: yellow;
+    border: 1px solid orange;
+}
+
+.tipus[tipus="mojawea"]{
+    color: cyan;
+    background-color: darkblue;
+    border: 1px solid blue;
+}
+
+.battle_hero, .battle_enemy{
+    position: absolute;
+    transform: scale(2);
+    width: 200px;
+    height: auto;
+    overflow: hidden;
+}
+
+.battle_hero img, .battle_enemy img{
+    pointer-events: none;
+}
+
+.battle_hero{
+    bottom: 75px;
+    left: 70px;
+}
+
+.battle_enemy{
+    top: 200px;
+    right: -40px;
+}
+
+.battle_enemy img{
+    width: 100px;;
+}
+
+#atacMenu{
+    display:flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-content: center;
+}
+
+.moviment{
+    border: 2px solid black;
+    height: 50px;
+    width: 150px;
+    font-weight: bold;
+    font-size: 17px;
+    background-color: orange;
+    border-radius: 15%;
+}
+
+.moviment:hover{
+    background-color: orangered;
+}
+
+.moviment:active{
+    background-color: yellow;
+}

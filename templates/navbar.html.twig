@@ -1,23 +1,20 @@
 <!-- Navigation -->
 <div>
-    <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
-        <div class="container-fluid">
-            <a href="{{ path('home') }}"  class="navbar-brand">Inici</a>
-            <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarCollapse">
-                <div class="navbar-nav">
-                    <a href="{{ path('elemento_list') }}" class="nav-item nav-link active">Elementos</a>
-                    <a href="{{ path('bakugan_list') }}" class="nav-item nav-link active">Bakugans</a>
-
-                    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-                        <a href="{{ path('app_logout') }}" class="nav-item nav-link active">Logout</a>
-                    {% else %}
-                        <a href="{{ path('login') }}" class="nav-item nav-link active">Login</a>
-                    {% endif %}
-                </div>
-            </div>
-        </div>
+    <nav>
+        <ul class="menu">
+            <li class="logo"><a href="{{ path('principal') }}" class="logo_navbar"><img class="img-fluid logo_navbar" src="{{ asset('./img/fondos/logo8.png') }}"></a></li>
+            <li class="item item_link"><a href="{{ path('principal') }}">Home</a></li>
+            <li class="item item_link"><a href="#">Combatir</a></li>
+            <li class="item item_link"><a href="{{ path('weadex') }}">Weadex</a></li>
+            
+            {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                <li class="item button"><a href="{{ path('perfil') }}">{{ username }}</a></li>
+                <li class="item button secondary"><a href="{{ path('app_logout') }}">Logout</a></li>
+            {% else %}
+                <li class="item button"><a href="{{ path('login') }}">Log In</a></li>
+                <li class="item button secondary"><a href="{{ path('register') }}">Sign Up</a></li>
+            {% endif %}
+            <li class="toggle"><a href="#"> <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/></svg> </a></li>
+        </ul>
     </nav>
 </div>

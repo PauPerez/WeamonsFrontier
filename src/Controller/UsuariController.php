@@ -7,16 +7,22 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use App\Service\FileUploader;
+use Symfony\Component\HttpFoundation\Cookie;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 use App\Entity\Usuari;
 use App\Repository\UsuariRepository;
 use App\Form\UsuariType;
 
+use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mime\Email;
+use Symfony\Bridge\Twig\Mime\TemplatedEmail;
+
 class UsuariController extends AbstractController
 {
 
     /**
-     * @Route("/usuari/list", name="usuari_list")
+     * @Route("/admin/usuari/list", name="usuari_list")
      */
     public function list()
     {
@@ -27,11 +33,11 @@ class UsuariController extends AbstractController
         //codi de prova per visualitzar l'array de usuaris
         //dump($usuaris);exit();
 
-        return $this->render('usuari/list.html.twig', ['usuaris' => $usuaris]);
+        return $this->render('admin/usuari/list.html.twig', ['usuaris' => $usuaris]);
     }
 
     /**
-    * @Route("/usuari/new", name="usuari_new")
+    * @Route("/admin/usuari/new", name="usuari_new")
     */
     public function new(Request $request, FileUploader $fileUploader)
     {
@@ -63,14 +69,14 @@ class UsuariController extends AbstractController
             return $this->redirectToRoute('usuari_list');
         }
 
-        return $this->render('usuari/usuari.html.twig', array(
+        return $this->render('admin/usuari/usuari.html.twig', array(
             'form' => $form->createView(),
             'title' => 'Nou usuari',
         ));
     }
 
     /**
-     * @Route("/usuari/delete/{id}", name="usuari_delete", requirements={"id"="\d+"})
+     * @Route("/admin/usuari/delete/{id}", name="usuari_delete", requirements={"id"="\d+"})
      */
     public function delete($id, Request $request)
     {
@@ -97,7 +103,7 @@ class UsuariController extends AbstractController
     }
 
     /**
-     * @Route("/usuari/edit/{id<\d+>}", name="usuari_edit")
+     * @Route("/admin/usuari/edit/{id<\d+>}", name="usuari_edit")
      */
     public function edit($id, Request $request)
     {
@@ -133,34 +139,124 @@ class UsuariController extends AbstractController
             return $this->redirectToRoute('usuari_list');
         }
 
-        return $this->render('usuari/usuari.html.twig', array(
+        return $this->render('admin/usuari/usuari.html.twig', array(
             'form' => $form->createView(),
             'title' => 'Editar usuari',
         ));
     }
 
     /**
-    * @Route("/pruebas/registration", name="registration")
+    * @Route("/registration", name="registration")
     */
-    public function register()
+    public function register(MailerInterface $mailer, UserPasswordHasherInterface $passwordHasher): Response
     {
-      $usuari = new Usuari();
-      $usuari->setUsername($_POST['username']);
-      $usuari->setPassword($_POST['password']);
-      $usuari->setRol("F2P");
-      // recollim els camps del formulari en l'objecte usuari
-      
+      $usuariRepository = $this->getDoctrine()
+        ->getRepository(Usuari::class);
+      $user = $usuariRepository
+        ->findByEmail($_POST['email']);
 
-      /*$brochureFile = $_POST['img'];
-      if ($brochureFile) {
-          $brochureFileName = $fileUploader->upload($brochureFile, $usuari->getUsername());
-          $usuari->setImg($brochureFileName);
-      }*/
-      $entityManager = $this->getDoctrine()->getManager();
-      $entityManager->persist($usuari);
-      $entityManager->flush();
+      if ($user == null) {
+        // Recollim els camps del formulari en l'objecte usuari
+        $usuari = new Usuari();
+        $usuari->setUsername($_POST['username']);
+        $usuari->setEmail($_POST['email']);
+        $usuari->setRoles(['ROLE_USER']);
+        $usuari->setImg("avatares/trainer_male_C.png");
+        $usuari->setVerificationToken(bin2hex(random_bytes(64)));
+        $usuari->setIsVerified(false);
+        
+        // Hashear la contrasenya de l'usuari
+        $hashedPassword = $passwordHasher->hashPassword(
+          $usuari,
+          $_POST['password']
+        );
+        $usuari->setPassword($hashedPassword);
 
-      return $this->redirectToRoute('principal');
+        // Enviem email de confirmacio de creacio
+        $email = (new TemplatedEmail())
+            ->from('hello@example.com')
+            ->to($_POST['email'])
+            ->subject('Verifica el compte!')
+            ->text('Sending emails is fun again!')
+            //->html('<p>See Twig integration for better HTML integration!</p>');
+            ->htmlTemplate('verificarCuenta.html.twig')
+            ->context(['link' => $this->getParameter('link_servidor'),
+              'token' => $usuari->getVerificationToken(),
+              'mail' => $usuari->getEmail()]);
+        
+        //var_dump($email);die;
+        $mailer->send($email);
+        
+        // Guardem les dades a la base de dades
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->persist($usuari);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('principal');
+      }
+
+      return $this->redirectToRoute('register');
     }
+
+    /**
+    * @Route("/accountVerified", name="accountVerified")
+    */
+    public function accountVerified(Request $request): Response
+    {
+      //var_dump($request->query->get('token'));die;
+      $token = $request->query->get('token');
+
+      $usuariRepository = $this->getDoctrine()
+        ->getRepository(Usuari::class);
+      $usuari = $usuariRepository
+        ->findByToken($token);
+      
+      if ($usuari != null) {
+        $usuari->setVerificationToken(null);
+        $usuari->setIsVerified(true);
+
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->persist($usuari);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('principal');
+      }
+
+      return $this->redirectToRoute('weadex');
+    }
+
+    /**
+    * @Route("/pruebas/authentication", name="authentication")
+    */
+    /*public function authentication(): Response
+    {
+      $usuaris = $this->getDoctrine()
+        ->getRepository(Usuari::class)
+        ->findAll();
+      
+      $trobat = false;
+      $correcte = false;
+      $user = new Usuari();
+      foreach ($usuaris as $posicion=>$usuari)
+        if ($usuari->getIsVerified()) {
+          if ($usuari->getUsername() == $_POST['_username'] || $usuari->getEmail() == $_POST['_username'])
+          $trobat = true;
+
+          if ($trobat == true && $usuari->getPassword() == $_POST['_password']) {
+            $correcte = true;
+            $user = $usuari;
+          }
+        }
+
+      if ($correcte) {
+        $stringUser = serialize($user);
+        $response = $this->redirectToRoute('principal');
+        $response->headers->setCookie(Cookie::create('Authetication', $stringUser, time() + 3600));
+        return $response;
+      } else {
+        return $this->redirectToRoute('login');
+      }
+        
+    }*/
 }
 ?>

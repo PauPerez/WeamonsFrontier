@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello LoginController!{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="{{ asset('css/weamon-info.css') }}" type="text/css" rel="stylesheet" />
+{% endblock %}
+{% block body %}
+    {{ include('navbar.html.twig') }}
+    <div class="padre_weamonInfo">
+        <div class="info_weamonInfo">
+            <h1>Nº{{ weamon.id}} {{ weamon.nom }}</h1>
+            <img class="imagen_weamonInfo" src="{{ asset ('img/' ~ weamon.img) }}" class="img-fluid">
+            <div class="tipos_weamonInfo">
+                <label class="tipo_weamonInfo">Fuego</label>
+                <label class="fuerte_weamonInfo">Planta</label>
+                <label class="debil_weamonInfo">Agua</label>
+            </div>
+        </div>
+        <div class="moviment_weamonInfo">
+            {% for moviment in weamon.moviments %}
+                <p>{{ moviment.nom }}</p>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

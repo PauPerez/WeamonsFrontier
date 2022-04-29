@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello LoginController!{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="{{ asset('css/principal.css') }}" type="text/css" rel="stylesheet" />
+    <script src="{{ asset('javascript/principal.js') }}"></script>
+{% endblock %}
+{% block body %}
+    {{ include('navbar.html.twig') }}
+    <div class="inicio_principal">
+        <img class="img-fluid logo_principal" src="{{ asset('./img/fondos/logo7.png') }}">
+    </div>
+    
+    <div class="separarador_principal">
+        
+    </div>
+    <div class="cuentas_principal">
+        <div class="div_imagen_principal animado_arriba_principal">
+            <img class="" src="{{ asset('./img/fondos/fondoprincipal9.jpg') }}">
+        </div>
+        <div class="div_texto_principal animado_abajo_principal">
+            <h2 class="titulo_principal">Crea una <a class="resaltar_titulo_principal">cuenta</a></h2>
+            <p class="texto_principal">Crea una cuenta para poder hacer seguimiento de tu perfil y poder combatir contra otros jugadores!</p>
+            <p class="texto_principal">Podràs pagar una suma de 5 € para poder hacerte VIP y poder disfrutar de los raros y unicos Weamons shinies.</p>
+            <button class="btn btn-primary botones_principal">Crear cuenta <svg xmlns="http://www.w3.org/2000/svg" width="25" height="16" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/></svg> </button>
+        </div>
+    </div>
+    <div class="combates_principal">
+        <div class="div_texto_principal animado_arriba_principal">
+            <h2 class="titulo_principal">Combate vs otros <a class="resaltar_titulo_principal">Weamons</a></h2>
+            <p class="texto_principal">Combate con tu equipo de Weamons contra el equipo contrario en un combate por turnos épico.</p>
+            <p class="texto_principal">Tu tarea es llegar hasta lo mas alto en la clasificación de jugadores para llegar a ser el mejor.</p>
+            <button class="btn btn-primary botones_principal">Crear cuenta <svg xmlns="http://www.w3.org/2000/svg" width="25" height="16" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/></svg> </button>
+        </div>
+        <div class="div_imagen_principal animado_abajo_principal">
+            <img class="" src="{{ asset('./img/fondos/principal1.jpg') }}">
+        </div>
+    </div>
+    <div class="weadex_principal">
+        <div class="div_imagen_principal animado_arriba_principal">
+            <img class="" src="{{ asset('./img/fondos/fondoprincipal9.jpg') }}">
+        </div>
+        <div class="div_texto_principal animado_abajo_principal">
+            <h2 class="titulo_principal">Explora tus Weamons en la <a class="resaltar_titulo_principal">Weadex</a></h2>
+            <p class="texto_principal">Explora en nuestra Weadex las estadisticas, tipos, debilidades y movimientos unicos de toda nuestra variedad de Weamons diferentes y unicos para reclutarlos para tus equipos para tus batallas legendarias.</p>
+            <button class="btn btn-primary botones_principal">Explora <svg xmlns="http://www.w3.org/2000/svg" width="25" height="16" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/></svg> </button>
+        </div>
+    </div>
+    <div class="relleno"></div>
+    <!--<div class="relleno"></div>
+    <div class="relleno"></div>
+    <div class="relleno"></div>-->
+{% endblock %}

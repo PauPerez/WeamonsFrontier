@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello LoginController!{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="{{ asset('css/weadex.css') }}" type="text/css" rel="stylesheet" />
+    <script src="{{ asset('javascript/weadex.js') }}"></script>
+{% endblock %}
+{% block body %}
+    {{ include('navbar.html.twig') }}
+    <div class="padre_weadex">
+        <div class="weamons_weadex">
+            {% for weamon in weamons %}
+                <div class="weamon_weadex" onclick="weamon_info({{ weamon.id }});">
+                    <div class="weamon_img_weadex">
+                        <img src="{{ asset ('img/' ~ weamon.img) }}" class="img-fluid">
+                    </div>
+                    <div class="weamon_info_weadex">
+                        <p class="weamon_id_weadex">N.º{{ weamon.id }}</p>
+                        <p class="weamon_nombre_weadex">{{ weamon.nom }}</p>
+                        <label class="weamon_tipo_{{ weamon.tipus.nom }}_weadex">{{ weamon.tipus.nom }}</label>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        <div class="navigation">
+            {{ knp_pagination_render(weamons) }}
+        </div>
+    </div>
+{% endblock %}

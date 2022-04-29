@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <style type="text/css">
+        .padre_verificar {
+            max-width: 35em;
+            background-color: green;
+        }
+
+        .principal_verificar {
+            max-width: 35em;
+            background-color: red;
+        }
+
+        .logo_verificar {
+            max-width: 20em;
+            max-height: 20em;
+            min-width: 5em;
+            min-height: 5em;
+            margin: 20px;
+        }
+
+        .boton_verificar {
+            max-width: 200px;
+            max-height: 200px;
+            margin-bottom: 20px;
+            background-color: rgb(22, 47, 54);
+            color: rgb(29, 214, 205);
+            border-color: rgb(4, 34, 43);
+            border-radius: 5px;
+            background-color: #006c97;
+        }
+    </style>
+{% endblock %}
+
+{% block body %}
+    <div class="padre_verificar">
+        <div class="principal_verificar">
+            <img class="logo_verificar" src="{{ email.image('@img/fondos/logo5.png') }}">
+            <a class="boton_verificar" href="{{ link }}pruebas/accountVerified?email={{ mail }}&token={{ token }}">Crear cuenta</a>
+        </div>
+    </div>
+{% endblock %}

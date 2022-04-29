@@ -146,7 +146,7 @@ class UsuariController extends AbstractController
     }
 
     /**
-    * @Route("/pruebas/registration", name="registration")
+    * @Route("/registration", name="registration")
     */
     public function register(MailerInterface $mailer, UserPasswordHasherInterface $passwordHasher): Response
     {
@@ -179,7 +179,7 @@ class UsuariController extends AbstractController
             ->subject('Verifica el compte!')
             ->text('Sending emails is fun again!')
             //->html('<p>See Twig integration for better HTML integration!</p>');
-            ->htmlTemplate('pruebas/verificarCuenta.html.twig')
+            ->htmlTemplate('verificarCuenta.html.twig')
             ->context(['link' => $this->getParameter('link_servidor'),
               'token' => $usuari->getVerificationToken(),
               'mail' => $usuari->getEmail()]);
@@ -199,7 +199,7 @@ class UsuariController extends AbstractController
     }
 
     /**
-    * @Route("/pruebas/accountVerified", name="accountVerified")
+    * @Route("/accountVerified", name="accountVerified")
     */
     public function accountVerified(Request $request): Response
     {

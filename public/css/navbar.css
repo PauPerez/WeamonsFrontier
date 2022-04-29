@@ -23,6 +23,7 @@ nav {
 
 .menu a {
     color: white;
+    font-weight: bold;
     text-decoration: none;
 }
 
@@ -46,6 +47,10 @@ nav {
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
+}
+
+.button a {
+  color: teal;
 }
 
 .toggle {
@@ -73,6 +78,10 @@ nav {
     justify-content: center;
   }
 
+  .button a {
+    color: white;
+  }
+
   .logo {
     flex: 1;
   }
@@ -82,7 +91,7 @@ nav {
     text-align: right;
   }
 
-  .item.button {
+  .button {
     width: auto;
     order: 1;
     display: block;
@@ -91,26 +100,32 @@ nav {
     order: 2;
   }
 
-  .button.secondary {
+  .secondary {
     border: 0;
   }
+
   .button a {
     padding: 7.5px 15px;
-    background: teal;
+    background: transparent;
     border: 1px #006d6d solid;
   }
-  .button.secondary a {
-    background: transparent;
+
+  .secondary a {
+    background: teal;
   }
+
   .button a:hover {
     text-decoration: none;
   }
+
   .button:not(.secondary) a:hover {
     background: #006d6d;
     border-color: #005959;
   }
-  .button.secondary a:hover {
-    color: #ddd;
+  
+  .secondary a:hover {
+    background: transparent;
+    border: 1px #006d6d solid;
   }
 }
 /* Desktop menu */

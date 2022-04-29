@@ -35,6 +35,7 @@ body {
 
 .weamon_weadex:hover {
     animation: desplazarDiv 0.2s;
+    cursor: pointer;
 }
 
 @keyframes desplazarDiv {

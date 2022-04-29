@@ -7,18 +7,20 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class DefaultController extends AbstractController
 {
-  /*
-  public function index(): Response
-  {
-    return new Response('Hola que tal');
-  }*/
-
   /**
    * @Route("/", name="home")
    */
   public function home()
   {
-    return $this->render('pruebas/principal.html.twig');
+    $user = $this->getUser();
+    if ($user == null)
+      $username = "";
+    else
+      $username = $user->getUsername();
+
+    return $this->render('principal.html.twig', [
+        'username' => $username,
+    ]);
   }
 
 }

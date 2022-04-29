@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Weamon Frontier
+{% endblock %}
+{% block stylesheets %}
+	<link href="{{ asset('css/Battle.css') }}" type="text/css" rel="stylesheet"/>
+{% endblock %}
+{% block javascripts %}
+	<script src="{{ asset('javascripts/Battle.js') }}"/>
+{% endblock %}
+{% block body %}
+	<div id="battle" class="battle">
+		{% for weamon in weamons %}
+			<div id="{{ weamon.id }}" class="weamon" hidden>
+				<p class="nom" pos="jugador">{{ weamon.nom }}</p>
+				<p class="tipus" tipus="{{ weamon.tipus.nom }}" pos="jugador">{{ weamon.tipus.nom }}</p>
+				<div pos="jugador" class="health-bar" data-total="{{ weamon.vida }}" data-value="{{ weamon.vida }}">
+					<div class="bar">
+						<div class="hit"></div>
+					</div>
+				</div>
+				<div class="battle_hero">
+					<img src="{{ asset("Battlers/" ~ weamon.imgb) }}" alt="jugador">
+				</div>
+			</div>
+		{% endfor %}
+		{% for weamon in weamons %}
+			<div id="{{ weamon.id }}e" class="weamon" hidden>
+				<p class="nom" pos="enemic">{{ weamon.nom }}</p>
+				<p class="tipus" tipus="{{ weamon.tipus.nom }}" pos="enemic">{{ weamon.tipus.nom }}</p>
+				<div pos="enemic" class="health-bar" data-total="{{ weamon.vida }}" data-value="{{ weamon.vida }}">
+					<div class="bar">
+						<div class="hit"></div>
+					</div>
+				</div>
+				<div class="battle_enemy">
+					<img src="{{ asset("Battlers/" ~ weamon.img) }}" alt="enemic">
+					<p id="{{ weamon.id }}eAtac" hidden>{{ weamon.atac }}</p>
+				</div>
+				<div id="moviments">
+				{% for moviment in weamon.getMoviments %}
+					<p hidden>{{ moviment.nom }}</p>
+				{% endfor %}
+				</div>
+			</div>
+		{% endfor %}
+	</div>
+	<div id="atacMenu" weamon="1" class="textMenu" style="display:flex">
+		{% for moviment in weamons[0].getMoviments %}
+			<button atac="{{ weamons[0].atac }}" class="moviment">{{ moviment.nom }}</button>
+		{% endfor %}
+	</div>
+	<div id="textMenu" class="textMenu" style="display:none"></div>
+	<p id="activeEnemy" hidden>{{ weamons[0].id }}e</p>
+	<p id="activeWeamon" hidden>{{ weamons[0].id }}</p>
+	<p id="deadEnemies" hidden>0</p>
+	<p id="deadPlayers" hidden>0</p>
+{% endblock %}

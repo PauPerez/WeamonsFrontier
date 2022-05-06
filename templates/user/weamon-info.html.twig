@@ -8,19 +8,97 @@
 {% block body %}
     {{ include('navbar.html.twig') }}
     <div class="padre_weamonInfo">
-        <div class="info_weamonInfo">
-            <h1>Nº{{ weamon.id}} {{ weamon.nom }}</h1>
-            <img class="imagen_weamonInfo" src="{{ asset ('img/' ~ weamon.img) }}" class="img-fluid">
-            <div class="tipos_weamonInfo">
-                <label class="tipo_weamonInfo">Fuego</label>
-                <label class="fuerte_weamonInfo">Planta</label>
-                <label class="debil_weamonInfo">Agua</label>
+        <div class="principal_weamonInfo">
+            <div class="cabecera_weamonInfo cabecera_{{ weamon.tipus.nom }}_weamonInfo">
+                <h1>Nº{{ weamon.id}} {{ weamon.nom }}</h1>
             </div>
-        </div>
-        <div class="moviment_weamonInfo">
-            {% for moviment in weamon.moviments %}
-                <p>{{ moviment.nom }}</p>
-            {% endfor %}
+            <div class="imagen_weamonInfo">
+                <img src="{{ asset ('img/' ~ weamon.img) }}" class="img-fluid">
+            </div>
+            <div class="info_weamonInfo">
+                <div class="tipos_weamonInfo">
+                    <div>
+                        <h2>Tipo</h2>
+                        <label class="tipo_weamonInfo tipo_Foc_weamonInfo">Fuego</label>
+                    </div>
+                    <div>
+                        <h2>Fortaleza</h2>
+                        <label class="tipo_weamonInfo tipo_Planta_weamonInfo">Planta</label>
+                    </div>
+                    <div>
+                        <h2>Debilidad</h2>
+                        <label class="tipo_weamonInfo tipo_Aigua_weamonInfo">Agua</label>
+                    </div>
+                </div>
+                <div class="stats_weamonInfo">
+                    <div class="stat_weamonInfo">
+                        {% if weamon.vida < 100 %}
+                            {% for i in (weamon.vida/10+1)..10 %}
+                                <li class="statVacio_weamonInfo"></li>
+                            {% endfor %}
+                        {% endif %}
+                        {% for i in 1..(weamon.vida/10) %}
+                            <li class="statLleno_weamonInfo"></li>
+                        {% endfor %}
+                        <label>Vida</label>
+                    </div>
+                    <div class="stat_weamonInfo">
+                        {% if weamon.atac < 100 %}
+                            {% for i in (weamon.atac/10+1)..10 %}
+                                <li class="statVacio_weamonInfo"></li>
+                            {% endfor %}
+                        {% endif %}
+                        {% for i in 1..(weamon.atac/10) %}
+                            <li class="statLleno_weamonInfo"></li>
+                        {% endfor %}
+                        <label>Ataque</label>
+                    </div>
+                    <div class="stat_weamonInfo">
+                        {% if weamon.velocitat < 100 %}
+                            {% for i in (weamon.velocitat/10+1)..10 %}
+                                <li class="statVacio_weamonInfo"></li>
+                            {% endfor %}
+                        {% endif %}
+                        {% for i in 1..(weamon.velocitat/10) %}
+                            <li class="statLleno_weamonInfo"></li>
+                        {% endfor %}
+                        <label>Velocidad</label>
+                    </div>
+                </div>
+            </div>
+            <div class="moviments_weamonInfo">
+                {% for moviment in weamon.moviments %}
+                    <div class="moviment_weamonInfo moviment_{{ moviment.tipus.nom }}_weamonInfo">
+                        <h2>{{ moviment.nom }}</h2>
+                        <p>{{ moviment.descripcion }}</p>
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="evoluciones_weamonInfo">
+                {% if (primera != null) %}
+                    <div class="evolucion_weamonInfo">
+                        <a href="{{ primera.id }}"><img src="{{ asset ('img/' ~ primera.img) }}" class="img-fluid"></a>
+                        <p>{{ primera.nom }}<p>
+                        <label class="tipo_weamonInfo tipo_{{ primera.tipus.nom }}_weamonInfo">{{ primera.tipus.nom }}</label>
+                    </div>
+                {% endif %}
+                {% if (segunda != null) %}
+                    <p style="font-size: 5em;">❯</p>
+                    <div class="evolucion_weamonInfo">
+                        <a href="{{ segunda.id }}"><img src="{{ asset ('img/' ~ segunda.img) }}" class="img-fluid"></a>
+                        <p>{{ segunda.nom }}<p>
+                        <label class="tipo_weamonInfo tipo_{{ segunda.tipus.nom }}_weamonInfo">{{ segunda.tipus.nom }}</label>
+                    </div>
+                {% endif %}  
+                {% if (tercera != null) %}
+                    <p style="font-size: 5em;">❯</p>
+                    <div class="evolucion_weamonInfo">
+                        <a href="{{ tercera.id }}"><img src="{{ asset ('img/' ~ tercera.img) }}" class="img-fluid"></a>
+                        <p>{{ tercera.nom }}<p>
+                        <label class="tipo_weamonInfo tipo_{{ tercera.tipus.nom }}_weamonInfo">{{ tercera.tipus.nom }}</label>
+                    </div>
+                {% endif %}             
+            </div>
         </div>
     </div>
 {% endblock %}

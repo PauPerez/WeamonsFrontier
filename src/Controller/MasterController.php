@@ -130,12 +130,50 @@ class MasterController extends AbstractController
         $user = $this->getUser();
         $weamonRepository = $this->getDoctrine()
         ->getRepository(Weamon::class);
+
         $weamon = $weamonRepository
             ->find($id);
+
+        $weamons = $this->getDoctrine()
+            ->getRepository(Weamon::class)
+            ->findAll();
+
+        for ($i=0; $i < count($weamons); $i++) { 
+            if ($weamons[$i] == $weamon) {
+                switch ($weamon->getNEvolucion()) {
+                    case 1:
+                        $primera = $weamons[$i];
+                        if ($weamons[$i+1]->getNEvolucion() == 2) {
+                            $segunda = $weamons[$i+1];
+                        if ($weamons[$i+2]->getNEvolucion() == 3)
+                            $tercera = $weamons[$i+2];
+                        }
+                        break;
+                    case 2:
+                        $segunda = $weamons[$i];
+                        if ($weamons[$i-1]->getNEvolucion() == 1) {
+                            $primera = $weamons[$i-1];
+                        if ($weamons[$i+1]->getNEvolucion() == 3)
+                            $tercera = $weamons[$i+1];
+                        }
+                        break;
+                    case 3:
+                        $tercera = $weamons[$i];
+                        if ($weamons[$i-1]->getNEvolucion() == 2)
+                            $segunda = $weamons[$i-1];
+                        if ($weamons[$i-2]->getNEvolucion() == 1)
+                            $primera = $weamons[$i-2];
+                        break;
+                }        
+            }
+        }
 
         return $this->render('user/weamon-info.html.twig', [
             'username' => $user->getUsername(),
             'weamon'   => $weamon,
+            'primera'  => $primera,
+            'segunda'  => $segunda,
+            'tercera'  => $tercera
         ]);
     }
 

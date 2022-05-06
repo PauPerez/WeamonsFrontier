@@ -24,6 +24,22 @@ function mostrarScrollAbajo() {
     }
 }
 
+function cambiarOrden() {
+    var screenWidth = screen.width;
+    var divObjetivo = document.getElementById("divCambio");
+    /*var txt = `<div class="div_imagen_principal animado_abajo_principal">
+                <img src="{{ asset('./img/fondos/principal1.jpg') }}">
+               </div>`;*/
+    var div = document.createElement("div");
+    div.className = "div_imagen_principal animado_abajo_principal";
+    div.innerHTML = `<img src="/M14/WeamonsFrontier/public/./img/fondos/principal1.jpg">`;
+    if (screenWidth <= 1200) {
+        divObjetivo.insertAdjacentElement("beforebegin", div);
+    } else {
+        divObjetivo.insertAdjacentElement("afterend", div);
+    }
+}
 
 window.addEventListener("scroll", mostrarScrollArriba);
 window.addEventListener("scroll", mostrarScrollAbajo);
+window.addEventListener("DOMContentLoaded", cambiarOrden);

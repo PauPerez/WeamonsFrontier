@@ -25,11 +25,6 @@ class Moviment
     private $Nom;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $Accio;
-
-    /**
      * @ORM\ManyToOne(targetEntity=Tipus::class, inversedBy="moviments")
      * @ORM\JoinColumn(nullable=false)
      */
@@ -39,6 +34,16 @@ class Moviment
      * @ORM\ManyToMany(targetEntity=Weamon::class, mappedBy="Moviments")
      */
     private $weamons;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $descripcion;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $Poder;
 
     public function __construct()
     {
@@ -58,18 +63,6 @@ class Moviment
     public function setNom(string $Nom): self
     {
         $this->Nom = $Nom;
-
-        return $this;
-    }
-
-    public function getAccio(): ?string
-    {
-        return $this->Accio;
-    }
-
-    public function setAccio(string $Accio): self
-    {
-        $this->Accio = $Accio;
 
         return $this;
     }
@@ -109,6 +102,30 @@ class Moviment
         if ($this->weamons->removeElement($weamon)) {
             $weamon->removeMoviment($this);
         }
+
+        return $this;
+    }
+
+    public function getDescripcion(): ?string
+    {
+        return $this->descripcion;
+    }
+
+    public function setDescripcion(string $descripcion): self
+    {
+        $this->descripcion = $descripcion;
+
+        return $this;
+    }
+
+    public function getPoder(): ?int
+    {
+        return $this->Poder;
+    }
+
+    public function setPoder(int $Poder): self
+    {
+        $this->Poder = $Poder;
 
         return $this;
     }

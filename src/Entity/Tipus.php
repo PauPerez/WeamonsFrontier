@@ -38,6 +38,7 @@ class Tipus
     {
         $this->moviments = new ArrayCollection();
         $this->weamons = new ArrayCollection();
+        $this->debil = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -113,6 +114,18 @@ class Tipus
                 $weamon->setTipus(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getTipus(): ?self
+    {
+        return $this->tipus;
+    }
+
+    public function setTipus(?self $tipus): self
+    {
+        $this->tipus = $tipus;
 
         return $this;
     }

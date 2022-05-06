@@ -84,6 +84,31 @@ class HistorialController extends AbstractController
             'title' => 'Nou historial',
         ));
     }
+
+  /**
+   * @Route("/user/admin/historial/create/{victory}", name="historial_create")
+   */
+  public function create($victory)
+  {
+    $historial = new Historial();
+    $user = $this->getDoctrine()
+    ->getRepository(Usuari::class)
+    ->find($this->getUser()->getId());
+
+    $historial->setUsuari($user);
+    $historial->setUsuariP($user);
+    $historial->setContrincant($user);
+    $historial->setResultat($victory);
+
+    $entityManager = $this->getDoctrine()->getManager();
+    $entityManager->persist($historial);
+    $entityManager->flush();
+
+    //codi de prova per visualitzar l'array de historials
+    //dump($historials);exit();
+
+    return $this->render("principal.html.twig", ["username"=>$user->getUsername()]);
+  }
 }
 
    

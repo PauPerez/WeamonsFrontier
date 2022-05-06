@@ -7,9 +7,14 @@
     border:7px groove black;
     width: 800px;
     height: 500px;
-    background-image:url(http://localhost/TREBALL_EN_GRUP/prueba/public/Battlebacks/battlebgBosque.png);
+    background-image:url(../img/battlebacks/battlebgBosque.png);
     background-size: cover;
     image-rendering: pixelated;
+}
+
+body {
+    background-color: rgb(4, 34, 43);
+    background-image: url(../img/fondos/weadex2.png);
 }
 
 .textMenu{
@@ -153,10 +158,15 @@ transition: width .5s linear;
 }
 
 .battle_enemy img{
-    width: 100px;;
+    width: 100px;
+    animation: idle 1.5s infinite;
 }
 
-#atacMenu{
+.battle_hero img{
+    animation: idle2 2s infinite;
+}
+
+.textMenu{
     display:flex;
     flex-wrap: wrap;
     justify-content: space-evenly;
@@ -179,4 +189,51 @@ transition: width .5s linear;
 
 .moviment:active{
     background-color: yellow;
+}
+
+.animation{
+    pointer-events: none;
+    width:200px;
+    height: 160px;
+    overflow: hidden;
+    position: absolute;
+    top: 35%;
+    right: 10%;
+    z-index: 1;
+}
+
+.animationE{
+    pointer-events: none;
+    width:200px;
+    height: 160px;
+    overflow: hidden;
+    position: absolute;
+    top: 60%;
+    right: 70%;
+    z-index: 1;
+}
+
+.attack_animation, .attack_animationE{
+    animation: moveAttack 1s steps(5) infinite;
+}
+
+@keyframes moveAttack{
+    from {
+        transform: translate3d(0px,0,0);
+    }
+    to {
+        transform: translate3d(-100%,0,0);
+    }
+}
+
+@keyframes idle{
+    0%{transform: translateY(0px);}
+    50%{transform: translateY(5%);}
+    100%{transform: translateY(0px);}
+}
+
+@keyframes idle2{
+    0%{transform: translateX(0px);}
+    50%{transform: translateX(5%);}
+    100%{transform: translateX(0px);}
 }

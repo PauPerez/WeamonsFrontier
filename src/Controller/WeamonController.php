@@ -49,12 +49,12 @@ class WeamonController extends AbstractController
             $brochureFile = $form->get('Img')->getData();
             if ($brochureFile) {
                 $brochureFileName = $fileUploader->upload($brochureFile, $weamon->getNom());
-                $weamon->setImg($brochureFileName);
+                $weamon->setImg("weamons/".$brochureFileName);
             }
             $brochureFile = $form->get('ImgB')->getData();
             if ($brochureFile) {
                 $brochureFileName = $fileUploader->upload($brochureFile, $weamon->getNom());
-                $weamon->setImgB($brochureFileName);
+                $weamon->setImgB("weamons/b".$brochureFileName);
             }
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($weamon);

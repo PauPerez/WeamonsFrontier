@@ -67,6 +67,13 @@ class Historial
         return $this;
     }
 
+    public function setUsuariP(?Usuari $Usuari): self
+    {
+        $this->usuari = $Usuari;
+
+        return $this;
+    }
+
     public function getContrincant(): ?Usuari
     {
         return $this->Contrincant;

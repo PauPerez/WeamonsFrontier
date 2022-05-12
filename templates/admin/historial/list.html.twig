@@ -2,6 +2,8 @@
 
 {% block title %}Llistat d'historials{% endblock %}
 {% block body %}
+{{ include('navbaradmin.html.twig') }}
+<div style="margin-top:150px">
         <h1>Llistat d'historials</h1>
         <a href="{{ path('historial_new') }}">+ Nou historial</a>
         <br><br>
@@ -19,6 +21,7 @@
                   {% for historial in historials %}
                       <tr>
                           <td>{{ historial.getUsuari.Username }}</td><td>{{ historial.getContrincant.Username }}</td><td>{% if historial.Resultat == 0 %}No{% else %}Si{% endif %}</td>
+                          <td><a href="{{ path('historial_delete', {'id': historial.id}) }}" onclick="return eliminar('{{ historial.id }}')">Eliminar</a></td>
                       </tr>
                   {% else %}
                       <tr>
@@ -29,5 +32,5 @@
           </table>
 
           <br>
-
+</div>
 {% endblock %}

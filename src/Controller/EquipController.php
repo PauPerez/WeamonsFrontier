@@ -46,7 +46,14 @@ class EquipController extends AbstractController
 
           // recollim els camps del formulari en l'objecte equip
             $equip = $form->getData();
-
+            $equip->setUsuari2($equip->getUsuari());
+            if (count($equip->getWeamons()) > 4 || count($equip->getWeamons()) < 4) {
+              $this->addFlash(
+                  'notice',
+                  "has d'escollir només 4 weamons!"
+              );
+              return $this->redirectToRoute('equip_new');
+            }
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($equip);
             $entityManager->flush();
@@ -109,7 +116,13 @@ class EquipController extends AbstractController
 
             // recollim els camps del formulari en l'objecte equip
             $equip = $form->getData();
-
+            if (count($equip->getWeamons()) > 4 || count($equip->getWeamons()) < 4) {
+              $this->addFlash(
+                  'notice',
+                  "has d'escollir només 4 weamons!"
+              );
+              return $this->redirectToRoute('equip_edit',['id'=>$equip->getId()]);
+            }
             $status = $equipRepository
                 ->add($equip);
 

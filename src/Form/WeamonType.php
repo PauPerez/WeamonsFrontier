@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -15,6 +16,7 @@ use Symfony\Component\Validator\Constraints\File;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 use App\Entity\Weamon;
+use App\Entity\Moviment;
 use App\Entity\Tipus;
 
 class WeamonType extends AbstractType
@@ -62,6 +64,9 @@ class WeamonType extends AbstractType
                     ])
                 ],
             ])
+            ->add('Moviments', EntityType::class, array('class' => Moviment::class,
+            'choice_label' => 'nom',
+            'multiple' => true))
             ->add('save', SubmitType::class, array('label' => $options['submit']))
         ;
     }

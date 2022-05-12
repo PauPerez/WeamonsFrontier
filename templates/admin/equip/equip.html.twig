@@ -4,6 +4,11 @@
 {% block body %}
         <h1>{{ title }}</h1>
         <a href="{{ path('equip_list') }}">&laquo; Torna</a>
+		<br>
+		<br>
+		{% for message in app.flashes('notice') %}
+              <strong><i> {{ message }} </i></strong>
+        {% endfor %}
 		<div style="margin-top: 20px">
   	    	{{ form_start(form) }}
 		      {{ form_widget(form) }}

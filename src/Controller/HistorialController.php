@@ -109,8 +109,35 @@ class HistorialController extends AbstractController
 
     return $this->render("principal.html.twig", ["username"=>$user->getUsername()]);
   }
+
+  /**
+ * @Route("/admin/historial/delete/{id}", name="historial_delete", requirements={"id"="\d+"})
+ */
+public function delete($id, Request $request)
+{
+    $historialRepository = $this->getDoctrine()
+    ->getRepository(Historial::class);
+    $historial = $historialRepository
+        ->find($id);
+
+    $status = $historialRepository
+        ->remove($historial);
+
+    if (($status >= 200) && ($status < 300)) {
+      $this->addFlash(
+        'notice',
+        'historial '.$historial->getCodi().' eliminat!'
+      );
+    } else {
+      $this->addFlash(
+        'notice',
+        'ERROR '.$status
+      );
+    }
+    return $this->redirectToRoute('historial_list');
+}
 }
 
-   
+
 
 ?>

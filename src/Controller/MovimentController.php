@@ -7,6 +7,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 
+use App\Service\FileUploader;
 use App\Entity\Moviment;
 use App\Repository\MovimentRepository;
 use App\Form\MovimentType;
@@ -31,7 +32,7 @@ class MovimentController extends AbstractController
     /**
     * @Route("/admin/moviment/new", name="moviment_new")
     */
-    public function new(Request $request)
+    public function new(Request $request, FileUploader $fileUploader)
     {
         $moviment = new Moviment();
         //podem personalitzar el text del botó passant una opció 'submit' al builder de la classe movimentType
@@ -43,6 +44,18 @@ class MovimentController extends AbstractController
 
           // recollim els camps del formulari en l'objecte moviment
             $moviment = $form->getData();
+
+            $brochureFile = $form->get('Animation')->getData();
+            if ($brochureFile) {
+                $brochureFileName = $fileUploader->upload($brochureFile, $moviment->getNom());
+                $moviment->setAnimation("animations/".$brochureFileName);
+            }else{
+                $this->addFlash(
+                    'notice',
+                    "has d'afegir una imatge!"
+                );
+                return $this->redirectToRoute('moviment_new');
+            }
 
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($moviment);

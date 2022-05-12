@@ -6,6 +6,7 @@
             <li class="item item_link"><a href="{{ path('principal') }}">Home</a></li>
             <li class="item item_link"><a href="{{ path('pregame') }}">Combatir</a></li>
             <li class="item item_link"><a href="{{ path('weadex') }}">Weadex</a></li>
+            <li class="item item_link"><a href="{{ path('admin_backoffice') }}">Backoffice</a></li>
             
             {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                 <li class="item button"><a href="{{ path('perfil') }}">{{ username }}</a></li>

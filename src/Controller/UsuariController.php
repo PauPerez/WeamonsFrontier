@@ -37,6 +37,17 @@ class UsuariController extends AbstractController
     }
 
     /**
+     * @Route("/admin/usuari/backoffice", name="admin_backoffice")
+     */
+    public function office()
+    {
+        //codi de prova per visualitzar l'array de usuaris
+        //dump($usuaris);exit();
+
+        return $this->render('admin/backoffice.html.twig');
+    }
+
+    /**
     * @Route("/admin/usuari/new", name="usuari_new")
     */
     public function new(Request $request, FileUploader $fileUploader)
@@ -52,7 +63,7 @@ class UsuariController extends AbstractController
           // recollim els camps del formulari en l'objecte usuari
             $usuari = $form->getData();
 
-            $brochureFile = $form->get('Img')->getData();
+            $brochureFile = $form->get('img')->getData();
             if ($brochureFile) {
                 $brochureFileName = $fileUploader->upload($brochureFile, $usuari->getUsername());
                 $usuari->setImg($brochureFileName);

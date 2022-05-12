@@ -10,6 +10,8 @@ use App\Service\FileUploader;
 
 use App\Entity\Weamon;
 use App\Repository\WeamonRepository;
+use App\Entity\Moviment;
+use App\Repository\MovimentRepository;
 use App\Form\WeamonType;
 
 class WeamonController extends AbstractController
@@ -45,17 +47,37 @@ class WeamonController extends AbstractController
 
           // recollim els camps del formulari en l'objecte weamon
             $weamon = $form->getData();
-
+            $moviments = $weamon->getMoviments();
+            if (count($moviments) > 4 || count($moviments) < 4) {
+                $this->addFlash(
+                    'notice',
+                    "has d'escollir només 4 moviments!"
+                );
+                return $this->redirectToRoute('weamon_new');
+            }
             $brochureFile = $form->get('Img')->getData();
             if ($brochureFile) {
                 $brochureFileName = $fileUploader->upload($brochureFile, $weamon->getNom());
                 $weamon->setImg("weamons/".$brochureFileName);
+            }else{
+                $this->addFlash(
+                    'notice',
+                    "has d'afegir una imatge!"
+                );
+                return $this->redirectToRoute('weamon_new');
             }
             $brochureFile = $form->get('ImgB')->getData();
             if ($brochureFile) {
-                $brochureFileName = $fileUploader->upload($brochureFile, $weamon->getNom());
+                $brochureFileName = $fileUploader->upload($brochureFile, "weamons/b".$weamon->getNom());
                 $weamon->setImgB("weamons/b".$brochureFileName);
+            }else{
+                $this->addFlash(
+                    'notice',
+                    "has d'afegir una imatge!"
+                );
+                return $this->redirectToRoute('weamon_new');
             }
+
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($weamon);
             $entityManager->flush();
@@ -111,15 +133,27 @@ class WeamonController extends AbstractController
         $weamon = $weamonRepository
             ->find($id);
 
+            
+
         //podem personalitzar el text del botó passant una opció 'submit' al builder de la classe weamonType
         $form = $this->createForm(WeamonType::class, $weamon, array('submit'=>'Desar'));
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-
             // recollim els camps del formulari en l'objecte weamon
             $weamon = $form->getData();
-
+            $moviments = $weamon->getMoviments();
+            if (count($moviments) > 4 || count($moviments) < 4) {
+                $this->addFlash(
+                    'notice',
+                    "has d'escollir només 4 moviments!"
+                );
+                return $this->redirectToRoute('weamon_edit',['id'=>$weamon->getId()]);
+            }
+            $moviments = $form->get('Moviments');
+            for ($i=0; $i < count($moviments); $i++) { 
+                $weamon->addMoviment($moviments[$i]);
+            }
             $status = $weamonRepository
                 ->add($weamon);
 

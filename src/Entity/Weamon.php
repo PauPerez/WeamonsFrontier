@@ -65,6 +65,11 @@ class Weamon
      */
     private $ImgB;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $nEvolucion;
+
     public function __construct()
     {
         $this->Moviments = new ArrayCollection();
@@ -191,6 +196,18 @@ class Weamon
     public function setImgB(string $ImgB): self
     {
         $this->ImgB = $ImgB;
+
+        return $this;
+    }
+
+    public function getNEvolucion(): ?int
+    {
+        return $this->nEvolucion;
+    }
+
+    public function setNEvolucion(int $nEvolucion): self
+    {
+        $this->nEvolucion = $nEvolucion;
 
         return $this;
     }

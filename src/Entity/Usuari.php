@@ -129,18 +129,6 @@ class Usuari implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    /*public function getRol(): ?string
-    {
-        return $this->rol;
-    }
-
-    public function setRol(string $rol): self
-    {
-        $this->rol = $rol;
-
-        return $this;
-    }*/
-
     /**
      * @see PasswordAuthenticatedUserInterface
      */

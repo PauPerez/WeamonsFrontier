@@ -25,11 +25,6 @@ class Moviment
     private $Nom;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $Accio;
-
-    /**
      * @ORM\ManyToOne(targetEntity=Tipus::class, inversedBy="moviments")
      * @ORM\JoinColumn(nullable=false)
      */
@@ -44,6 +39,11 @@ class Moviment
      * @ORM\Column(type="string", length=255)
      */
     private $animation;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $descripcion;
 
     public function __construct()
     {
@@ -63,18 +63,6 @@ class Moviment
     public function setNom(string $Nom): self
     {
         $this->Nom = $Nom;
-
-        return $this;
-    }
-
-    public function getAccio(): ?string
-    {
-        return $this->Accio;
-    }
-
-    public function setAccio(string $Accio): self
-    {
-        $this->Accio = $Accio;
 
         return $this;
     }
@@ -126,6 +114,16 @@ class Moviment
     public function setAnimation(string $animation): self
     {
         $this->animation = $animation;
+        return $this;
+    }
+    public function getDescripcion(): ?string
+    {
+        return $this->descripcion;
+    }
+
+    public function setDescripcion(string $descripcion): self
+    {
+        $this->descripcion = $descripcion;
 
         return $this;
     }

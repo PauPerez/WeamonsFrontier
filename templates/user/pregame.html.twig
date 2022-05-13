@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Pregame{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="{{ asset('css/pregame.css') }}" type="text/css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/js/select2.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/css/select2.css" />
+
+    <script src="{{ asset('javascript/pregame.js') }}"></script>
+{% endblock %}
+{% block body %}
+    {{ include('navbar.html.twig') }}
+    <div class="padre_pregame">
+        <div class="principal_pregame">
+            <div class="equipos_pregame">
+                <form name="pregame" action="{{ path('cambiarWeamons') }}" method="post">
+                    <select id="equipoSelec" name="equipoSelec">
+                        {% for i in 1..equipos|length %}
+                            <option value="{{ equipos[i-1].id }}" selected>{{ i }}</option>
+                        {% endfor %}
+                    </select>
+                    <div class="weamons_pregame">
+                        {% for i in 1..equipos|length %}
+                            <div id="equipo{{ i }}" class="equipo_pregame">
+                                {% for j in 1..equipos[i-1].weamons|length %}
+                                    <select id="equipo{{ i }}-{{ j }}" name="equipo{{ i }}-{{ j }}" class="form-control" style="width: 200px;">
+                                        {% for weamon in weamons %}
+                                            {% if weamon.id == equipos[i-1].weamons[j-1].id %}
+                                                <option selected value="{{ weamon.id }}" data-img_src="{{ asset ('img/' ~ weamon.img) }}">{{ weamon.nom }}</option>
+                                            {% else %}
+                                                <option value="{{ weamon.id }}" data-img_src="{{ asset ('img/' ~ weamon.img) }}">{{ weamon.nom }}</option>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </select>
+                                {% endfor %}
+                            </div>
+                        {% endfor %}
+                    </div>
+                    <button type="submit" class="btn btn-primary">Guardar equip</button>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

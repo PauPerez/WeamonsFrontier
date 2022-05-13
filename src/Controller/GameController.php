@@ -18,7 +18,7 @@ use App\Repository\WeamonRepository;
 class GameController extends AbstractController
 {
     /**
-     * @Route("/user/game/pre", name="pregame")
+     * @Route("/user/game", name="game")
      */
     public function game()
     {

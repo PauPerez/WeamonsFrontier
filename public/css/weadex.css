@@ -76,37 +76,27 @@ body {
     font-size: 1.5em;
 }
 
-.weamon_tipo_Planta_weadex {
+.tipus_weadex {
+    color: white;
+    width: 100px;
+    text-align: center;
+    font-size: 0.9em;
+    margin-bottom: 10px;
+    padding: 6px;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.tipo_Planta_weadex {
     background-color: rgb(12, 173, 12);
-    color: white;
-    width: 100px;
-    text-align: center;
-    font-size: 0.9em;
-    margin-bottom: 10px;
-    padding: 6px;
-    border-radius: 3px;
 }
 
-.weamon_tipo_Foc_weadex {
+.tipo_Foc_weadex {
     background-color: rgb(255, 61, 13);
-    color: white;
-    width: 100px;
-    text-align: center;
-    font-size: 0.9em;
-    margin-bottom: 10px;
-    padding: 6px;
-    border-radius: 3px;
 }
 
-.weamon_tipo_Aigua_weadex {
+.tipo_Aigua_weadex {
     background-color: rgb(13, 158, 255);
-    color: white;
-    width: 100px;
-    text-align: center;
-    font-size: 0.9em;
-    margin-bottom: 10px;
-    padding: 6px;
-    border-radius: 3px;
 }
 
 .pagination {

@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello LoginController!{% endblock %}
+{% block title %}Weadex{% endblock %}
 {% block stylesheets %}
     {{ parent() }}
     <link href="{{ asset('css/weadex.css') }}" type="text/css" rel="stylesheet" />
@@ -18,7 +18,7 @@
                     <div class="weamon_info_weadex">
                         <p class="weamon_id_weadex">N.º{{ weamon.id }}</p>
                         <p class="weamon_nombre_weadex">{{ weamon.nom }}</p>
-                        <label class="weamon_tipo_{{ weamon.tipus.nom }}_weadex">{{ weamon.tipus.nom }}</label>
+                        <label class="tipus_weadex tipo_{{ weamon.tipus.nom }}_weadex">{{ weamon.tipus.nom }}</label>
                     </div>
                 </div>
             {% endfor %}

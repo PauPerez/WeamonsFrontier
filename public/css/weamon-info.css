@@ -18,39 +18,289 @@ body {
     height: 100%;
     margin-right: 5vw;
     margin-left: 5vw;
-    display: flex;
-    flex-wrap: wrap;
 }
 
-.info_weamonInfo {
-    background-color: green;
+.principal_weamonInfo {
+    background-color: rgb(4, 34, 43);
+    margin: 5vw;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    border-radius: 20px;
+    border: 4px solid #006c97;
+    background-image: url(../img/fondos/weadex2.png);
+}
+
+.cabecera_weamonInfo {
+    width: 100%;
+    height: 15vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-direction: column;
-    width: 33%;
-    margin: 20px;
-    padding: 20px;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
 }
 
-.info_weamonInfo h1 {
-    font-size: 2em;
+.cabecera_Planta_weamonInfo {
+    background-image: url(../img/fondos/Planta_weamonInfo.png);
+}
+
+.cabecera_Foc_weamonInfo {
+    background-image: url(../img/fondos/Foc_weamonInfo.png);
+}
+
+.cabecera_Aigua_weamonInfo {
+    background-image: url(../img/fondos/Aigua_weamonInfo.png);
+}
+
+.cabecera_weamonInfo h1 {
+    font-size: 2.5em;
     font-weight: bold;
+    color: white;
+    margin: 10px;
 }
 
 .imagen_weamonInfo {
     background-color: rgb(228, 228, 228);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 34em;
+    height: 34em;
+    margin: 20px;
+    padding: 20px;
+    border-radius: 5px;
+    /*border-radius: 20px;
+    border: 4px solid #006c97;*/
+}
+
+.imagen_weamonInfo img {
+    /*background-color: rgb(228, 228, 228);
+    border: 2px black solid;*/
     width: 100%;
+}
+
+.info_weamonInfo {
+    width: 34em;
+    height: 34em;
+    margin: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
 
 .tipos_weamonInfo {
-    width: 100%;
-    background-color: red;
+    background-color: rgb(228, 228, 228);
     display: flex;
-    justify-content: space-evenly;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    flex-direction: row;
+    width: 100%;
+    padding: 20px;
+    border-radius: 5px;
+}
+
+.tipos_weamonInfo div {
+    margin: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.tipo_weamonInfo {
+    color: rgb(4, 34, 43);
+    width: 100px;
+    text-align: center;
+    font-size: 0.9em;
+    margin-bottom: 10px;
+    padding: 6px;
+    border-radius: 3px;
+}
+
+.tipo_Planta_weamonInfo {
+    background-color: rgb(12, 173, 12);
+}
+
+.tipo_Foc_weamonInfo {
+    background-color: rgb(255, 61, 13);
+}
+
+.tipo_Aigua_weamonInfo {
+    background-color: rgb(13, 158, 255);
+}
+
+.stats_weamonInfo {
+    background-color: rgb(228, 228, 228);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    flex-direction: row;
+    width: 100%;
+    height: 71%;
+    margin-top: 10px;
+    padding: 20px;
+    border-radius: 5px;
+}
+
+.stat_weamonInfo {
+    text-align: center;
+    margin: 30px;
+    color: rgb(4, 34, 43);
+}
+
+.stat_weamonInfo li {
+    width: 5em;
+    height: 10px;
+    margin: 10px;
+    list-style: none;
+}
+
+.statVacio_weamonInfo {
+    background-color: rgb(4, 34, 43);
+}
+
+.statLleno_weamonInfo {
+    background-color: rgb(0, 177, 177);
+}
+
+.moviments_weamonInfo {
+    background-color: rgb(228, 228, 228);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    flex-direction: row;
+    border-radius: 5px;
+    width: 70em;
+    margin: 20px;
+    padding: 20px;
+}
+
+.moviment_weamonInfo {
+    color: rgb(4, 34, 43);
+    width: 45%;
+    height: 40%;
+    padding: 10px;
+    margin: 20px;
+    border: 2px black solid;
+    border-radius: 5px;
+}
+
+.moviment_Planta_weamonInfo {
+    background-color: rgb(12, 173, 12);
+}
+
+.moviment_Foc_weamonInfo {
+    background-color: rgb(255, 61, 13);
+}
+
+.moviment_Aigua_weamonInfo {
+    background-color: rgb(13, 158, 255);
+}
+
+.evoluciones_weamonInfo {
+    /*background-color: rgb(161, 161, 161);*/
+    background-color: rgb(228, 228, 228);
+    background-image: url(../img/fondos/weadex.png);
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 70em;
+    margin: 20px;
+    padding: 20px;
+    color: rgb(4, 34, 43);
+}
+
+.evolucion_weamonInfo {
+    width: 12em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
     margin: 10px;
 }
 
-.tipos_weamonInfo label {
-    background-color: blue;
+.evolucion_weamonInfo img {
+    border: 5px black solid;
+    border-radius: 100%;
+    background-color: rgb(9, 56, 70);
+    padding: 20px;
+}
+
+.evolucion_weamonInfo img:hover {
+    animation: desplazarDiv 0.2s;
+    cursor: pointer;
+}
+
+@keyframes desplazarDiv {
+    0% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(10px);
+    }
+    100% {
+        transform: translateY(0px);
+        
+    }
+}
+
+.weadex_weamonInfo {
+    width: 70em;
+    margin: 20px;
+}
+
+.weadex_weamonInfo a {
+    text-decoration: none;
+    color: rgb(15, 202, 202);
+}
+
+/* Tablet and Mobile */
+@media all and (max-width: 1500px) {
+    .cabecera_weamonInfo h1 {
+        font-size: 1.5em;
+    }
+
+    .imagen_weamonInfo {
+        width: 80%;
+        height: 50%;
+    }
+
+    .info_weamonInfo {
+        width: 80%;
+        height: auto;
+    }
+
+    .moviments_weamonInfo {
+        width: 80%;
+    }
+
+    .moviment_weamonInfo {
+        width: 100%;
+        height: auto;
+        margin: 10px;
+    }
+
+    .stats_weamonInfo {
+        height: auto;
+    }
+
+    .stat_weamonInfo {
+        margin: 10px;
+    }
+
+    .evoluciones_weamonInfo {
+        width: 80%;
+    }
+
+    .weadex_weamonInfo {
+        text-align: center;
+    }
 }

@@ -87,4 +87,13 @@ class Equip
 
         return $this;
     }
+
+    public function cambiarWeamon(Weamon $weamonNuevo, int $pos): self 
+    {
+        $equipo = $this->getWeamons();
+        //$equipo->removeWeamon($weamonActual);
+        $equipo[$pos] = $weamonNuevo;
+
+        return $this;
+    }
 }

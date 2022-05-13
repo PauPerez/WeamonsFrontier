@@ -73,7 +73,7 @@ body {
     opacity: 0.8;
 }
 
-.div_register input[type="text"]:focus, .div_register input[type="password"]:focus, .div_register input[type="email"] {
+.div_register input[type="text"]:Fuegous, .div_register input[type="password"]:Fuegous, .div_register input[type="email"] {
     background-color: rgb(13, 44, 49);
     color: white;
 }

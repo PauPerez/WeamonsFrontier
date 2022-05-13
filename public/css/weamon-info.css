@@ -45,12 +45,12 @@ body {
     background-image: url(../img/fondos/Planta_weamonInfo.png);
 }
 
-.cabecera_Foc_weamonInfo {
-    background-image: url(../img/fondos/Foc_weamonInfo.png);
+.cabecera_Fuego_weamonInfo {
+    background-image: url(../img/fondos/Fuego_weamonInfo.png);
 }
 
-.cabecera_Aigua_weamonInfo {
-    background-image: url(../img/fondos/Aigua_weamonInfo.png);
+.cabecera_Agua_weamonInfo {
+    background-image: url(../img/fondos/Agua_weamonInfo.png);
 }
 
 .cabecera_weamonInfo h1 {
@@ -125,11 +125,11 @@ body {
     background-color: rgb(12, 173, 12);
 }
 
-.tipo_Foc_weamonInfo {
+.tipo_Fuego_weamonInfo {
     background-color: rgb(255, 61, 13);
 }
 
-.tipo_Aigua_weamonInfo {
+.tipo_Agua_weamonInfo {
     background-color: rgb(13, 158, 255);
 }
 
@@ -195,11 +195,11 @@ body {
     background-color: rgb(12, 173, 12);
 }
 
-.moviment_Foc_weamonInfo {
+.moviment_Fuego_weamonInfo {
     background-color: rgb(255, 61, 13);
 }
 
-.moviment_Aigua_weamonInfo {
+.moviment_Agua_weamonInfo {
     background-color: rgb(13, 158, 255);
 }
 

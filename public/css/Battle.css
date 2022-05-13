@@ -117,19 +117,19 @@ transition: width .5s linear;
     top: 18%;
 }
 
-.tipus[tipus="weaverde"]{
+.tipus[tipus="Planta"]{
     color: lime;
     background-color: darkgreen;
     border: 1px solid green;
 }
 
-.tipus[tipus="quemawea"]{
+.tipus[tipus="Foc"]{
     color: red;
     background-color: yellow;
     border: 1px solid orange;
 }
 
-.tipus[tipus="mojawea"]{
+.tipus[tipus="Aigua"]{
     color: cyan;
     background-color: darkblue;
     border: 1px solid blue;

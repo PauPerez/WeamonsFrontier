@@ -96,11 +96,4 @@ class Equip
 
         return $this;
     }
-
-    public function setUsuari2(?Usuari $Usuari): self
-    {
-        $this->usuari = $Usuari;
-
-        return $this;
-    }
 }

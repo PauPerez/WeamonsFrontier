@@ -7,20 +7,28 @@ window.onload = function () {
 
     document.getElementById(document.getElementById("activeEnemy").innerHTML).style.display = "inline";
     document.getElementById(document.getElementById("activeWeamon").innerHTML).style.display = "inline";
+    document.getElementById(document.getElementById("activeWeamon").innerHTML+"atacMenu").style.display = "flex";
 }
 
 function attack() {
     let active = document.getElementById("activeEnemy").innerHTML;
+    let weamon = document.getElementById("activeWeamon").innerHTML;
     let hBar = document.getElementById(active).getElementsByClassName('health-bar')[0];
     let bar = hBar.getElementsByClassName('bar')[0];
     let hit = hBar.getElementsByClassName('hit')[0];
     let textm = document.getElementById("textMenu");
-    let atacm = document.getElementById("atacMenu");
+    let atacm = document.getElementById(weamon+"atacMenu");
+    let enemy = document.getElementById(active);
 
     let total = hBar.getAttribute("data-total");
     let value = hBar.getAttribute("data-value");
-
-
+    let gif = document.getElementById("atacGif");
+    gif.setAttribute("src", this.getAttribute("animation"));
+    gif.style.display = "inline";
+    setTimeout(function () {
+        gif.style.display = "none";
+    },1000);
+    
     var damage = Math.floor(Math.random()*parseInt(this.getAttribute("atac")));
     var newValue = value - damage;
     var barWidth = (newValue / total) * 100;
@@ -46,6 +54,8 @@ function attack() {
     },500);    
 
     setTimeout(attackEnemic, 1000);
+    
+    
 
     setTimeout(function () {
         
@@ -62,6 +72,8 @@ function attack() {
 
 function pointCounter(player) {
     let points=0;
+    let link = document.getElementById("redirect").innerHTML;
+    link = link.slice(0,-1);
     if (player == "jugador") {
         points = document.getElementById("deadEnemies").innerHTML;
         points = parseInt(points)+1;
@@ -75,7 +87,12 @@ function pointCounter(player) {
     if(points==4){
         document.getElementById("textMenu").style.display="none";
         document.getElementById("battle").style.display="none";
-        document.getElementById("atacMenu").style.display="none";
+        document.getElementById(document.getElementById("activeWeamon").innerHTML+"atacMenu").style.display="none";
+        if (player == "jugador") {
+            window.location.replace(link+1);
+        }else{
+            window.location.replace(link+0);
+        }
     }
 }
 
@@ -86,6 +103,7 @@ function attackEnemic() {
     let hit = hBar.getElementsByClassName('hit')[0];
     let textm = document.getElementById("textMenu");
     let weamon = document.getElementById("activeEnemy").innerHTML;
+    
 
     let total = hBar.getAttribute("data-total");
     let value = hBar.getAttribute("data-value");
@@ -96,13 +114,21 @@ function attackEnemic() {
     var barWidth = (newValue / total) * 100;
     var hitWidth = (damage / value) * 100 + "%";
 
+    var mov = document.getElementById(weamon).getElementsByClassName("moviments");
+    var num = Math.floor(Math.random() * mov.length);
+    var gif = document.getElementById("atacGifE");
+    gif.setAttribute("src",mov[num].getAttribute("animation"));
+    gif.style.display = "inline";
+    setTimeout(function () {
+        gif.style.display = "none";
+    },1000);
     hit.style.width = hitWidth;
     hBar.setAttribute("data-value",newValue);
 
     if (value <= 0) {
         textm.innerHTML = "<p>El weamon aliat ha caigut!</p>";
     }else{
-        textm.innerHTML = "<p>El weamon enemic ha atacat</p>";
+        textm.innerHTML = "<p>El weamon enemic ha utilitzat "+mov[num].innerHTML+"</p>";
     }
     textm.style.display = "inline";
 
@@ -126,11 +152,16 @@ function changeActive(id, active) {
     }
 
     weamon.style.display = "none";
+    if (document.getElementById(id+"atacMenu") != null && document.getElementById(newId+"atacMenu") != null) {
+        document.getElementById(id+"atacMenu").style.display = "none"
+        document.getElementById(newId+"atacMenu").style.display = "flex"
+    }
+    
     if (newId!=null) {
         weamon = document.getElementById(newId).style.display = "inline";
         document.getElementById(active).innerHTML=newId;
+        
     }
     
     
 }
-

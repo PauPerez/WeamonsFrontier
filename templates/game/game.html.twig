@@ -6,7 +6,7 @@
 	<link href="{{ asset('css/Battle.css') }}" type="text/css" rel="stylesheet"/>
 {% endblock %}
 {% block javascripts %}
-	<script src="{{ asset('javascripts/Battle.js') }}"/>
+	<script src="{{ asset('javascript/Battle.js') }}"/>
 {% endblock %}
 {% block body %}
 	<div id="battle" class="battle">
@@ -20,12 +20,18 @@
 					</div>
 				</div>
 				<div class="battle_hero">
-					<img src="{{ asset("Battlers/" ~ weamon.imgb) }}" alt="jugador">
+					<img src="{{ asset("img/" ~ weamon.imgb) }}" alt="jugador">
 				</div>
 			</div>
 		{% endfor %}
-		{% for weamon in weamons %}
-			<div id="{{ weamon.id }}e" class="weamon" hidden>
+		<div id="atackContainer" class="animation">
+			<img id="atacGif" class="attack_animation" src=""/>
+		</div>
+		<div id="atackEnemic" class="animationE">
+			<img id="atacGifE" class="attack_animationE" src=""/>
+		</div>
+		{% for weamon in enemics %}
+			<div id="{{ weamon.id }}e" class="weamon" velocitat="{{ weamon.velocitat }}" hidden>
 				<p class="nom" pos="enemic">{{ weamon.nom }}</p>
 				<p class="tipus" tipus="{{ weamon.tipus.nom }}" pos="enemic">{{ weamon.tipus.nom }}</p>
 				<div pos="enemic" class="health-bar" data-total="{{ weamon.vida }}" data-value="{{ weamon.vida }}">
@@ -34,25 +40,28 @@
 					</div>
 				</div>
 				<div class="battle_enemy">
-					<img src="{{ asset("Battlers/" ~ weamon.img) }}" alt="enemic">
+					<img src="{{ asset("img/" ~ weamon.img) }}" alt="enemic">
 					<p id="{{ weamon.id }}eAtac" hidden>{{ weamon.atac }}</p>
 				</div>
-				<div id="moviments">
-				{% for moviment in weamon.getMoviments %}
-					<p hidden>{{ moviment.nom }}</p>
-				{% endfor %}
+				<div id="moviments" hidden>
+					{% for moviment in weamon.getMoviments %}
+						<p class="moviments" animation="{{ asset("img/" ~ moviment.animation) }}">{{ moviment.nom }}</p>
+					{% endfor %}
 				</div>
 			</div>
 		{% endfor %}
 	</div>
-	<div id="atacMenu" weamon="1" class="textMenu" style="display:flex">
-		{% for moviment in weamons[0].getMoviments %}
-			<button atac="{{ weamons[0].atac }}" class="moviment">{{ moviment.nom }}</button>
-		{% endfor %}
-	</div>
+	{% for weamon in weamons %}
+		<div id="{{ weamon.id }}atacMenu" class="textMenu" style="display:none">
+			{% for moviment in weamon.getMoviments %}
+				<button velocitat="{{ weamon.velocitat }}" atac="{{ weamon.atac }}" class="moviment" animation="{{ asset("img/" ~ moviment.animation) }}">{{ moviment.nom }}</button>
+			{% endfor %}
+		</div>
+	{% endfor %}
 	<div id="textMenu" class="textMenu" style="display:none"></div>
-	<p id="activeEnemy" hidden>{{ weamons[0].id }}e</p>
+	<p id="activeEnemy" hidden>{{ enemics[0].id }}e</p>
 	<p id="activeWeamon" hidden>{{ weamons[0].id }}</p>
 	<p id="deadEnemies" hidden>0</p>
 	<p id="deadPlayers" hidden>0</p>
+	<p id="redirect" hidden>{{ path("historial_create", { victory:1 }) }}</p>
 {% endblock %}

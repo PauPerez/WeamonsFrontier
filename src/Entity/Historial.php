@@ -33,6 +33,11 @@ class Historial
      */
     private $Contrincant;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Usuari::class, inversedBy="historials")
+     */
+    private $usuari;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -58,6 +63,13 @@ class Historial
     public function setUsuari(?Usuari $Usuari): self
     {
         $this->Usuari = $Usuari;
+
+        return $this;
+    }
+
+    public function setUsuariP(?Usuari $Usuari): self
+    {
+        $this->usuari = $Usuari;
 
         return $this;
     }

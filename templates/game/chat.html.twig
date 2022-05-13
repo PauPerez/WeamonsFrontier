@@ -1,0 +1,67 @@
+<!doctype html>
+<form name="publish">
+  <p>
+    <label>User: </label>
+    <input type="text" name="user" maxlength="50" value="Pepe" />
+    <input type="button" name="connect" value="Connect" />
+  </p>
+  <p>
+    <input type="button" name="ajax" value="Ajax" />
+  <div id=result></div>
+  </p>
+  <label>Message: </label><input type="text" name="message" maxlength="50" />
+  <input type="submit" value="Send" />
+</form>
+
+<div id="messages"></div>
+
+<script>
+  //let host = "172.16.206.50";
+  //let host = "172.16.23.24";
+  let host = "localhost";
+  let urlws = `ws://${host}:8080/ws`;
+  let api = `http://${host}:8080/api`;
+  let socket = new WebSocket(urlws);;
+
+  // connect
+  document.forms.publish.connect.onclick = function () {
+    let outgoingMessage = { tipus: "login", content: `${document.forms.publish.user.value}` };
+    socket.send(JSON.stringify(outgoingMessage));
+  };
+
+  // handle incoming messages
+  socket.onmessage = function (event) {
+    let incomingMessage = event.data;
+    showMessage(incomingMessage);
+  };
+
+  socket.onclose = event => console.log(`Closed ${event.code}`);
+
+  // send message from the form
+  document.forms.publish.onsubmit = function () {
+    let outgoingMessage = { tipus: "data", content: `${this.message.value}` };
+    socket.send(JSON.stringify(outgoingMessage));
+    return false;
+  };
+
+  // show message in div#messages
+  function showMessage(message) {
+    let messageElem = document.createElement('div');
+    messageElem.textContent = message;
+    document.getElementById('messages').prepend(messageElem);
+  }
+
+  document.forms.publish.ajax.onclick = function () {
+    fetch(api).then(function (response) {
+      if (response.ok) {
+        response.json().then((dades) => {
+          document.getElementById("result").innerHTML = JSON.stringify(dades);
+        });
+      } else {
+        document.getElementById("result").innerHTML = "Error fetch";
+      }
+    }).catch(function (error) {
+      document.getElementById("result").innerHTML = 'Hubo un problema con la petición Fetch:' + error.message;
+    });
+  };
+</script>

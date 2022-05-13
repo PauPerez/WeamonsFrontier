@@ -40,6 +40,11 @@ class Moviment
      */
     private $weamons;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $animation;
+
     public function __construct()
     {
         $this->weamons = new ArrayCollection();
@@ -109,6 +114,18 @@ class Moviment
         if ($this->weamons->removeElement($weamon)) {
             $weamon->removeMoviment($this);
         }
+
+        return $this;
+    }
+
+    public function getAnimation(): ?string
+    {
+        return $this->animation;
+    }
+
+    public function setAnimation(string $animation): self
+    {
+        $this->animation = $animation;
 
         return $this;
     }

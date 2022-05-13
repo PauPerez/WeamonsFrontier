@@ -5,6 +5,7 @@
 
 body {
     background-color: rgb(4, 34, 43);
+    background-image: url(../img/fondos/weadex2.png);
 }
 
 .inicio_principal {
@@ -23,8 +24,9 @@ body {
 .logo_principal {
     max-width: 20em;
     max-height: 20em;
-    min-width: 10em;
-    min-height: 10em;
+    min-width: 5em;
+    min-height: 5em;
+    margin: 20px;
 }
 
 .separarador_principal {

@@ -30,6 +30,11 @@ class Equip
      */
     private $Weamons;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Usuari::class, inversedBy="equips")
+     */
+    private $usuari;
+
     public function __construct()
     {
         $this->Weamons = new ArrayCollection();
@@ -48,6 +53,13 @@ class Equip
     public function setUsuari(?Usuari $Usuari): self
     {
         $this->Usuari = $Usuari;
+
+        return $this;
+    }
+
+    public function setUsuari2(?Usuari $Usuari): self
+    {
+        $this->usuari = $Usuari;
 
         return $this;
     }

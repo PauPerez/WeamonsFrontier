@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+{% block title %}Backoffice{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+{% block body %}
+{{ include('navbaradmin.html.twig') }}
+<div style="margin-top: 200px">
+<h1>Benvingut al backoffice!</h1>
+<p>Aquí pots afegir nous elements a la web o modificar-ne de existents!</p>
+</div>
+{% endblock %}

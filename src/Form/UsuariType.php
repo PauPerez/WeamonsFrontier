@@ -10,6 +10,10 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Validator\Constraints\File;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+
+
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 use App\Entity\Usuari;
 
@@ -18,10 +22,10 @@ class UsuariType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('Username', TextType::class)
-            ->add('Password', PasswordType::class)
-            ->add('Rol', TextType::class)
-            ->add('Img', FileType::class, [
+            ->add('username', TextType::class)
+            ->add('email', TextType::class)
+            ->add('password', PasswordType::class)
+            ->add('img', FileType::class, [
                 'label' => 'Imatge de perfil',
                 'mapped' => false,
                 'required' => false,
@@ -35,6 +39,17 @@ class UsuariType extends AbstractType
                         'mimeTypesMessage' => "Només s'accepten imatges png/jpeg de 1024k o menys",
                     ])
                 ],
+            ])
+            ->add('Roles', ChoiceType::class, [
+                'choices'  => [
+                    'Admin' => "ROLE_ADMIN",
+                    'Usuari' => "ROLE_USER",
+                ],
+                'multiple' => true,
+            ])
+            ->add('is_verified', CheckboxType::class, [
+                'label'    => 'verificar el usuario?',
+                'required' => false,
             ])
             ->add('save', SubmitType::class, array('label' => $options['submit']))
         ;

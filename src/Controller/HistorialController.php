@@ -18,7 +18,7 @@ class HistorialController extends AbstractController
 {
 
     /**
-     * @Route("/historial/list", name="historial_list")
+     * @Route("/admin/historial/list", name="historial_list")
      */
     public function list()
     {
@@ -29,11 +29,11 @@ class HistorialController extends AbstractController
         //codi de prova per visualitzar l'array de historials
         //dump($historials);exit();
 
-        return $this->render('historial/list.html.twig', ['historials' => $historials]);
+        return $this->render('admin/historial/list.html.twig', ['historials' => $historials]);
     }
 
     /**
-    * @Route("/historial/new", name="historial_new")
+    * @Route("/admin/historial/new", name="historial_new")
     */
     public function new(Request $request, FileUploader $fileUploader)
     {
@@ -79,13 +79,65 @@ class HistorialController extends AbstractController
             return $this->redirectToRoute('historial_list');
         }
 
-        return $this->render('historial/historial.html.twig', array(
+        return $this->render('admin/historial/historial.html.twig', array(
             'form' => $form->createView(),
             'title' => 'Nou historial',
         ));
     }
+
+  /**
+   * @Route("/user/admin/historial/create/{victory}", name="historial_create")
+   */
+  public function create($victory)
+  {
+    $historial = new Historial();
+    $user = $this->getDoctrine()
+    ->getRepository(Usuari::class)
+    ->find($this->getUser()->getId());
+
+    $historial->setUsuari($user);
+    $historial->setUsuariP($user);
+    $historial->setContrincant($user);
+    $historial->setResultat($victory);
+
+    $entityManager = $this->getDoctrine()->getManager();
+    $entityManager->persist($historial);
+    $entityManager->flush();
+
+    //codi de prova per visualitzar l'array de historials
+    //dump($historials);exit();
+
+    return $this->render("principal.html.twig", ["username"=>$user->getUsername()]);
+  }
+
+  /**
+ * @Route("/admin/historial/delete/{id}", name="historial_delete", requirements={"id"="\d+"})
+ */
+public function delete($id, Request $request)
+{
+    $historialRepository = $this->getDoctrine()
+    ->getRepository(Historial::class);
+    $historial = $historialRepository
+        ->find($id);
+
+    $status = $historialRepository
+        ->remove($historial);
+
+    if (($status >= 200) && ($status < 300)) {
+      $this->addFlash(
+        'notice',
+        'historial '.$historial->getCodi().' eliminat!'
+      );
+    } else {
+      $this->addFlash(
+        'notice',
+        'ERROR '.$status
+      );
+    }
+    return $this->redirectToRoute('historial_list');
+}
 }
 
-   
+
 
 ?>

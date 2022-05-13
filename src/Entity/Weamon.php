@@ -63,7 +63,7 @@ class Weamon
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $imgb;
+    private $ImgB;
 
     public function __construct()
     {
@@ -183,14 +183,14 @@ class Weamon
         return $this;
     }
 
-    public function getImgb(): ?string
+    public function getImgB(): ?string
     {
-        return $this->imgb;
+        return $this->ImgB;
     }
 
-    public function setImgb(string $imgb): self
+    public function setImgB(string $ImgB): self
     {
-        $this->imgb = $imgb;
+        $this->ImgB = $ImgB;
 
         return $this;
     }

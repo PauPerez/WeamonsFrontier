@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ title }}{% endblock %}
+{% block body %}
+        <h1>{{ title }}</h1>
+        <a style="width:100px" href="{{ path('weamon_list') }}">&laquo; Torna</a>
+		<br><br>
+        {% for message in app.flashes('notice') %}
+              <strong><i> {{ message }} </i></strong>
+        {% endfor %}
+		<div style="margin-top: 20px">
+  	    	{{ form_start(form) }}
+		      {{ form_widget(form) }}
+		{{ form_end(form) }}
+		</div>
+{% endblock %}

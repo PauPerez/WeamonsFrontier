@@ -15,6 +15,7 @@ use Symfony\Component\Validator\Constraints\File;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 use App\Entity\Equip;
+use App\Entity\Weamon;
 use App\Entity\Usuari;
 
 class EquipType extends AbstractType
@@ -24,6 +25,9 @@ class EquipType extends AbstractType
         $builder
             ->add('Usuari', EntityType::class, array('class' => Usuari::class,
             'choice_label' => 'username'))
+            ->add('Weamons', EntityType::class, array('class' => Weamon::class,
+            'choice_label' => 'nom',
+            'multiple' => true))
             ->add('save', SubmitType::class, array('label' => $options['submit']))
         ;
     }

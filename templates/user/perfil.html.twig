@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello LoginController!{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="{{ asset('css/perfil.css') }}" type="text/css" rel="stylesheet" />
+{% endblock %}
+{% block body %}
+    {{ include('navbar.html.twig') }}
+    <div class="padre_perfil">
+        <div class="jugador_perfil">
+            <img src="{{ asset ('img/' ~ user.Img) }}" class="img-fluid">
+        </div>
+    </div>
+{% endblock %}

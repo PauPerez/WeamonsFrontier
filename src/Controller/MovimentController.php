@@ -7,6 +7,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 
+use App\Service\FileUploader;
 use App\Entity\Moviment;
 use App\Repository\MovimentRepository;
 use App\Form\MovimentType;
@@ -15,7 +16,7 @@ class MovimentController extends AbstractController
 {
 
     /**
-     * @Route("/moviment/list", name="moviment_list")
+     * @Route("/admin/moviment/list", name="moviment_list")
      */
     public function list()
     {
@@ -25,13 +26,13 @@ class MovimentController extends AbstractController
 
         //codi de prova per visualitzar l'array de moviments
 
-        return $this->render('moviment/list.html.twig', ['moviments' => $moviment]);
+        return $this->render('admin/moviment/list.html.twig', ['moviments' => $moviment]);
     }
 
     /**
-    * @Route("/moviment/new", name="moviment_new")
+    * @Route("/admin/moviment/new", name="moviment_new")
     */
-    public function new(Request $request)
+    public function new(Request $request, FileUploader $fileUploader)
     {
         $moviment = new Moviment();
         //podem personalitzar el text del botó passant una opció 'submit' al builder de la classe movimentType
@@ -43,6 +44,18 @@ class MovimentController extends AbstractController
 
           // recollim els camps del formulari en l'objecte moviment
             $moviment = $form->getData();
+
+            $brochureFile = $form->get('Animation')->getData();
+            if ($brochureFile) {
+                $brochureFileName = $fileUploader->upload($brochureFile, $moviment->getNom());
+                $moviment->setAnimation("animations/".$brochureFileName);
+            }else{
+                $this->addFlash(
+                    'notice',
+                    "has d'afegir una imatge!"
+                );
+                return $this->redirectToRoute('moviment_new');
+            }
 
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($moviment);
@@ -56,14 +69,14 @@ class MovimentController extends AbstractController
             return $this->redirectToRoute('moviment_list');
         }
 
-        return $this->render('moviment/moviment.html.twig', array(
+        return $this->render('admin/moviment/moviment.html.twig', array(
             'form' => $form->createView(),
             'title' => 'Nou moviment',
         ));
     }
 
     /**
-     * @Route("/moviment/delete/{id}", name="moviment_delete", requirements={"id"="\d+"})
+     * @Route("/admin/moviment/delete/{id}", name="moviment_delete", requirements={"id"="\d+"})
      */
     public function delete($id, Request $request)
     {
@@ -90,7 +103,7 @@ class MovimentController extends AbstractController
     }
 
     /**
-     * @Route("/moviment/edit/{id<\d+>}", name="moviment_edit")
+     * @Route("/admin/moviment/edit/{id<\d+>}", name="moviment_edit")
      */
     public function edit($id, Request $request)
     {
@@ -126,7 +139,7 @@ class MovimentController extends AbstractController
             return $this->redirectToRoute('moviment_list');
         }
 
-        return $this->render('moviment/moviment.html.twig', array(
+        return $this->render('admin/moviment/moviment.html.twig', array(
             'form' => $form->createView(),
             'title' => 'Editar moviment',
         ));

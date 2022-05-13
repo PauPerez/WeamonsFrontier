@@ -17,7 +17,7 @@ class EquipController extends AbstractController
 {
 
     /**
-     * @Route("/equip/list", name="equip_list")
+     * @Route("/admin/equip/list", name="equip_list")
      */
     public function list()
     {
@@ -28,11 +28,11 @@ class EquipController extends AbstractController
         //codi de prova per visualitzar l'array de equips
         //dump($equips);exit();
 
-        return $this->render('equip/list.html.twig', ['equips' => $equips]);
+        return $this->render('admin/equip/list.html.twig', ['equips' => $equips]);
     }
 
     /**
-    * @Route("/equip/new", name="equip_new")
+    * @Route("/admin/equip/new", name="equip_new")
     */
     public function new(Request $request, FileUploader $fileUploader)
     {
@@ -46,7 +46,14 @@ class EquipController extends AbstractController
 
           // recollim els camps del formulari en l'objecte equip
             $equip = $form->getData();
-
+            $equip->setUsuari2($equip->getUsuari());
+            if (count($equip->getWeamons()) > 4 || count($equip->getWeamons()) < 4) {
+              $this->addFlash(
+                  'notice',
+                  "has d'escollir només 4 weamons!"
+              );
+              return $this->redirectToRoute('equip_new');
+            }
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($equip);
             $entityManager->flush();
@@ -59,13 +66,13 @@ class EquipController extends AbstractController
             return $this->redirectToRoute('equip_list');
         }
 
-        return $this->render('equip/equip.html.twig', array(
+        return $this->render('admin/equip/equip.html.twig', array(
             'form' => $form->createView(),
             'title' => 'Nou equip',
         ));
     }
     /**
-     * @Route("/equip/delete/{id}", name="equip_delete", requirements={"id"="\d+"})
+     * @Route("/admin/equip/delete/{id}", name="equip_delete", requirements={"id"="\d+"})
      */
     public function delete($id, Request $request)
     {
@@ -92,7 +99,7 @@ class EquipController extends AbstractController
     }
 
     /**
-     * @Route("/equip/edit/{id<\d+>}", name="equip_edit")
+     * @Route("/admin/equip/edit/{id<\d+>}", name="equip_edit")
      */
     public function edit($id, Request $request)
     {
@@ -109,7 +116,13 @@ class EquipController extends AbstractController
 
             // recollim els camps del formulari en l'objecte equip
             $equip = $form->getData();
-
+            if (count($equip->getWeamons()) > 4 || count($equip->getWeamons()) < 4) {
+              $this->addFlash(
+                  'notice',
+                  "has d'escollir només 4 weamons!"
+              );
+              return $this->redirectToRoute('equip_edit',['id'=>$equip->getId()]);
+            }
             $status = $equipRepository
                 ->add($equip);
 
@@ -128,14 +141,14 @@ class EquipController extends AbstractController
             return $this->redirectToRoute('equip_list');
         }
 
-        return $this->render('equip/equip.html.twig', array(
+        return $this->render('admin/equip/equip.html.twig', array(
             'form' => $form->createView(),
             'title' => 'Editar equip',
         ));
     }
 
     /**
-    * @Route("/equip/add/{id<\d+>}", name="equip_add")
+    * @Route("/admin/equip/add/{id<\d+>}", name="equip_add")
     */
     public function add($id, Request $request)
     {
@@ -175,7 +188,7 @@ class EquipController extends AbstractController
             return $this->redirectToRoute('equip_list');
         }
 
-        return $this->render('equip/equip.html.twig', array(
+        return $this->render('admin/equip/equip.html.twig', array(
             'form' => $form->createView(),
             'title' => 'Nou equip',
         ));

@@ -26,6 +26,20 @@ class MovimentType extends AbstractType
             'choice_label' => 'nom'))
             ->add('Nom', TextType::class)
             ->add('Accio', TextType::class)
+            ->add('Animation', FileType::class, [
+                'label' => 'Sprite png del moviment',
+                'mapped' => false,
+                'required' => false,
+                'constraints' => [
+                    new File([
+                        'maxSize' => '1024k',
+                        'mimeTypes' => [
+                            'image/png'
+                        ],
+                        'mimeTypesMessage' => "Només s'accepten imatges png de 1024k o menys",
+                    ])
+                ],
+            ])
             ->add('save', SubmitType::class, array('label' => $options['submit']))
         ;
     }

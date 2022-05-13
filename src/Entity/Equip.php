@@ -80,4 +80,20 @@ class Equip
 
         return $this;
     }
+
+    public function cambiarWeamon(Weamon $weamonNuevo, int $pos): self 
+    {
+        $equipo = $this->getWeamons();
+        //$equipo->removeWeamon($weamonActual);
+        $equipo[$pos] = $weamonNuevo;
+
+        return $this;
+    }
+
+    public function setUsuari2(?Usuari $Usuari): self
+    {
+        $this->usuari = $Usuari;
+
+        return $this;
+    }
 }

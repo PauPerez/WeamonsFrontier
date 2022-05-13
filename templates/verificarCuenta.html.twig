@@ -4,13 +4,22 @@
     {{ parent() }}
     <style type="text/css">
         .padre_verificar {
-            max-width: 35em;
-            background-color: green;
+            width: 100%;
+            padding-top: 50px;
+            padding-bottom: 50px;
+            background-color: rgb(4, 34, 43)
         }
 
         .principal_verificar {
-            max-width: 35em;
-            background-color: red;
+            width: 35em;
+            border-radius: 5px;
+            padding: 20px;
+            background-color: rgb(228, 228, 228);
+            margin-left: auto;
+            margin-right: auto;
+            margin-top: 10em;
+            margin-bottom: 10em;
+            text-align: center;
         }
 
         .logo_verificar {
@@ -21,15 +30,30 @@
             margin: 20px;
         }
 
-        .boton_verificar {
-            max-width: 200px;
-            max-height: 200px;
-            margin-bottom: 20px;
-            background-color: rgb(22, 47, 54);
-            color: rgb(29, 214, 205);
-            border-color: rgb(4, 34, 43);
-            border-radius: 5px;
-            background-color: #006c97;
+        .link_verificar {
+            color: rgb(4, 34, 43);
+            font-size: 1.5em;
+            text-decoration: none;
+        }
+
+        /* Mobile */
+        @media all and (max-width: 500px) {
+            .principal_verificar {
+                width: 35%;
+                margin-top: 10%;
+                margin-bottom: 10%;
+            }
+
+            .logo_verificar {
+                max-width: 70%;
+                max-height: 70%;
+                min-width: 5%;
+                min-height: 5%;
+            }
+
+            .link_verificar {
+                font-size: 1em;
+            }
         }
     </style>
 {% endblock %}
@@ -37,8 +61,9 @@
 {% block body %}
     <div class="padre_verificar">
         <div class="principal_verificar">
-            <img class="logo_verificar" src="{{ email.image('@img/fondos/logo5.png') }}">
-            <a class="boton_verificar" href="{{ link }}pruebas/accountVerified?email={{ mail }}&token={{ token }}">Crear cuenta</a>
+            <img class="logo_verificar" src="{{ email.image('@img/fondos/logo7.png') }}">
+            <br>
+            <a class="link_verificar" href="{{ link }}accountVerified?email={{ mail }}&token={{ token }}">Clica aquí para verificar la creación de tu cuenta de Weamon Frontier</a>
         </div>
     </div>
 {% endblock %}

@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello LoginController!{% endblock %}
+{% block title %}WeamonInfo{% endblock %}
 {% block stylesheets %}
     {{ parent() }}
     <link href="{{ asset('css/weamon-info.css') }}" type="text/css" rel="stylesheet" />
@@ -83,7 +83,9 @@
                     </div>
                 {% endif %}
                 {% if (segunda != null) %}
-                    <p style="font-size: 5em;">❯</p>
+                    {% if (primera != null) %}
+                        <p style="font-size: 5em;">❯</p>
+                    {% endif %} 
                     <div class="evolucion_weamonInfo">
                         <a href="{{ segunda.id }}"><img src="{{ asset ('img/' ~ segunda.img) }}" class="img-fluid"></a>
                         <p>{{ segunda.nom }}<p>
@@ -91,13 +93,18 @@
                     </div>
                 {% endif %}  
                 {% if (tercera != null) %}
-                    <p style="font-size: 5em;">❯</p>
+                    {% if (segunda != null) %}
+                        <p style="font-size: 5em;">❯</p>
+                    {% endif %} 
                     <div class="evolucion_weamonInfo">
                         <a href="{{ tercera.id }}"><img src="{{ asset ('img/' ~ tercera.img) }}" class="img-fluid"></a>
                         <p>{{ tercera.nom }}<p>
                         <label class="tipo_weamonInfo tipo_{{ tercera.tipus.nom }}_weamonInfo">{{ tercera.tipus.nom }}</label>
                     </div>
                 {% endif %}             
+            </div>
+            <div class="weadex_weamonInfo">
+                <a href="{{ path('weadex') }}">Volver a la Weadex</a>
             </div>
         </div>
     </div>

@@ -57,6 +57,7 @@ body {
     font-size: 2.5em;
     font-weight: bold;
     color: white;
+    margin: 10px;
 }
 
 .imagen_weamonInfo {
@@ -215,7 +216,6 @@ body {
     margin: 20px;
     padding: 20px;
     color: rgb(4, 34, 43);
-    padding: 50px;
 }
 
 .evolucion_weamonInfo {
@@ -232,11 +232,42 @@ body {
     border-radius: 100%;
     background-color: rgb(9, 56, 70);
     padding: 20px;
+}
+
+.evolucion_weamonInfo img:hover {
+    animation: desplazarDiv 0.2s;
     cursor: pointer;
+}
+
+@keyframes desplazarDiv {
+    0% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(10px);
+    }
+    100% {
+        transform: translateY(0px);
+        
+    }
+}
+
+.weadex_weamonInfo {
+    width: 70em;
+    margin: 20px;
+}
+
+.weadex_weamonInfo a {
+    text-decoration: none;
+    color: rgb(15, 202, 202);
 }
 
 /* Tablet and Mobile */
 @media all and (max-width: 1500px) {
+    .cabecera_weamonInfo h1 {
+        font-size: 1.5em;
+    }
+
     .imagen_weamonInfo {
         width: 80%;
         height: 50%;
@@ -267,5 +298,9 @@ body {
 
     .evoluciones_weamonInfo {
         width: 80%;
+    }
+
+    .weadex_weamonInfo {
+        text-align: center;
     }
 }

@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 use App\Entity\Usuari;
+use App\Entity\Equip;
 use App\Repository\UsuariRepository;
 use App\Form\UsuariType;
 
@@ -65,8 +66,14 @@ class UsuariController extends AbstractController
 
             $brochureFile = $form->get('img')->getData();
             if ($brochureFile) {
-                $brochureFileName = $fileUploader->upload($brochureFile, $usuari->getUsername());
-                $usuari->setImg($brochureFileName);
+                $brochureFileName = $fileUploader->upload($brochureFile, $usuari->getUsername(), "avatares/");
+                $usuari->setImg("avatares/".$brochureFileName);
+            }else{
+                $this->addFlash(
+                    'notice',
+                    "has d'afegir una imatge!"
+                );
+                return $this->redirectToRoute('usuari_new');
             }
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($usuari);
@@ -93,9 +100,18 @@ class UsuariController extends AbstractController
     {
         $usuariRepository = $this->getDoctrine()
         ->getRepository(Usuari::class);
+        $equipRepository = $this->getDoctrine()
+        ->getRepository(Equip::class);
         $usuari = $usuariRepository
             ->find($id);
 
+        $equips = $usuari->getEquips();
+        if (count($equips) > 0) {
+            for ($i=0; $i < count($equips); $i++) { 
+                $equipRepository->remove($equips[$i], false);
+            }
+        }
+        
         $status = $usuariRepository
             ->remove($usuari);
 
@@ -116,7 +132,7 @@ class UsuariController extends AbstractController
     /**
      * @Route("/admin/usuari/edit/{id<\d+>}", name="usuari_edit")
      */
-    public function edit($id, Request $request)
+    public function edit($id, Request $request, FileUploader $fileUploader)
     {
         $usuariRepository = $this->getDoctrine()
         ->getRepository(Usuari::class);
@@ -131,6 +147,12 @@ class UsuariController extends AbstractController
 
             // recollim els camps del formulari en l'objecte usuari
             $usuari = $form->getData();
+
+            $brochureFile = $form->get('img')->getData();
+            if ($brochureFile) {
+                $brochureFileName = $fileUploader->upload($brochureFile, $usuari->getUsername(), "avatares/");
+                $usuari->setImg("avatares/".$brochureFileName);
+            }
 
             $status = $usuariRepository
                 ->add($usuari);

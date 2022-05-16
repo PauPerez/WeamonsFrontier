@@ -13,13 +13,17 @@ class DefaultController extends AbstractController
   public function home()
   {
     $user = $this->getUser();
-    if ($user == null)
+    if ($user == null){
       $username = "";
-    else
+      $roles=[];
+    }
+    else{
       $username = $user->getUsername();
-
+      $roles = $user->getRoles();
+    }
     return $this->render('principal.html.twig', [
         'username' => $username,
+        'roles' => $roles,
     ]);
   }
 

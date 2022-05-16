@@ -16,12 +16,12 @@ class FileUploader
         $this->slugger = $slugger;
     }
 
-    public function upload(UploadedFile $file, $name)
+    public function upload(UploadedFile $file, $name, $lastPart)
     {
         $fileName = $name.'.'.$file->guessExtension();
 
         try {
-            $file->move($this->getTargetDirectory(), $fileName);
+            $file->move($this->getTargetDirectory().$lastPart, $fileName);
         } catch (FileException $e) {
             // ... handle exception if something happens during file upload
         }

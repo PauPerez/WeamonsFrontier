@@ -32,7 +32,7 @@ function cambiarOrden() {
                </div>`;*/
     var div = document.createElement("div");
     div.className = "div_imagen_principal animado_abajo_principal";
-    div.innerHTML = `<img src="/M14/WeamonsFrontier/public/./img/fondos/principal1.jpg">`;
+    div.innerHTML = `<img src="../img/fondos/principal1.jpg">`;
     if (screenWidth <= 1200) {
         divObjetivo.insertAdjacentElement("beforebegin", div);
     } else {

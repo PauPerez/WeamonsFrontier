@@ -14,6 +14,7 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Validator\Constraints\File;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 use App\Entity\Weamon;
 use App\Entity\Moviment;
@@ -33,6 +34,13 @@ class WeamonType extends AbstractType
             ->add('Shiny', CheckboxType::class, [
                 'label'    => 'es shiny?',
                 'required' => false,
+            ])
+            ->add('nEvolucion', ChoiceType::class, [
+                'choices'  => [
+                    '1' => "1",
+                    '2' => "2",
+                    '3' => '3'
+                ],
             ])
             ->add('Img', FileType::class, [
                 'label' => 'Sprite del weamon',

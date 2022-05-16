@@ -25,7 +25,7 @@ class MovimentType extends AbstractType
             ->add('Tipus', EntityType::class, array('class' => Tipus::class,
             'choice_label' => 'nom'))
             ->add('Nom', TextType::class)
-            ->add('Accio', TextType::class)
+            ->add('Descripcion', TextType::class)
             ->add('Animation', FileType::class, [
                 'label' => 'Sprite png del moviment',
                 'mapped' => false,

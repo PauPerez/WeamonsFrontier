@@ -135,6 +135,12 @@ transition: width .5s linear;
     border: 1px solid blue;
 }
 
+.tipus{
+    color: black;
+    background-color: lightgray;
+    border: 1px solid gray;
+}
+
 .battle_hero, .battle_enemy{
     position: absolute;
     transform: scale(2);

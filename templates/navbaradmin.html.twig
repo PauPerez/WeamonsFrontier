@@ -1,5 +1,10 @@
 <!-- Navigation -->
-<div>
+{% block stylesheets %}
+<link href="{{ asset('css/taula.css') }}" type="text/css" rel="stylesheet" />
+{% endblock %}
+<div>{% block javascripts %}
+  <script src="{{ asset('javascript/backoffice.js') }}" type="text/javascript"></script>
+{% endblock %}
     <nav>
         <ul class="menu">
             <li class="logo"><a href="{{ path('principal') }}" class="logo_navbar"><img class="img-fluid logo_navbar" src="{{ asset('./img/fondos/logo8.png') }}"></a></li>

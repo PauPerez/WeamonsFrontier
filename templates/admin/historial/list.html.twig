@@ -12,13 +12,13 @@
           <table class="table table-hover table-dark table-bordered" style="margin-top: 20px;margin-bottom: 10px;">
               <thead>
                   <tr>
-                      <th>Usuari</th><th>Contrincant</th><th>Victoria</th><th>Accions</th>
+                      <th>Usuari</th><th>Victoria</th><th>Accions</th>
                   </tr>
               </thead>
               <tbody>
                   {% for historial in historials %}
                       <tr>
-                          <td>{{ historial.getUsuari.Username }}</td><td>{{ historial.getContrincant.Username }}</td><td>{% if historial.Resultat == 0 %}No{% else %}Si{% endif %}</td>
+                          <td>{{ historial.getUsuari.Username }}</td><td>{% if historial.Resultat == 0 %}No{% else %}Si{% endif %}</td>
                           <td><a class="btn btn-danger" href="{{ path('historial_delete', {'id': historial.id}) }}" onclick="return eliminar('{{ historial.id }}')">Eliminar</a></td>
                       </tr>
                   {% else %}

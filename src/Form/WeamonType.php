@@ -26,14 +26,16 @@ class WeamonType extends AbstractType
     {
         $builder
             ->add('Tipus', EntityType::class, array('class' => Tipus::class,
-            'choice_label' => 'nom'))
-            ->add('Nom', TextType::class)
-            ->add('Vida', IntegerType::class)
-            ->add('Atac', IntegerType::class)
-            ->add('Velocitat', IntegerType::class)
+            'choice_label' => 'nom',
+            'attr'=>['attr'=>'form-select']))
+            ->add('Nom', TextType::class, ['attr'=>['class'=>'form-control']])
+            ->add('Vida', IntegerType::class, ['attr'=>['class'=>'form-control']])
+            ->add('Atac', IntegerType::class, ['attr'=>['class'=>'form-control']])
+            ->add('Velocitat', IntegerType::class, ['attr'=>['class'=>'form-control']])
             ->add('Shiny', CheckboxType::class, [
                 'label'    => 'es shiny?',
                 'required' => false,
+                'attr'=>['class'=>'form-check']
             ])
             ->add('nEvolucion', ChoiceType::class, [
                 'choices'  => [
@@ -41,6 +43,7 @@ class WeamonType extends AbstractType
                     '2' => "2",
                     '3' => '3'
                 ],
+                'attr'=>['class'=>'form-select']
             ])
             ->add('Img', FileType::class, [
                 'label' => 'Sprite del weamon',

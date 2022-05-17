@@ -162,26 +162,17 @@ class MasterController extends AbstractController
     public function principal(MailerInterface $mailer): Response
     {
         $user = $this->getUser();
-        if ($user == null)
+        if ($user == null){
           $username = "";
-        else
+          $roles=[];
+        }
+        else{
           $username = $user->getUsername();
-
+          $roles = $user->getRoles();
+        }
         // Enviem email de confirmacio de creacio
-        /*$email = (new TemplatedEmail())
-            ->from('hello@example.com')
-            ->to('diego_aguilarlopez@iescarlesvallbona.cat')
-            ->subject('Verifica el compte!')
-            ->text('Sending emails is fun again!')
-            //->html('<p>See Twig integration for better HTML integration!</p>');
-            ->htmlTemplate('verificarCuenta.html.twig')
-            ->context(['link' => $this->getParameter('link_servidor'),
-              'token' => 'xd',
-              'mail' => 'diego_aguilarlopez@iescarlesvallbona.cat']);
         
-        //var_dump($email);die;
-        $mailer->send($email);*/
-        $roles = $user->getRoles();
+        
 
         return $this->render('principal.html.twig', [
             'username' => $username,

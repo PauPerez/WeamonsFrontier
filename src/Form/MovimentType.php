@@ -23,9 +23,10 @@ class MovimentType extends AbstractType
     {
         $builder
             ->add('Tipus', EntityType::class, array('class' => Tipus::class,
-            'choice_label' => 'nom'))
-            ->add('Nom', TextType::class)
-            ->add('Descripcion', TextType::class)
+            'choice_label' => 'nom',
+            'attr'=>['class'=>'form-control']))
+            ->add('Nom', TextType::class, ['attr'=>['class'=>'form-control']])
+            ->add('Descripcion', TextType::class, ['attr'=>['class'=>'form-control']])
             ->add('Animation', FileType::class, [
                 'label' => 'Sprite png del moviment',
                 'mapped' => false,
@@ -40,7 +41,7 @@ class MovimentType extends AbstractType
                     ])
                 ],
             ])
-            ->add('save', SubmitType::class, array('label' => $options['submit']))
+            ->add('save', SubmitType::class, array('label' => $options['submit'],'attr'=>['class'=>'btn btn-primary']))
         ;
     }
 

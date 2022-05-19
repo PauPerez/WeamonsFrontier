@@ -15,13 +15,13 @@
           <table class="table table-hover table-dark table-bordered" style="margin-top: 20px;margin-bottom: 10px;">
               <thead>
                   <tr>
-                      <th>Tipus</th><th>Nom</th><th>Descripcion</th><th>Accions</th>
+                      <th>Tipus</th><th>Nom</th><th>Descripcion</th><th>Animation</th><th>Accions</th>
                   </tr>
               </thead>
               <tbody>
                   {% for moviment in moviments %}
                       <tr>
-                          <td>{{ moviment.getTipus.Nom }}</td><td>{{ moviment.Nom }}</td><td>{{ moviment.Descripcion }}</td>
+                          <td>{{ moviment.getTipus.Nom }}</td><td>{{ moviment.Nom }}</td><td>{{ moviment.Descripcion }}</td><td><img class="img img-fluid" src="{{ asset('img/' ~ moviment.animation) }}" style="width:200px"></td>
                           <td>
                             <a class="btn btn-primary" href="{{ path('moviment_edit', {'id': moviment.id}) }}">Editar</a>
                             <a class="btn btn-danger" href="{{ path('moviment_delete', {'id': moviment.id}) }}" onclick="return eliminar('{{ moviment.nom }}')">Eliminar</a>

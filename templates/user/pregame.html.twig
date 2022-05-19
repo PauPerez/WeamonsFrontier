@@ -9,6 +9,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/css/select2.css" />
 
     <script src="{{ asset('javascript/pregame.js') }}"></script>
+    <script src="{{ asset('javascript/client.js') }}"></script>
+
 {% endblock %}
 {% block body %}
     {{ include('navbar.html.twig') }}
@@ -43,4 +45,13 @@
             </div>
         </div>
     </div>
+    <div id="chat">
+<form name="publish">
+    <input hidden type="text" name="user" maxlength="50" value="{{ username }}" />
+  <label>Message: </label><input type="text" name="message" maxlength="50" />
+  <input type="submit" value="Send" />
+</form>
+
+<div id="messages"></div>
+</div>
 {% endblock %}

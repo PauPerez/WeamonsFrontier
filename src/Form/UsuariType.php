@@ -53,7 +53,7 @@ class UsuariType extends AbstractType
                 'required' => false,
                 'attr'=>['class'=>'form-check']
             ])
-            ->add('save', SubmitType::class, array('label' => $options['submit']))
+            ->add('save', SubmitType::class, array('label' => $options['submit'],'attr'=>['class'=>'btn btn-primary']))
         ;
     }
 

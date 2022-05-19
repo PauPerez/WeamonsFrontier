@@ -78,7 +78,7 @@ class WeamonType extends AbstractType
             ->add('Moviments', EntityType::class, array('class' => Moviment::class,
             'choice_label' => 'nom',
             'multiple' => true))
-            ->add('save', SubmitType::class, array('label' => $options['submit']))
+            ->add('save', SubmitType::class, array('label' => $options['submit'],'attr'=>['class'=>'btn btn-primary']))
         ;
     }
 

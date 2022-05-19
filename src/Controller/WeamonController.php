@@ -68,8 +68,8 @@ class WeamonController extends AbstractController
             }
             $brochureFile = $form->get('ImgB')->getData();
             if ($brochureFile) {
-                $brochureFileName = $fileUploader->upload($brochureFile, $weamon->getNom(), "weamons/b");
-                $weamon->setImgB("weamons/b".$brochureFileName);
+                $brochureFileName = $fileUploader->upload($brochureFile, $weamon->getNom()."b", "weamons/");
+                $weamon->setImgB("weamons/".$brochureFileName);
             }else{
                 $this->addFlash(
                     'notice',
@@ -158,6 +158,11 @@ class WeamonController extends AbstractController
             if ($brochureFile) {
                 $brochureFileName = $fileUploader->upload($brochureFile, $weamon->getNom(), "weamons/");
                 $weamon->setImg("weamons/".$brochureFileName);
+            }
+            $brochureFile = $form->get('ImgB')->getData();
+            if ($brochureFile) {
+                $brochureFileName = $fileUploader->upload($brochureFile, $weamon->getNom()."b", "weamons/");
+                $weamon->setImgB("weamons/".$brochureFileName);
             }
             $status = $weamonRepository
                 ->add($weamon);

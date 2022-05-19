@@ -26,10 +26,9 @@
                      <span class="error" id="_passwordError" style="color: red;"></span>
                     </div>
                     <div>
-                        <!--<input type="checkbox" name="_recordaUsername" class="form-check-input" id="recordaUsername">
-                        <label class="form-check-label" for="recordaUsername">Recordar nombre de usuario?</label>-->
-                        {% if error %}
+                        {% if error|default("") %}
                             <label style="color: red; margin-top: 0px; margin-bottom: 10px;">{{ error }}</label>
+                            <p><a href="{{ path('emailChangePassword') }}">¿Has olvidado la contraseña?</a></p>
                         {% endif %}
                     </div>
                     <button type="submit" class="btn btn-primary">Login</button>

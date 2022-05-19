@@ -91,9 +91,9 @@ class MasterController extends AbstractController
         $email = (new TemplatedEmail())
             ->from('hello@example.com')
             ->to($_POST['email'])
-            ->subject('Verifica el compte!')
+            ->subject('Verificar creación cuenta Weamon Frontiers')
             ->text('Sending emails is fun again!')
-            ->htmlTemplate('verificarCuenta.html.twig')
+            ->htmlTemplate('sendVerificationToken.twig')
             ->context(['link' => $this->getParameter('link_servidor'),
               'token' => $usuari->getVerificationToken(),
               'mail' => $usuari->getEmail()]);
@@ -105,10 +105,14 @@ class MasterController extends AbstractController
         $entityManager->persist($usuari);
         $entityManager->flush();
 
-        return $this->redirectToRoute('principal');
+        return $this->render('notificacion.html.twig', [
+          'notificacion' => 'Se te a enviado un email de confirmación a tu correo electrónico!',
+        ]);
       }
 
-      return $this->redirectToRoute('register');
+      return $this->render('register.html.twig', [
+        'error' => 'El email introducido ya esta en uso!',
+      ]);
     }
 
     /**
@@ -121,7 +125,7 @@ class MasterController extends AbstractController
       $usuariRepository = $this->getDoctrine()
         ->getRepository(Usuari::class);
       $usuari = $usuariRepository
-        ->findByToken($token);
+        ->findByAccountVerifiedToken($token);
       
       if ($usuari != null) {
         $usuari->setVerificationToken(null);
@@ -150,16 +154,124 @@ class MasterController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('principal');
+        return $this->render('notificacion.html.twig', [
+          'notificacion' => 'Cuenta verificada con éxito!',
+        ]);
       }
 
-      return $this->redirectToRoute('weadex');
+      return $this->render('notificacion.html.twig', [
+        'notificacion' => 'Su cuenta ya a sido verificada o el token dado es incorrecto!',
+      ]);
+    }
+
+    /**
+    * @Route("/emailChangePassword", name="emailChangePassword")
+    */
+    public function emailChangePassword(): Response
+    {
+      return $this->render('emailChangePassword.html.twig', [
+        'error' => ''
+      ]);
+    }
+
+    /**
+    * @Route("/sendChangePassword", name="sendChangePassword")
+    */
+    public function sendChangePassword(MailerInterface $mailer): Response
+    {
+      $usuariRepository = $this->getDoctrine()
+        ->getRepository(Usuari::class);
+      $user = $usuariRepository
+        ->findByEmail($_POST['_email']);
+
+      if ($user != null) {
+        // Recollim els camps del formulari en l'objecte user
+        $user->setChangePasswordToken(bin2hex(random_bytes(64)));
+
+        // Enviem email de confirmacio de creacio
+        $email = (new TemplatedEmail())
+            ->from('hello@example.com')
+            ->to($_POST['_email'])
+            ->subject('Petición de cambio de contraseña')
+            ->text('Sending emails is fun again!')
+            ->htmlTemplate('sendChangePasswordToken.html.twig')
+            ->context(['link' => $this->getParameter('link_servidor'),
+              'token' => $user->getChangePasswordToken(),
+              'mail' => $user->getEmail()]);
+        
+        $mailer->send($email);
+        
+        // Guardem les dades a la base de dades
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->persist($user);
+        $entityManager->flush();
+
+        return $this->render('notificacion.html.twig', [
+          'notificacion' => 'Se te a enviado un email para cambiar la contraseña a tu correo electrónico!',
+        ]);
+      }
+
+      return $this->render('emailChangePassword.html.twig', [
+        /*'notificacion' => 'Su contraseña ya a sido cambiada o el token dado es incorrecto!',*/
+        'error' => 'El email introducido es incorrecto!'
+      ]);
+    }
+
+    /**
+    * @Route("/formChangePassword", name="formChangePassword")
+    */
+    public function formChangePassword(Request $request): Response
+    {
+      $token = $request->query->get('token');
+
+      $usuariRepository = $this->getDoctrine()
+        ->getRepository(Usuari::class);
+      $usuari = $usuariRepository
+        ->findByChangePasswordToken($token);
+
+      if ($usuari) {
+        return $this->render('changePassword.html.twig', [
+          'email' => $usuari->getEmail(),
+        ]);
+      }
+      
+      return $this->render('notificacion.html.twig', [
+        'notificacion' => 'El token dado es incorrecto!',
+      ]);
+    }
+
+    /**
+    * @Route("/changePassword", name="changePassword")
+    */
+    public function changePassword(Request $request, UserPasswordHasherInterface $passwordHasher): Response
+    {
+      $usuariRepository = $this->getDoctrine()
+        ->getRepository(Usuari::class);
+      $user = $usuariRepository
+        ->findByEmail($_POST['_email']);
+
+      $user->setChangePasswordToken(null);
+      // Hashear la contrasenya de l'usuari
+      $hashedPassword = $passwordHasher->hashPassword(
+        $user,
+        $_POST['_password']
+      );
+      $user->setPassword($hashedPassword);
+
+      // Guardem les dades a la base de dades
+      $entityManager = $this->getDoctrine()->getManager();
+      $entityManager->persist($user);
+      $entityManager->flush();
+
+      return $this->render('notificacion.html.twig', [
+        'notificacion' => 'Se a cambiado la contraseña correctamente!',
+      ]);
     }
 
     /**
      * @Route("/principal", name="principal")
      */
-    public function principal(MailerInterface $mailer): Response
+    public function principal(): Response
     {
         $user = $this->getUser();
         if ($user == null){
@@ -171,7 +283,6 @@ class MasterController extends AbstractController
           $roles = $user->getRoles();
         }
         // Enviem email de confirmacio de creacio
-        
         
 
         return $this->render('principal.html.twig', [
@@ -290,10 +401,6 @@ class MasterController extends AbstractController
     public function pregame(): Response
     {
         $user = $this->getUser();
-        if ($user == null)
-          $username = "";
-        else
-          $username = $user->getUsername();
 
         $allWeamons = $this->getDoctrine()
           ->getRepository(Weamon::class)
@@ -303,7 +410,7 @@ class MasterController extends AbstractController
 
         $roles = $user->getRoles();
         return $this->render('user/pregame.html.twig', [
-            'username' => $username,
+            'username' => $user->getUsername(),
             'weamons'  => $allWeamons,
             'equipos'  => $equipos,
             'roles' => $roles,

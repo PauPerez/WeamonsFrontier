@@ -19,15 +19,15 @@
                 <div class="tipos_weamonInfo">
                     <div>
                         <h2>Tipo</h2>
-                        <label class="tipo_weamonInfo tipo_Foc_weamonInfo">Fuego</label>
+                        <label class="tipo_weamonInfo tipo_{{ weamon.tipus.nom }}_weamonInfo">{{ weamon.tipus.nom }}</label>
                     </div>
                     <div>
                         <h2>Fortaleza</h2>
-                        <label class="tipo_weamonInfo tipo_Planta_weamonInfo">Planta</label>
+                        <label class="tipo_weamonInfo tipo_{{ weamon.tipus.fortaleza.nom }}_weamonInfo">{{ weamon.tipus.fortaleza.nom }}</label>
                     </div>
                     <div>
                         <h2>Debilidad</h2>
-                        <label class="tipo_weamonInfo tipo_Aigua_weamonInfo">Agua</label>
+                        <label class="tipo_weamonInfo tipo_{{ weamon.tipus.debilidad.nom }}_weamonInfo">{{ weamon.tipus.debilidad.nom }}</label>
                     </div>
                 </div>
                 <div class="stats_weamonInfo">

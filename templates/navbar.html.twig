@@ -26,19 +26,11 @@
 
 
 			{% if is_granted('IS_AUTHENTICATED_FULLY') %}
-				<li class="item button">
-					<a href="{{ path('perfil') }}">{{ username }}</a>
-				</li>
-				<li class="item button secondary">
-					<a href="{{ path('app_logout') }}">Logout</a>
-				</li>
+				<li class="item button"><a href="{{ path('perfil') }}">{{ username }}</a></li>
+                <li class="item button secondary"><a href="{{ path('app_logout') }}">Cerrar la sesión</a></li>
 			{% else %}
-				<li class="item button">
-					<a href="{{ path('login') }}">Log In</a>
-				</li>
-				<li class="item button secondary">
-					<a href="{{ path('register') }}">Sign Up</a>
-				</li>
+				<li class="item button"><a href="{{ path('login') }}">Inicia sesión</a></li>
+                <li class="item button secondary"><a href="{{ path('register') }}">Crea una cuenta</a></li>
 			{% endif %}
 			<li class="toggle">
 				<a href="#">
@@ -48,3 +40,4 @@
 		</ul>
 	</nav>
 </div>
+

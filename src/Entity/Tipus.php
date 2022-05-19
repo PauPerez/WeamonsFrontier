@@ -34,6 +34,18 @@ class Tipus
      */
     private $weamons;
 
+    /**
+     * @ORM\OneToOne(targetEntity=Tipus::class, cascade={"persist", "remove"})
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $debilidad;
+
+    /**
+     * @ORM\OneToOne(targetEntity=Tipus::class, cascade={"persist", "remove"})
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $fortaleza;
+
     public function __construct()
     {
         $this->moviments = new ArrayCollection();
@@ -126,6 +138,30 @@ class Tipus
     public function setTipus(?self $tipus): self
     {
         $this->tipus = $tipus;
+
+        return $this;
+    }
+
+    public function getDebilidad(): ?self
+    {
+        return $this->debilidad;
+    }
+
+    public function setDebilidad(self $debilidad): self
+    {
+        $this->debilidad = $debilidad;
+
+        return $this;
+    }
+
+    public function getFortaleza(): ?self
+    {
+        return $this->fortaleza;
+    }
+
+    public function setFortaleza(self $fortaleza): self
+    {
+        $this->fortaleza = $fortaleza;
 
         return $this;
     }

@@ -123,13 +123,13 @@ transition: width .5s linear;
     border: 1px solid green;
 }
 
-.tipus[tipus="Foc"]{
+.tipus[tipus="Fuego"]{
     color: red;
     background-color: yellow;
     border: 1px solid orange;
 }
 
-.tipus[tipus="Aigua"]{
+.tipus[tipus="Agua"]{
     color: cyan;
     background-color: darkblue;
     border: 1px solid blue;

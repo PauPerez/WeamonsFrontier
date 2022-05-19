@@ -1,0 +1,10 @@
+div{
+    margin-top: 20px;
+    width: 30%;
+    background-color: lightgray;
+    padding:15px
+}
+
+input{
+    width: 500px;
+}

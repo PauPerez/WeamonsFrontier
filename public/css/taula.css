@@ -1,4 +1,4 @@
-table, th, td {
+/*table, th, td {
   border: 1px solid black;
 }
 th, td {
@@ -9,4 +9,28 @@ img[a] {
 }
 body {
   margin: 10px;
+}*/
+
+th, td{
+  text-align: center;
+  width: auto;
+  text-overflow: ellipsis;
+}
+
+body{
+  background-color: lightgray;
+}
+
+table{
+max-width: fit-content;
+margin-left: 5px;
+}
+
+.btn{
+  margin: 3px;
+  width: 100%;
+}
+
+.btn-success{
+  width: 200px;
 }

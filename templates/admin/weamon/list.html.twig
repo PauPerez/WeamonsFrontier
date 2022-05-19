@@ -8,25 +8,25 @@
 {{ include('navbaradmin.html.twig') }}
 <div style="margin-top:200px">
         <h1>Llistat de Weamons</h1>
-        <a href="{{ path('weamon_new') }}">+ Nou Weamon</a>
+        <a class="btn btn-success" href="{{ path('weamon_new') }}">+ Nou Weamon</a>
         <br><br>
         {% for message in app.flashes('notice') %}
               <strong><i> {{ message }} </i></strong>
         {% endfor %}
 
-          <table style="margin-top: 20px;margin-bottom: 10px;">
+          <table class="table table-hover table-dark table-bordered">
               <thead>
                   <tr>
-                      <th>Tipus</th><th>Nom</th><th>Vida</th><th>Atac</th><th>Velocitat</th><th>Shiny</th><th>sprite</th>
+                      <th>Tipus</th><th>Nom</th><th>Vida</th><th>Atac</th><th>Velocitat</th><th>Shiny</th><th>nº Evolució</th><th>sprite</th><th>sprite darrere</th><th>Accions</th>
                   </tr>
               </thead>
               <tbody>
                   {% for weamon in weamons %}
                       <tr>
-                          <td>{{ weamon.Tipus.nom }}</td><td>{{ weamon.Nom }}</td><td>{{ weamon.Vida }}</td><td>{{ weamon.Atac }}</td><td>{{  weamon.Velocitat }}</td><td> {% if weamon.Shiny == 0 %}No{% else %}Si{% endif %} </td><td><img src="{{ asset('img/' ~ weamon.Img) }}" style="width:200px"></td>
+                          <td>{{ weamon.Tipus.nom }}</td><td>{{ weamon.Nom }}</td><td>{{ weamon.Vida }}</td><td>{{ weamon.Atac }}</td><td>{{  weamon.Velocitat }}</td><td> {% if weamon.Shiny == 0 %}No{% else %}Si{% endif %} </td><td>{{  weamon.nEvolucion }}</td><td><img class="img img-fluid" src="{{ asset('img/' ~ weamon.Img) }}" style="width:200px"></td><td><img class="img img-fluid" src="{{ asset('img/' ~ weamon.Imgb) }}" style="width:200px"></td>
                           <td>
-                            <a href="{{ path('weamon_edit', {'id': weamon.id}) }}">Editar</a>
-                            <a href="{{ path('weamon_delete', {'id': weamon.id}) }}" onclick="return eliminar('{{ weamon.nom }}')">Eliminar</a>
+                            <a class="btn btn-primary" href="{{ path('weamon_edit', {'id': weamon.id}) }}">Editar</a><br>
+                            <a class="btn btn-danger" href="{{ path('weamon_delete', {'id': weamon.id}) }}" onclick="return eliminar('{{ weamon.nom }}')">Eliminar</a>
                           </td>
                       </tr>
                   {% else %}

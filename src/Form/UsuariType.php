@@ -22,9 +22,9 @@ class UsuariType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('username', TextType::class)
-            ->add('email', TextType::class)
-            ->add('password', PasswordType::class)
+            ->add('username', TextType::class, ['attr'=>['class'=>'form-control']])
+            ->add('email', TextType::class, ['attr'=>['class'=>'form-control']])
+            ->add('password', PasswordType::class, ['attr'=>['class'=>'form-control']])
             ->add('img', FileType::class, [
                 'label' => 'Imatge de perfil',
                 'mapped' => false,
@@ -46,12 +46,14 @@ class UsuariType extends AbstractType
                     'Usuari' => "ROLE_USER",
                 ],
                 'multiple' => true,
+                'attr'=>['class'=>'form-select']
             ])
             ->add('is_verified', CheckboxType::class, [
                 'label'    => 'verificar el usuario?',
                 'required' => false,
+                'attr'=>['class'=>'form-check']
             ])
-            ->add('save', SubmitType::class, array('label' => $options['submit']))
+            ->add('save', SubmitType::class, array('label' => $options['submit'],'attr'=>['class'=>'btn btn-primary']))
         ;
     }
 

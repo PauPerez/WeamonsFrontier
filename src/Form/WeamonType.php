@@ -14,6 +14,7 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Validator\Constraints\File;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 use App\Entity\Weamon;
 use App\Entity\Moviment;
@@ -25,14 +26,24 @@ class WeamonType extends AbstractType
     {
         $builder
             ->add('Tipus', EntityType::class, array('class' => Tipus::class,
-            'choice_label' => 'nom'))
-            ->add('Nom', TextType::class)
-            ->add('Vida', IntegerType::class)
-            ->add('Atac', IntegerType::class)
-            ->add('Velocitat', IntegerType::class)
+            'choice_label' => 'nom',
+            'attr'=>['attr'=>'form-select']))
+            ->add('Nom', TextType::class, ['attr'=>['class'=>'form-control']])
+            ->add('Vida', IntegerType::class, ['attr'=>['class'=>'form-control']])
+            ->add('Atac', IntegerType::class, ['attr'=>['class'=>'form-control']])
+            ->add('Velocitat', IntegerType::class, ['attr'=>['class'=>'form-control']])
             ->add('Shiny', CheckboxType::class, [
                 'label'    => 'es shiny?',
                 'required' => false,
+                'attr'=>['class'=>'form-check']
+            ])
+            ->add('nEvolucion', ChoiceType::class, [
+                'choices'  => [
+                    '1' => "1",
+                    '2' => "2",
+                    '3' => '3'
+                ],
+                'attr'=>['class'=>'form-select']
             ])
             ->add('Img', FileType::class, [
                 'label' => 'Sprite del weamon',
@@ -67,7 +78,7 @@ class WeamonType extends AbstractType
             ->add('Moviments', EntityType::class, array('class' => Moviment::class,
             'choice_label' => 'nom',
             'multiple' => true))
-            ->add('save', SubmitType::class, array('label' => $options['submit']))
+            ->add('save', SubmitType::class, array('label' => $options['submit'],'attr'=>['class'=>'btn btn-primary']))
         ;
     }
 

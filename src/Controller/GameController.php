@@ -23,6 +23,7 @@ class GameController extends AbstractController
     public function game()
     {
         $user = $this->getUser();
+        $username = $user->getUsername();
         $equip = $user->getEquips()[0];
         if ($equip == null) {
             return $this->render("principal.html.twig", ["username"=>$user->getUsername()]);
@@ -52,6 +53,6 @@ class GameController extends AbstractController
             
         }
 
-        return $this->render('game/game.html.twig',["weamons"=>$equip->getWeamons(), "enemics"=>$enemics]);
+        return $this->render('game/game.html.twig',["weamons"=>$equip->getWeamons(), "enemics"=>$enemics, 'username'=>$username]);
     }
 }

@@ -274,13 +274,20 @@ class MasterController extends AbstractController
     public function principal(): Response
     {
         $user = $this->getUser();
-        if ($user == null)
+        if ($user == null){
           $username = "";
-        else
+          $roles=[];
+        }
+        else{
           $username = $user->getUsername();
+          $roles = $user->getRoles();
+        }
+        // Enviem email de confirmacio de creacio
+        
 
         return $this->render('principal.html.twig', [
             'username' => $username,
+            'roles' => $roles,
         ]);
     }
 
@@ -290,10 +297,12 @@ class MasterController extends AbstractController
     public function perfil(): Response
     {
         $user = $this->getUser();
+        $roles = $user->getRoles();
 
         return $this->render('user/perfil.html.twig', [
             'username' => $user->getUsername(),
             'user'     => $user,
+            'roles' => $roles,
         ]);
     }
 
@@ -316,11 +325,12 @@ class MasterController extends AbstractController
             // Items per page
             12
         );
-        
+        $roles = $user->getRoles();
         // Render the twig view
         return $this->render('user/weadex.html.twig', [
             'weamons' => $weamons,
             'username' => $user->getUsername(),
+            'roles' => $roles,
         ]);
     }
 
@@ -374,12 +384,14 @@ class MasterController extends AbstractController
             }
         }
 
+        $roles = $user->getRoles();
         return $this->render('user/weamon-info.html.twig', [
             'username' => $user->getUsername(),
             'weamon'   => $weamon,
             'primera'  => $primera,
             'segunda'  => $segunda,
-            'tercera'  => $tercera
+            'tercera'  => $tercera,
+            'roles' => $roles,
         ]);
     }
 
@@ -396,10 +408,12 @@ class MasterController extends AbstractController
 
         $equipos = $user->getEquips();
 
+        $roles = $user->getRoles();
         return $this->render('user/pregame.html.twig', [
             'username' => $user->getUsername(),
             'weamons'  => $allWeamons,
-            'equipos'  => $equipos
+            'equipos'  => $equipos,
+            'roles' => $roles,
         ]);
     }
 

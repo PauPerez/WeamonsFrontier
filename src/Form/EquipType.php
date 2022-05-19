@@ -24,11 +24,13 @@ class EquipType extends AbstractType
     {
         $builder
             ->add('Usuari', EntityType::class, array('class' => Usuari::class,
-            'choice_label' => 'username'))
+            'choice_label' => 'username',
+            'attr'=>['class'=>'form-select']))
             ->add('Weamons', EntityType::class, array('class' => Weamon::class,
             'choice_label' => 'nom',
-            'multiple' => true))
-            ->add('save', SubmitType::class, array('label' => $options['submit']))
+            'multiple' => true,
+            'attr'=>['class'=>'form-select']))
+            ->add('save', SubmitType::class, array('label' => $options['submit'], 'attr'=>['class'=>'btn btn-primary']))
         ;
     }
 

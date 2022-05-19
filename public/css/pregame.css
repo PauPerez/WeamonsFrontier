@@ -41,3 +41,21 @@ body {
     padding: 20px;
     border-radius: 5px;
 }
+
+#chat{
+    max-width: fit-content;
+    background-color: cyan;
+    padding: 15px;
+    border-radius: 5%;
+    border: 2px darkblue solid;
+}
+
+#chat #messages{
+color: white;
+background-color: black;
+border-radius: 3%;
+border: 1px blue solid;
+opacity: 40%;
+overflow: scroll; 
+height: 200px
+}

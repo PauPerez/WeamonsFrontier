@@ -20,8 +20,8 @@ class TipusType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('Nom', TextType::class)
-            ->add('save', SubmitType::class, array('label' => $options['submit']))
+            ->add('Nom', TextType::class, ['attr'=>['class'=>'form-control']])
+            ->add('save', SubmitType::class, array('label' => $options['submit'],'attr'=>['class'=>'btn btn-primary']))
         ;
     }
 

@@ -47,7 +47,7 @@ class MovimentController extends AbstractController
 
             $brochureFile = $form->get('Animation')->getData();
             if ($brochureFile) {
-                $brochureFileName = $fileUploader->upload($brochureFile, $moviment->getNom());
+                $brochureFileName = $fileUploader->upload($brochureFile, $moviment->getNom(), "animations/");
                 $moviment->setAnimation("animations/".$brochureFileName);
             }else{
                 $this->addFlash(
@@ -121,6 +121,12 @@ class MovimentController extends AbstractController
             // recollim els camps del formulari en l'objecte moviment
             $moviment = $form->getData();
 
+            $brochureFile = $form->get('Animation')->getData();
+            if ($brochureFile) {
+                $brochureFileName = $fileUploader->upload($brochureFile, $moviment->getNom(), "animations/");
+                $moviment->setAnimation("animations/".$brochureFileName);
+            }
+            
             $status = $movimentRepository
                 ->add($moviment);
 

@@ -234,7 +234,7 @@ class Usuari implements UserInterface, PasswordAuthenticatedUserInterface
         if ($this->equips->removeElement($equip)) {
             // set the owning side to null (unless already changed)
             if ($equip->getUsuari() === $this) {
-                $equip->setUsuari(null);
+                $equip->setUsuari2(null);
             }
         }
 

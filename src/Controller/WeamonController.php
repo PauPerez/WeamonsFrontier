@@ -57,7 +57,7 @@ class WeamonController extends AbstractController
             }
             $brochureFile = $form->get('Img')->getData();
             if ($brochureFile) {
-                $brochureFileName = $fileUploader->upload($brochureFile, $weamon->getNom());
+                $brochureFileName = $fileUploader->upload($brochureFile, $weamon->getNom(), "weamons/");
                 $weamon->setImg("weamons/".$brochureFileName);
             }else{
                 $this->addFlash(
@@ -68,8 +68,8 @@ class WeamonController extends AbstractController
             }
             $brochureFile = $form->get('ImgB')->getData();
             if ($brochureFile) {
-                $brochureFileName = $fileUploader->upload($brochureFile, "weamons/b".$weamon->getNom());
-                $weamon->setImgB("weamons/b".$brochureFileName);
+                $brochureFileName = $fileUploader->upload($brochureFile, $weamon->getNom()."b", "weamons/");
+                $weamon->setImgB("weamons/".$brochureFileName);
             }else{
                 $this->addFlash(
                     'notice',
@@ -126,7 +126,7 @@ class WeamonController extends AbstractController
     /**
      * @Route("/admin/weamon/edit/{id<\d+>}", name="weamon_edit")
      */
-    public function edit($id, Request $request)
+    public function edit($id, Request $request, FileUploader $fileUploader)
     {
         $weamonRepository = $this->getDoctrine()
         ->getRepository(Weamon::class);
@@ -153,6 +153,16 @@ class WeamonController extends AbstractController
             $moviments = $form->get('Moviments');
             for ($i=0; $i < count($moviments); $i++) { 
                 $weamon->addMoviment($moviments[$i]);
+            }
+            $brochureFile = $form->get('Img')->getData();
+            if ($brochureFile) {
+                $brochureFileName = $fileUploader->upload($brochureFile, $weamon->getNom(), "weamons/");
+                $weamon->setImg("weamons/".$brochureFileName);
+            }
+            $brochureFile = $form->get('ImgB')->getData();
+            if ($brochureFile) {
+                $brochureFileName = $fileUploader->upload($brochureFile, $weamon->getNom()."b", "weamons/");
+                $weamon->setImgB("weamons/".$brochureFileName);
             }
             $status = $weamonRepository
                 ->add($weamon);

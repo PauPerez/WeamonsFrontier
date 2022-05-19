@@ -8,7 +8,13 @@
         {% for message in app.flashes('notice') %}
               <strong><i> {{ message }} </i></strong>
         {% endfor %}
-		<div style="margin-top: 20px">
+		<div style="margin-top: 20px;
+    width: 30%;
+    background-color: lightgray;
+    padding:15px;
+	border: 1px solid darkblue;
+	margin-left:10px;
+	border-radius:5%">
   	    	{{ form_start(form) }}
 		      {{ form_widget(form) }}
 		{{ form_end(form) }}

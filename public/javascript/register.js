@@ -43,7 +43,7 @@ function tractarError(elem, valid, helperMsg) {
         document.getElementById(idError).innerHTML = "";
     } else {
         document.getElementById(idError).innerHTML = "&nbsp;" + helperMsg;
-        elem.Fuegous();
+        elem.focus();
     }
     return valid;
 }

@@ -1,9 +1,9 @@
 $(document).ready(inicialitzarEvents);
 
 function inicialitzarEvents() {
-    document.login.addEventListener("submit", formValidatorEvent);
-    document['login']['_username'].addEventListener("change", validaElementEvent);
-    document['login']['_password'].addEventListener("change", validaElementEvent);
+    document.changePassword.addEventListener("submit", formValidatorEvent);
+    document['changePassword']['_password'].addEventListener("change", validaElementEvent);
+    document['changePassword']['_repeatPassword'].addEventListener("change", validaElementEvent);
 }
 
 function formValidatorEvent(e) {
@@ -14,13 +14,13 @@ function formValidatorEvent(e) {
 
 function formValidator() {
     // Make quick references to our fields
-    var email = document['login']['_username'];
-    var password = document['login']['_password'];
+    var password = document['changePassword']['_password'];
+    var repeatPassword = document['changePassword']['_repeatPassword'];
 
     var noValid = null;
     // Check each input in the order that it appears in the form!
-    if (!emailValidator(email, "* Introduce un formato de email valido!") && !noValid) noValid = email;
     if (!notEmpty(password, "* Introduce una contraseña!") && !noValid) noValid = password;
+    if (!notSamePassword(repeatPassword, "* Las contraseñas no coinciden!") && !noValid) noValid = repeatPassword;
 
     if (noValid)
         return false;
@@ -39,15 +39,14 @@ function tractarError(elem, valid, helperMsg) {
     return valid;
 }
 
-function emailValidator(elem, helperMsg) {
-    var emailExp = /^[\w\-\.\+]+\@[a-zA-Z0-9\.\-]+\.[a-zA-z0-9]{2,4}$/;
-    var resultat = elem.value.match(emailExp);
+function notEmpty(elem, helperMsg) {
+    var resultat = !(elem.value.length == 0);
     tractarError(elem, resultat, helperMsg);
     return resultat;
 }
 
-function notEmpty(elem, helperMsg) {
-    var resultat = !(elem.value.length == 0);
+function notSamePassword(elem, helperMsg) {
+    var resultat = (elem.value == document['changePassword']['_password'].value);
     tractarError(elem, resultat, helperMsg);
     return resultat;
 }
@@ -58,11 +57,11 @@ function validaElementEvent(e) {
 
 function validaElement(elem) {
     switch (elem.name) {
-        case "_username":
-            emailValidator(elem, "* Introduce un formato de email valido!");
-            break;
         case "_password":
             notEmpty(elem, "* Introduce una contraseña!");
+            break;
+        case "_repeatPassword":
+            notSamePassword(elem, "* Las contraseñas no coinciden!");
             break;
         default:
             break;

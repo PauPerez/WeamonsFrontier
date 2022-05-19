@@ -12,17 +12,17 @@
             <div class="div_register">
                 <form name="register" action="{{ path('registration') }}" method="post">
                     <img class="img-fluid" id="logo_register" src="{{ asset('./img/fondos/logo5.png') }}">
-                    <div class="div_username_login">
+                    <div class="div_username_register">
                         <label for="username" class="form-label">Nombre de usuario</label><br>
                         <input type="text" name="username" class="form-control" id="username">
                         <span class="error" id="usernameError" style="color: red;"></span>
                     </div>
-                    <div class="div_email_login">
+                    <div class="div_email_register">
                         <label for="email" class="form-label">E-mail de usuario</label><br>
                         <input type="email" name="email" class="form-control" id="email">
                         <span class="error" id="emailError" style="color: red;"></span>
                     </div>
-                    <div class="div_password_login">
+                    <div class="div_password_register">
                         <label for="password" class="form-label">Contraseña</label><br>
                         <input type="password" name="password" class="form-control" id="password" >
                         <a id="showPassword" onclick="mostrarContrasenya('password', 'showPassword')" class="btn"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye-slash-fill" viewBox="0 0 16 16">
@@ -30,7 +30,7 @@
                         <path d="M5.525 7.646a2.5 2.5 0 0 0 2.829 2.829l-2.83-2.829zm4.95.708-2.829-2.83a2.5 2.5 0 0 1 2.829 2.829zm3.171 6-12-12 .708-.708 12 12-.708.708z"/></svg></a>
                         <span class="error" id="passwordError" style="color: red;"></span>
                     </div>
-                    <div class="div_password_login">
+                    <div class="div_password_register">
                         <label for="confPassword" class="form-label">Confirmar Contraseña</label><br>
                         <input type="password" name="confPassword" class="form-control" id="confPassword" >
                         <a id="showConfPassword" onclick="mostrarContrasenya('confPassword', 'showConfPassword')" class="btn"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye-slash-fill" viewBox="0 0 16 16">
@@ -38,12 +38,17 @@
                         <path d="M5.525 7.646a2.5 2.5 0 0 0 2.829 2.829l-2.83-2.829zm4.95.708-2.829-2.83a2.5 2.5 0 0 1 2.829 2.829zm3.171 6-12-12 .708-.708 12 12-.708.708z"/></svg></a>
                         <span class="error" id="confPasswordError" style="color: red;"></span>
                     </div>
-                    <div class="div_terms_login">
+                    <div class="div_terms_register">
                         <div class="mb-3 form-check">
                             <input type="checkbox" name="terms" class="form-check-input" id="terms">
                             <label class="form-check-label" for="terms">Acepto las Condiciones de uso y la Política de privacidad de Weamon Frontiers.</label>
                             <span class="error" id="termsError" style="color: red;"></span>
                         </div>
+                    </div>
+                    <div>
+                        {% if error|default("") %}
+                            <label style="color: red; margin-top: 0px; margin-bottom: 10px;">{{ error }}</label>
+                        {% endif %}
                     </div>
                     <button type="submit" class="btn btn-primary">Registrar-se</button>
                     <p>¿Ya tienes una cuenta? &nbsp;<a href="{{ path('login') }}">Iniciar sesión</a></p>

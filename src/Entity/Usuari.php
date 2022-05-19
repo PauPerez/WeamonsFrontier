@@ -68,6 +68,11 @@ class Usuari implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $verificationToken;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $changePasswordToken;
+
     public function __construct()
     {
         $this->historials = new ArrayCollection();
@@ -256,6 +261,18 @@ class Usuari implements UserInterface, PasswordAuthenticatedUserInterface
     public function setVerificationToken(?string $verificationToken): self
     {
         $this->verificationToken = $verificationToken;
+
+        return $this;
+    }
+
+    public function getChangePasswordToken(): ?string
+    {
+        return $this->changePasswordToken;
+    }
+
+    public function setChangePasswordToken(?string $changePasswordToken): self
+    {
+        $this->changePasswordToken = $changePasswordToken;
 
         return $this;
     }

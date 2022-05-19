@@ -72,10 +72,20 @@ class UsuariRepository extends ServiceEntityRepository implements PasswordUpgrad
         ;
     }
 
-    public function findbyToken($value): ?Usuari
+    public function findByAccountVerifiedToken($value): ?Usuari
     {
         return $this->createQueryBuilder('u')
             ->andWhere('u.verificationToken = :val')
+            ->setParameter('val', $value)
+            ->getQuery()
+            ->getOneOrNullResult()
+        ;
+    }
+
+    public function findByChangePasswordToken($value): ?Usuari
+    {
+        return $this->createQueryBuilder('u')
+            ->andWhere('u.changePasswordToken = :val')
             ->setParameter('val', $value)
             ->getQuery()
             ->getOneOrNullResult()

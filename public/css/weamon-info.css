@@ -71,13 +71,9 @@ body {
     margin: 20px;
     padding: 20px;
     border-radius: 5px;
-    /*border-radius: 20px;
-    border: 4px solid #006c97;*/
 }
 
 .imagen_weamonInfo img {
-    /*background-color: rgb(228, 228, 228);
-    border: 2px black solid;*/
     width: 100%;
 }
 

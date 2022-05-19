@@ -1,0 +1,44 @@
+body {
+    background-image: url("../img/fondos/login1.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    background-position-y: 0em;
+}
+
+.padre_notificacion {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px;
+}
+
+.container {
+    background-color: rgb(21, 63, 71);
+    border: solid rgb(65, 154, 172);
+    border-radius: 2%;
+    max-width: 25em;
+    opacity: 0.9;
+}
+
+.div_notificacion {
+    margin-right: 20px;
+    margin-left: 20px;
+}
+
+.div_notificacion a {
+    color: rgb(36, 202, 235);
+}
+
+#logo_notificacion {
+    max-width: 80%;
+    display:block;
+    margin:auto;
+    margin-top: 10px;
+}
+
+.txt_notificacion {
+    color: white;
+    margin-top: 10px;
+}

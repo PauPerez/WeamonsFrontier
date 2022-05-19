@@ -63,7 +63,7 @@ body {
     opacity: 0.8;
 }
 
-.div_login input[type="text"]:Fuegous, .div_login input[type="password"]:Fuegous {
+.div_login input[type="text"]:focus, .div_login input[type="password"]:focus {
     background-color: rgb(13, 44, 49);
     color: white;
 }

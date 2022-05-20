@@ -41,10 +41,13 @@
                         {% endfor %}
                     </div>
                     <button type="submit" class="btn btn-primary">Guardar equip</button>
+                    
                 </form>
+                <button id="jugar" class="btn btn-primary">Jugar</button>
             </div>
         </div>
     </div>
+    <p id="redirectToGame" hidden>{{ path('game', {id:0}) }}</p>
     <div id="chat">
 <form name="publish">
     <input hidden type="text" name="user" maxlength="50" value="{{ username }}" />

@@ -37,6 +37,16 @@ function cambioSelects() {
     }
 }
 
+function gameStart() {
+    var x = document.getElementById('equipoSelec').selectedIndex;
+    var y = document.getElementById('equipoSelec').options;
+    var id = y[x].value;
+    let link = document.getElementById("redirectToGame").innerHTML;
+    link = link.slice(0,-1);
+
+    window.location.replace(link+id);
+}
+
 var equipoS = $('#equipoSelec');
 
 function showEquipoSelec() {
@@ -53,4 +63,5 @@ $(document).ready(showEquipoSelec);
 $(document).ready(function () {
     cambioSelects();
     $(document).on('change', equipoS, showEquipoSelec);
+    $('#jugar').on('click',$('#jugar'),gameStart);
 });

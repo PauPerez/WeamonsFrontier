@@ -14,13 +14,13 @@
           <table class="table table-hover table-dark table-bordered" style="margin-top: 20px;margin-bottom: 10px;">
               <thead>
                   <tr>
-                      <th>Nom</th><th>Accions</th>
+                      <th>Nom</th><th>Debilitat</th><th>Fortalessa</th><th>Accions</th>
                   </tr>
               </thead>
               <tbody>
                   {% for tipus in tipuses %}
                       <tr>
-                          <td>{{ tipus.Nom }}</td>
+                          <td>{{ tipus.Nom }}</td><td>{{ tipus.debilidad.nom }}</td><td>{{ tipus.fortaleza.nom }}</td>
                           <td>
                             <a class="btn btn-primary" href="{{ path('tipus_edit', {'id': tipus.id}) }}">Editar</a>
                             <a class="btn btn-danger" href="{{ path('tipus_delete', {'id': tipus.id}) }}" onclick="return eliminar('{{ tipus.nom }}')">Eliminar</a>

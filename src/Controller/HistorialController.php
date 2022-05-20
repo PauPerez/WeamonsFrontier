@@ -86,7 +86,7 @@ class HistorialController extends AbstractController
     }
 
   /**
-   * @Route("/user/admin/historial/create/{victory}", name="historial_create")
+   * @Route("/user/historial/create/{victory}", name="historial_create")
    */
   public function create($victory)
   {
@@ -100,6 +100,16 @@ class HistorialController extends AbstractController
     $historial->setContrincant($user);
     $historial->setResultat($victory);
 
+    $notification ="";
+    $color="";
+    if ($victory == 1) {
+      $notification="YOU WIN!";
+      $color="green";
+    }else {
+      $notification="YOU LOSE!";
+      $color="red";
+    }
+
     $entityManager = $this->getDoctrine()->getManager();
     $entityManager->persist($historial);
     $entityManager->flush();
@@ -107,7 +117,7 @@ class HistorialController extends AbstractController
     //codi de prova per visualitzar l'array de historials
     //dump($historials);exit();
 
-    return $this->render("principal.html.twig", ["username"=>$user->getUsername()]);
+    return $this->render("user/postgame.html.twig", ["username"=>$user->getUsername(), 'notificacion'=>$notification, 'color'=>$color]);
   }
 
   /**

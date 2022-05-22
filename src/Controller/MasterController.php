@@ -26,6 +26,10 @@ use App\Entity\Equip;
 use App\Repository\EquipRepository;
 use App\Form\EquipType;
 
+use App\Entity\Historial;
+use App\Repository\HistorialRepository;
+use App\Form\HistorialType;
+
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Email;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
@@ -297,13 +301,56 @@ class MasterController extends AbstractController
     public function perfil(): Response
     {
         $user = $this->getUser();
-        $roles = $user->getRoles();
 
+        $nombreImgPerfil = [["Entrenadora tipo A", "avatares/trainer_female_A.png"], ["Entrenadora tipo B", "avatares/trainer_female_B.png"], ["Entrenadora tipo C", "avatares/trainer_female_C.png"], ["Entrenador tipo A", "avatares/trainer_male_A.png"], ["Entrenador tipo B", "avatares/trainer_male_B.png"], ["Entrenador tipo C", "avatares/trainer_male_C.png"]];
+
+        $equipos = $user->getEquips();
+
+        $historials = $user->getHistorials();
+        $ganadas = 0;
+        $perdidas = 0;
+        for ($i=0; $i < count($historials); $i++) { 
+          if ($historials[$i]->getResultat() == 1)
+            $ganadas++;
+          else
+            $perdidas++;
+        }
+
+        $roles = $user->getRoles();
         return $this->render('user/perfil.html.twig', [
             'username' => $user->getUsername(),
             'user'     => $user,
             'roles' => $roles,
+            'nombreImgPerfil' => $nombreImgPerfil,
+            'equipos' => $equipos,
+            'ganadas' => $ganadas,
+            'perdidas' => $perdidas
         ]);
+    }
+
+    /**
+     * @Route("/user/actualizarPerfil", name="actualizarPerfil")
+     */
+    public function actualizarPerfil(UserPasswordHasherInterface $passwordHasher): Response
+    {
+        $user = $this->getUser();
+
+        $user->setImg($_POST['img']);
+        $user->setUsername($_POST['username']);
+        if ($_POST['password'] != '') {
+          $hashedPassword = $passwordHasher->hashPassword(
+            $user,
+            $_POST['password']
+          );
+          $user->setPassword($hashedPassword);
+        }
+
+        // Guardem les dades a la base de dades
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->persist($user);
+        $entityManager->flush();
+        
+        return $this->redirectToRoute('perfil');
     }
 
     /**
@@ -402,18 +449,44 @@ class MasterController extends AbstractController
     {
         $user = $this->getUser();
 
+        $usuaris = $this->getDoctrine()
+          ->getRepository(Usuari::class)
+          ->findAll();
+
         $allWeamons = $this->getDoctrine()
           ->getRepository(Weamon::class)
           ->findAll();
 
         $equipos = $user->getEquips();
 
+        $rankingUsers = $this->getDoctrine()
+          ->getRepository(Historial::class)
+          ->prueba();
+
+        $bestAtacWeamons = $this->getDoctrine()
+          ->getRepository(Weamon::class)
+          ->bestAtacWeamons();
+
+        $bestVidaWeamons = $this->getDoctrine()
+          ->getRepository(Weamon::class)
+          ->bestVidaWeamons();
+
+        $bestVelocitatWeamons = $this->getDoctrine()
+          ->getRepository(Weamon::class)
+          ->bestVelocitatWeamons();
+        
         $roles = $user->getRoles();
         return $this->render('user/pregame.html.twig', [
             'username' => $user->getUsername(),
+            'roles' => $roles,
+            'usuaris' => $usuaris,
             'weamons'  => $allWeamons,
             'equipos'  => $equipos,
-            'roles' => $roles,
+            'ranking' => $rankingUsers,
+            'bestAtacWeamons' => $bestAtacWeamons,
+            'bestVidaWeamons' => $bestVidaWeamons,
+            'bestVelocitatWeamons' => $bestVelocitatWeamons,
+
         ]);
     }
 

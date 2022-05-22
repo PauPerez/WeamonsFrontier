@@ -46,6 +46,36 @@ class WeamonRepository extends ServiceEntityRepository
         }
     }
 
+    public function bestAtacWeamons()
+    {
+        return $this->createQueryBuilder('w')
+            ->orderBy('w.Atac', 'DESC')
+            ->setMaxResults(3)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+    public function bestVidaWeamons()
+    {
+        return $this->createQueryBuilder('w')
+            ->orderBy('w.Vida', 'DESC')
+            ->setMaxResults(3)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+    public function bestVelocitatWeamons()
+    {
+        return $this->createQueryBuilder('w')
+            ->orderBy('w.Velocitat', 'DESC')
+            ->setMaxResults(3)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
     // /**
     //  * @return Weamon[] Returns an array of Weamon objects
     //  */

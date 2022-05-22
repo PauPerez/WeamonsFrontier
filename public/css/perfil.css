@@ -5,26 +5,220 @@
 
 body {
     background-color: rgb(4, 34, 43);
-    background-image: url(../img/fondos/weadex2.png);
+    background-image: url(../img/fondos/fondo_paginas2.png);
 }
 
 .padre_perfil {
     margin-top: 10em;
-    margin-bottom: 5em;
-    background-color: rgb(0, 177, 177);
     height: 100%;
     margin-right: 5vw;
     margin-left: 5vw;
-}
-
-.jugador_perfil {
-    background-color: red;
-    max-width: 30em;
-    max-height: 30em;
     display: flex;
     justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    flex-wrap: wrap;
 }
 
-.jugador_perfil img {
-    
+.datos_perfil {
+    background-color: rgb(228, 228, 228);
+    border: solid rgb(65, 154, 172);
+    border-radius: 10px;
+    opacity: 0.9;
+    width: 40em;
+    height: 51em;
+    display: flex;
+    flex-direction: column;
+    margin-left: 50px;
+    margin-right: 50px;
+    margin-bottom: 50px;
+}
+
+.datos_perfil h1 {
+    margin: 10px;
+    font-weight: bold;
+    font-size: 2em;
+    color: rgb(10, 34, 37);
+}
+
+.datos_perfil div {
+    margin: 10px;
+}
+
+.div_img_perfil img {
+    width: 12.5em;
+    margin-bottom: 10px;
+    border: 2px rgb(65, 154, 172) solid;
+    border-radius: 5px;
+    background-color: rgb(13, 44, 49);
+    padding: 10px;
+}
+
+.datos_perfil input[type="text"], .datos_perfil input[type="password"], .datos_perfil input[type="email"] {
+    background-color: rgb(13, 44, 49);
+    color: white;
+    border-color: rgb(65, 154, 172);
+    opacity: 0.8;
+}
+
+.datos_perfil input[type="text"]:focus, .datos_perfil input[type="password"]:focus, .datos_perfil input[type="email"] {
+    background-color: rgb(13, 44, 49);
+    color: white;
+}
+
+.div_password_perfil {
+    position: relative;
+}
+
+label {
+    color: rgb(10, 34, 37);
+}
+
+svg {
+    color: rgb(25, 159, 185);
+    position: absolute;
+    top: 52%;
+    transform: translateY(-50%);
+    left: unset;
+    right: 12px;
+}
+
+button[type="submit"] {
+    width: 100%;
+    background-color: rgb(35, 119, 136);
+    border: 1px solid rgb(13, 44, 49);
+    margin-bottom: 10px;
+}
+
+button[type="submit"]:hover {
+    background-color: rgb(13, 44, 49);
+    border: 1px solid rgb(35, 119, 136);
+}
+
+button[type="submit"]:focus {
+    background-color: rgb(13, 44, 49);
+    border: 1px solid rgb(35, 119, 136);
+}
+
+.historial_perfil {
+    background-color: rgb(228, 228, 228);
+    border: solid rgb(65, 154, 172);
+    border-radius: 10px;
+    opacity: 0.9;
+    width: 40em;
+    height: 10em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-left: 50px;
+    margin-right: 50px;
+    margin-bottom: 50px;
+}
+
+.historial_perfil h2 {
+    margin: 10px;
+    font-weight: bold;
+    font-size: 2em;
+    color: rgb(10, 34, 37);
+}
+
+.historial_perfil p {
+    font-weight: bold;
+    font-size: 2em;
+    color: rgb(10, 34, 37);
+}
+
+.equipos_perfil {
+    width: 70em;
+    display: flex;
+    flex-direction: column;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.equipo_perfil {
+    background-color: rgb(228, 228, 228);
+    width: 100%;
+    margin-bottom: 20px;
+    border-radius: 5px;
+}
+
+.equipo_perfil h2 {
+    text-align: center;
+    margin: 10px;
+    font-weight: bold;
+    font-size: 2em;
+    color: rgb(10, 34, 37);
+}
+
+.weamons_equipo_perfil {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 20px;
+}
+
+.weamon_equipo_perfil {
+    background-color: rgb(163, 163, 163);
+    border: 2px black solid;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    flex-wrap: wrap;
+    margin: 20px;
+}
+
+.weamon_equipo_perfil img {
+    border-radius: 1px;
+    background-color: rgb(9, 56, 70);
+    padding: 20px;
+}
+
+.weamon_equipo_perfil p {
+    color: rgb(4, 24, 31);
+}
+
+.tipus_perfil {
+    color: white;
+    width: 100px;
+    text-align: center;
+    font-size: 0.9em;
+    margin-bottom: 10px;
+    padding: 4px;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.tipo_Planta_perfil {
+    background-color: rgb(12, 173, 12);
+}
+
+.tipo_Fuego_perfil {
+    background-color: rgb(255, 61, 13);
+}
+
+.tipo_Agua_perfil {
+    background-color: rgb(13, 158, 255);
+}
+
+.weamon_equipo_perfil:hover {
+    animation: desplazarDiv 0.2s;
+    cursor: pointer;
+}
+
+@keyframes desplazarDiv {
+    0% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(10px);
+    }
+    100% {
+        transform: translateY(0px);
+        
+    }
 }

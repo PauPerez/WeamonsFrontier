@@ -3,13 +3,81 @@
 {% block title %}Perfil{% endblock %}
 {% block stylesheets %}
     {{ parent() }}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/js/select2.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/css/select2.css" />
     <link href="{{ asset('css/perfil.css') }}" type="text/css" rel="stylesheet" />
+    <script src="{{ asset('javascript/perfil.js') }}"></script>
 {% endblock %}
 {% block body %}
     {{ include('navbar.html.twig') }}
     <div class="padre_perfil">
-        <div class="jugador_perfil">
-            <img src="{{ asset ('img/' ~ user.Img) }}" class="img-fluid">
+        <div class="datos_perfil">
+            <h1>Perfil de {{ user.username }}</h1>
+            <form name="perfil" action="{{ path('actualizarPerfil') }}" method="post">
+                <div class="div_img_perfil">
+                    <label for="img" class="form-label">Imagen de usuario</label><br>
+                    <img src="{{ asset ('img/' ~ user.Img) }}" class="img-fluid">
+                    <select id="img" name="img" class="form-control" style="width: 200px;">
+                        {% for nombreImg in nombreImgPerfil %}
+                            {% if user.Img == nombreImg.1 %}
+                                <option selected value="{{ nombreImg.1 }}" data-img_src="{{ asset ('img/' ~ nombreImg.1) }}">{{ nombreImg.0 }}</option>
+                            {% else %}
+                                <option value="{{ nombreImg.1 }}" data-img_src="{{ asset ('img/' ~ nombreImg.1) }}">{{ nombreImg.0 }}</option>
+                            {% endif %}
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="div_username_perfil">
+                    <label for="username" class="form-label">Nombre de usuario</label><br>
+                    <input type="text" name="username" class="form-control" id="username" value="{{ user.username }}" >
+                    <span class="error" id="usernameError" style="color: red;"></span>
+                </div>
+                <div class="div_email_perfil">
+                    <label for="email" class="form-label">E-mail de usuario</label><br>
+                    <input type="email" name="email" class="form-control" id="email" value="{{ user.email }}" readonly>
+                </div>
+                <div class="div_password_perfil">
+                    <label for="password" class="form-label">Contraseña</label><br>
+                    <input type="password" name="password" class="form-control" id="password" >
+                    <a id="showPassword" onclick="mostrarContrasenya('password', 'showPassword')" class="btn"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye-slash-fill" viewBox="0 0 16 16">
+                    <path d="m10.79 12.912-1.614-1.615a3.5 3.5 0 0 1-4.474-4.474l-2.06-2.06C.938 6.278 0 8 0 8s3 5.5 8 5.5a7.029 7.029 0 0 0 2.79-.588zM5.21 3.088A7.028 7.028 0 0 1 8 2.5c5 0 8 5.5 8 5.5s-.939 1.721-2.641 3.238l-2.062-2.062a3.5 3.5 0 0 0-4.474-4.474L5.21 3.089z"/>
+                    <path d="M5.525 7.646a2.5 2.5 0 0 0 2.829 2.829l-2.83-2.829zm4.95.708-2.829-2.83a2.5 2.5 0 0 1 2.829 2.829zm3.171 6-12-12 .708-.708 12 12-.708.708z"/></svg></a>
+                </div>
+                <div class="div_password_perfil">
+                    <label for="confPassword" class="form-label">Confirmar contraseña</label><br>
+                    <input type="password" name="confPassword" class="form-control" id="confPassword" >
+                    <a id="showConfPassword" onclick="mostrarContrasenya('confPassword', 'showConfPassword')" class="btn"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye-slash-fill" viewBox="0 0 16 16">
+                    <path d="m10.79 12.912-1.614-1.615a3.5 3.5 0 0 1-4.474-4.474l-2.06-2.06C.938 6.278 0 8 0 8s3 5.5 8 5.5a7.029 7.029 0 0 0 2.79-.588zM5.21 3.088A7.028 7.028 0 0 1 8 2.5c5 0 8 5.5 8 5.5s-.939 1.721-2.641 3.238l-2.062-2.062a3.5 3.5 0 0 0-4.474-4.474L5.21 3.089z"/>
+                    <path d="M5.525 7.646a2.5 2.5 0 0 0 2.829 2.829l-2.83-2.829zm4.95.708-2.829-2.83a2.5 2.5 0 0 1 2.829 2.829zm3.171 6-12-12 .708-.708 12 12-.708.708z"/></svg></a>
+                    <span class="error" id="confPasswordError" style="color: red;"></span>
+                </div>
+                <div>
+                    <button type="submit" class="btn btn-primary">Guardar cambios</button>
+                </div>
+            </form>
+        </div>
+        <div class="historial_perfil">
+            <h2>Historial de {{ user.username }}</h2>
+            <p><a style="color: green;">{{ ganadas }}</a> - <a style="color: red;">{{ perdidas }}</a></p>
+        </div>
+        <div class="equipos_perfil">
+            {% for i in 0..equipos|length - 1 %}
+                <div class="equipo_perfil">
+                <h2>Equipo Nº {{ i + 1 }} de {{ user.username }}</h2>
+                    <div class="weamons_equipo_perfil">
+                        {% for j in 0..equipos[i].weamons|length - 1 %}
+                            <div class="weamon_equipo_perfil" onclick="weamon_info({{ equipos[i].weamons[j].id }});">
+                                <img src="{{ asset ('img/' ~ equipos[i].weamons[j].img) }}" class="img-fluid">
+                                <p style="margin-top: 10px; font-size: 1.2em;font-weight: bold;">{{ equipos[i].weamons[j].nom }}</p>
+                                <label class="tipus_perfil tipo_{{ equipos[i].weamons[j].tipus.nom }}_perfil">{{ equipos[i].weamons[j].tipus.nom }}</label>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            {% endfor %}
         </div>
     </div>
+
+    {{ include('footer.html.twig') }}
 {% endblock %}

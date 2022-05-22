@@ -7,7 +7,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/js/select2.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/css/select2.css" />
-
     <script src="{{ asset('javascript/pregame.js') }}"></script>
     <script src="{{ asset('javascript/client.js') }}"></script>
 
@@ -17,41 +16,99 @@
     <div class="padre_pregame">
         <div class="principal_pregame">
             <div class="equipos_pregame">
+                <h1>Preparate para la batalla</h1>
+                <p>Equipo seleccionado:</p>
                 <form name="pregame" action="{{ path('cambiarWeamons') }}" method="post">
-                    <select id="equipoSelec" name="equipoSelec">
+                    <select id="equipoSelec" name="equipoSelec" class="equipoSelec_pregame" >
                         {% for i in 1..equipos|length %}
-                            <option value="{{ equipos[i-1].id }}" selected>{{ i }}</option>
+                            <option value="{{ equipos[i-1].id }}">Equipo {{ i }}</option>
                         {% endfor %}
                     </select>
                     <div class="weamons_pregame">
                         {% for i in 1..equipos|length %}
                             <div id="equipo{{ i }}" class="equipo_pregame">
-                                {% for j in 1..equipos[i-1].weamons|length %}
-                                    <select id="equipo{{ i }}-{{ j }}" name="equipo{{ i }}-{{ j }}" class="form-control" style="width: 200px;">
-                                        {% for weamon in weamons %}
-                                            {% if weamon.id == equipos[i-1].weamons[j-1].id %}
-                                                <option selected value="{{ weamon.id }}" data-img_src="{{ asset ('img/' ~ weamon.img) }}">{{ weamon.nom }}</option>
-                                            {% else %}
-                                                <option value="{{ weamon.id }}" data-img_src="{{ asset ('img/' ~ weamon.img) }}">{{ weamon.nom }}</option>
-                                            {% endif %}
-                                        {% endfor %}
-                                    </select>
-                                {% endfor %}
+                                <div class="weamons_equipo_pregame">
+                                    {% for j in 1..equipos[i-1].weamons|length %}
+                                        <select id="equipo{{ i }}-{{ j }}" name="equipo{{ i }}-{{ j }}" class="form-control" style="width: 200px;">
+                                            {% for weamon in weamons %}
+                                                {% if weamon.id == equipos[i-1].weamons[j-1].id %}
+                                                    <option selected value="{{ weamon.id }}" data-img_src="{{ asset ('img/' ~ weamon.img) }}">{{ weamon.nom }}</option>
+                                                {% else %}
+                                                    <option value="{{ weamon.id }}" data-img_src="{{ asset ('img/' ~ weamon.img) }}">{{ weamon.nom }}</option>
+                                                {% endif %}
+                                            {% endfor %}
+                                        </select>
+                                    {% endfor %}
+                                </div>
                             </div>
                         {% endfor %}
                     </div>
-                    <button type="submit" class="btn btn-primary">Guardar equip</button>
+                    <button type="submit" class="btn btn-primary" style="border: 2px black solid;">Guardar equipo</button>
                 </form>
             </div>
+
+            <div class="bestWeamons_pregame">
+                <h2>Weamons con major ataque</h2>
+                <div class="weamons_bestWeamons_pregame">
+                    {% for weamon in bestAtacWeamons %}
+                        <div class="bestWeamon_pregame" onclick="weamon_info({{ weamon.id }});">
+                            <img src="{{ asset ('img/' ~ weamon.img) }}" class="img-fluid">
+                            <p style="margin-top: 10px; font-size: 1.2em;">{{ weamon.nom }}</p>
+                            <label class="tipus_pregame tipo_{{ weamon.tipus.nom }}_pregame">{{ weamon.tipus.nom }}</label>
+                            <p style="font-weight: bold;">Ataque: {{ weamon.atac }}</p>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="bestWeamons_pregame">
+                <h2>Weamons con major vida</h2>
+                <div class="weamons_bestWeamons_pregame">
+                    {% for weamon in bestVidaWeamons %}
+                        <div class="bestWeamon_pregame" onclick="weamon_info({{ weamon.id }});">
+                            <img src="{{ asset ('img/' ~ weamon.img) }}" class="img-fluid">
+                            <p style="margin-top: 10px; font-size: 1.2em;">{{ weamon.nom }}</p>
+                            <label class="tipus_pregame tipo_{{ weamon.tipus.nom }}_pregame">{{ weamon.tipus.nom }}</label>
+                            <p style="font-weight: bold;">Vida: {{ weamon.vida }}</p>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="bestWeamons_pregame">
+                <h2>Weamons con major velocidad</h2>
+                <div class="weamons_bestWeamons_pregame">
+                    {% for weamon in bestAtacWeamons %}
+                        <div class="bestWeamon_pregame" onclick="weamon_info({{ weamon.id }});">
+                            <img src="{{ asset ('img/' ~ weamon.img) }}" class="img-fluid">
+                            <p style="margin-top: 10px; font-size: 1.2em;">{{ weamon.nom }}</p>
+                            <label class="tipus_pregame tipo_{{ weamon.tipus.nom }}_pregame">{{ weamon.tipus.nom }}</label>
+                            <p style="font-weight: bold;">Velocidad: {{ weamon.velocitat }}</p>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <!--<div class="ranking_pregame">
+                <tr>
+                    <th></th>
+                </tr>
+                {% for i in 1..ranking|length %}
+                    {% for usuari in usuaris %}
+                        {% if ranking[i - 1].1 == usuari.id %}
+                            <p style="color: white;">{{ i }} {{ usuari.username }} {{ ranking[i - 1].2 }}</p>
+                        {% endif %}
+                    {% endfor %}
+                {% endfor %}
+                {% if ranking|length < 10 %}
+                    {% for i in (ranking|length + 1)..10 %}
+                        <p style="color: white;">{{ i }} ----------------------</p>
+                    {% endfor %}
+                {% endif %}
+            </div>-->
         </div>
     </div>
-    <div id="chat">
-<form name="publish">
-    <input hidden type="text" name="user" maxlength="50" value="{{ username }}" />
-  <label>Message: </label><input type="text" name="message" maxlength="50" />
-  <input type="submit" value="Send" />
-</form>
+    
+    {{ include('footer.html.twig') }}
 
-<div id="messages"></div>
-</div>
 {% endblock %}

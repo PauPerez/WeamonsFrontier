@@ -45,6 +45,18 @@ class HistorialRepository extends ServiceEntityRepository
         }
     }
 
+    public function prueba()
+    {
+        return $this->createQueryBuilder('h')
+            ->orderBy('sum(h.Resultat)', 'DESC')
+            ->groupBy("h.usuari")
+            ->select("identity(h.usuari), sum(h.Resultat)")
+            ->setMaxResults(10)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
     // /**
     //  * @return Historial[] Returns an array of Historial objects
     //  */

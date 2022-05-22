@@ -29,11 +29,6 @@ class Historial
     private $Usuari;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Usuari::class)
-     */
-    private $Contrincant;
-
-    /**
      * @ORM\ManyToOne(targetEntity=Usuari::class, inversedBy="historials")
      */
     private $usuari;
@@ -70,18 +65,6 @@ class Historial
     public function setUsuariP(?Usuari $Usuari): self
     {
         $this->usuari = $Usuari;
-
-        return $this;
-    }
-
-    public function getContrincant(): ?Usuari
-    {
-        return $this->Contrincant;
-    }
-
-    public function setContrincant(?Usuari $Contrincant): self
-    {
-        $this->Contrincant = $Contrincant;
 
         return $this;
     }

@@ -8,11 +8,10 @@ body {
 
 .padre_pregame {
     margin-top: 10em;
-    margin-bottom: 5em;
     border: 4px solid #006c97;
     border-radius: 20px;
     background-color: rgb(0, 177, 177);
-    background-image: url(../img/fondos/weadex.png);
+    background-image: url(../img/fondos/fondo_paginas.png);
     height: 100%;
     margin-right: 5vw;
     margin-left: 5vw;
@@ -26,36 +25,166 @@ body {
     justify-content: center;
     border-radius: 20px;
     border: 4px solid #006c97;
-    background-image: url(../img/fondos/weadex2.png);
+    background-image: url(../img/fondos/fondo_paginas2.png);
 }
 
 .equipos_pregame {
-    background-color: red;
+    background-color: rgb(228, 228, 228);
+    background-image: url(../img/fondos/fondo_paginas2.png);
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    width: 34em;
-    /*height: 34em;*/
+    text-align: center;
+    width: 60em;
     margin: 20px;
     padding: 20px;
     border-radius: 5px;
 }
 
-#chat{
-    max-width: fit-content;
-    background-color: cyan;
-    padding: 15px;
-    border-radius: 5%;
-    border: 2px darkblue solid;
+.equipos_pregame button {
+    background-color: #006c97;
 }
 
-#chat #messages{
-color: white;
-background-color: black;
-border-radius: 3%;
-border: 1px blue solid;
-opacity: 40%;
-overflow: scroll; 
-height: 200px
+.equipos_pregame h1 {
+    font-size: 2.5em;
+    font-weight: bold;
 }
+
+.equipos_pregame p {
+    color: rgb(4, 34, 43);
+    font-size: 1.5em;
+}
+
+#equipoSelec {
+    width: 15em;
+    background-color: #006c97;
+    color: white;
+    border: 2px black solid;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.weamons_pregame {
+    background-color: rgb(4, 34, 43);
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.weamons_equipo_pregame {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 20px;
+}
+
+.bestWeamons_pregame {
+    background-color: rgb(228, 228, 228);
+    background-image: url(../img/fondos/pregame2.png);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+    width: 60em;
+    margin: 20px;
+    padding: 20px;
+    border-radius: 5px;
+}
+
+.weamons_bestWeamons_pregame {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.bestWeamon_pregame {
+    background-color: rgb(163, 163, 163);
+    border: 2px black solid;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: 30px;
+}
+
+.bestWeamons_pregame h2 {
+    font-size: 2em;
+    font-weight: bold;
+}
+
+.bestWeamon_pregame img {
+    border-radius: 1px;
+    background-color: rgb(9, 56, 70);
+    padding: 20px;
+}
+
+.bestWeamon_pregame p {
+    color: rgb(4, 24, 31);
+}
+
+.tipus_pregame {
+    color: white;
+    width: 100px;
+    text-align: center;
+    font-size: 0.9em;
+    margin-bottom: 10px;
+    padding: 4px;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.tipo_Planta_pregame {
+    background-color: rgb(12, 173, 12);
+}
+
+.tipo_Fuego_pregame {
+    background-color: rgb(255, 61, 13);
+}
+
+.tipo_Agua_pregame {
+    background-color: rgb(13, 158, 255);
+}
+
+.bestWeamon_pregame:hover {
+    animation: desplazarDiv 0.2s;
+    cursor: pointer;
+}
+
+@keyframes desplazarDiv {
+    0% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(10px);
+    }
+    100% {
+        transform: translateY(0px);
+        
+    }
+}
+
+
+
+/*TOCAR*/
+.ranking_pregame {
+    background-color: rgb(228, 228, 228);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 31em;
+    /*height: 34em;*/
+    margin: 20px;
+    padding: 20px;
+    border-radius: 5px;
+}
+/*TOCAR*/

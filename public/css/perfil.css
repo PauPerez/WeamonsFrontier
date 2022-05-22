@@ -11,22 +11,20 @@ body {
 .padre_perfil {
     margin-top: 10em;
     height: 100%;
-    margin-right: 5vw;
-    margin-left: 5vw;
+    margin-right: 2vw;
+    margin-left: 2vw;
     display: flex;
     justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    flex-wrap: wrap;
+    flex-direction: row;
 }
 
-.datos_perfil {
+
+.form_perfil {
     background-color: rgb(228, 228, 228);
     border: solid rgb(65, 154, 172);
     border-radius: 10px;
     opacity: 0.9;
-    width: 40em;
-    height: 51em;
+    max-width: 40em;
     display: flex;
     flex-direction: column;
     margin-left: 50px;
@@ -34,14 +32,14 @@ body {
     margin-bottom: 50px;
 }
 
-.datos_perfil h1 {
+.form_perfil h1 {
     margin: 10px;
     font-weight: bold;
     font-size: 2em;
     color: rgb(10, 34, 37);
 }
 
-.datos_perfil div {
+.form_perfil div {
     margin: 10px;
 }
 
@@ -54,14 +52,14 @@ body {
     padding: 10px;
 }
 
-.datos_perfil input[type="text"], .datos_perfil input[type="password"], .datos_perfil input[type="email"] {
+.form_perfil input[type="text"], .form_perfil input[type="password"], .form_perfil input[type="email"] {
     background-color: rgb(13, 44, 49);
     color: white;
     border-color: rgb(65, 154, 172);
     opacity: 0.8;
 }
 
-.datos_perfil input[type="text"]:focus, .datos_perfil input[type="password"]:focus, .datos_perfil input[type="email"] {
+.form_perfil input[type="text"]:focus, .form_perfil input[type="password"]:focus, .form_perfil input[type="email"] {
     background-color: rgb(13, 44, 49);
     color: white;
 }
@@ -105,7 +103,7 @@ button[type="submit"]:focus {
     border: solid rgb(65, 154, 172);
     border-radius: 10px;
     opacity: 0.9;
-    width: 40em;
+    max-width: 40em;
     height: 10em;
     display: flex;
     justify-content: center;
@@ -130,7 +128,7 @@ button[type="submit"]:focus {
 }
 
 .equipos_perfil {
-    width: 70em;
+    max-width: 70em;
     display: flex;
     flex-direction: column;
     margin-left: 20px;
@@ -139,7 +137,6 @@ button[type="submit"]:focus {
 
 .equipo_perfil {
     background-color: rgb(228, 228, 228);
-    width: 100%;
     margin-bottom: 20px;
     border-radius: 5px;
 }
@@ -220,5 +217,12 @@ button[type="submit"]:focus {
     100% {
         transform: translateY(0px);
         
+    }
+}
+
+/* Tablet and mobile */
+@media all and (max-width: 1200px) {
+    .padre_perfil {
+        flex-wrap: wrap;
     }
 }

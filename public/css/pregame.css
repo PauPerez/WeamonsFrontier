@@ -28,6 +28,31 @@ body {
     background-image: url(../img/fondos/fondo_paginas2.png);
 }
 
+.ranking_pregame {
+    background-color: rgb(228, 228, 228);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 31em;
+    margin: 20px;
+    padding: 20px;
+    border-radius: 5px;
+}
+
+.ranking_pregame h1 {
+    margin-bottom: 30px;
+    text-align: center;
+    font-size: 2em;
+    font-weight: bold;
+    color: rgb(4, 24, 31);
+}
+
+.ranking_pregame p {
+    font-size: 1.5em;
+    color: rgb(4, 24, 31);
+}
+
 .equipos_pregame {
     background-color: rgb(228, 228, 228);
     background-image: url(../img/fondos/fondo_paginas2.png);
@@ -172,19 +197,9 @@ body {
     }
 }
 
-
-
-/*TOCAR*/
-.ranking_pregame {
-    background-color: rgb(228, 228, 228);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    width: 31em;
-    /*height: 34em;*/
-    margin: 20px;
-    padding: 20px;
-    border-radius: 5px;
+/* Tablet and Mobile */
+@media all and (max-width: 600px) {
+    .ranking_pregame p {
+        font-size: 0.9em;
+    }
 }
-/*TOCAR*/

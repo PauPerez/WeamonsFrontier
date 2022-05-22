@@ -47,6 +47,22 @@
                 </form>
             </div>
 
+            <div class="ranking_pregame">
+                <h1>Ranking de jugadores</h1>
+                {% for i in 1..ranking|length %}
+                    {% for usuari in usuaris %}
+                        {% if ranking[i - 1].1 == usuari.id %}
+                            <p>{{ i }}. {{ usuari.username }} Puntos: {{ ranking[i - 1].2 }}</p>
+                        {% endif %}
+                    {% endfor %}
+                {% endfor %}
+                {% if ranking|length < 10 %}
+                    {% for i in (ranking|length + 1)..10 %}
+                        <p>{{ i }}. ________________ Puntos: 0</p>
+                    {% endfor %}
+                {% endif %}
+            </div>
+
             <div class="bestWeamons_pregame">
                 <h2>Weamons con major ataque</h2>
                 <div class="weamons_bestWeamons_pregame">
@@ -88,24 +104,6 @@
                     {% endfor %}
                 </div>
             </div>
-
-            <!--<div class="ranking_pregame">
-                <tr>
-                    <th></th>
-                </tr>
-                {% for i in 1..ranking|length %}
-                    {% for usuari in usuaris %}
-                        {% if ranking[i - 1].1 == usuari.id %}
-                            <p style="color: white;">{{ i }} {{ usuari.username }} {{ ranking[i - 1].2 }}</p>
-                        {% endif %}
-                    {% endfor %}
-                {% endfor %}
-                {% if ranking|length < 10 %}
-                    {% for i in (ranking|length + 1)..10 %}
-                        <p style="color: white;">{{ i }} ----------------------</p>
-                    {% endfor %}
-                {% endif %}
-            </div>-->
         </div>
     </div>
     

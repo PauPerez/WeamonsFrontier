@@ -8,7 +8,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/js/select2.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/css/select2.css" />
     <script src="{{ asset('javascript/pregame.js') }}"></script>
-    <script src="{{ asset('javascript/client.js') }}"></script>
 
 {% endblock %}
 {% block body %}
@@ -44,7 +43,9 @@
                         {% endfor %}
                     </div>
                     <button type="submit" class="btn btn-primary" style="border: 2px black solid;">Guardar equipo</button>
+                    <button id="jugar" class="btn btn-primary" style="border: 2px black solid;">Jugar</button>
                 </form>
+                
             </div>
 
             <div class="ranking_pregame">
@@ -106,7 +107,9 @@
             </div>
         </div>
     </div>
-    
     {{ include('footer.html.twig') }}
+
+    <p id="redirectToGame" hidden>{{ path('game', {id:0}) }}</p>
+    
 
 {% endblock %}

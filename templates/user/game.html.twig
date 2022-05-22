@@ -7,7 +7,7 @@
 {% endblock %}
 {% block javascripts %}
 	<script src="{{ asset('javascript/Battle.js') }}"/>
-
+	
 {% endblock %}
 {% block body %}
 	<div id="battle" class="battle">
@@ -60,6 +60,16 @@
 		</div>
 	{% endfor %}
 	<div id="textMenu" class="textMenu" style="display:none"></div>
+<div id="chat">
+<form name="publish">
+    <input hidden type="text" name="user" maxlength="50" value="{{ username }}" />
+  <label>Message: </label><input type="text" name="message" maxlength="50" />
+  <input type="submit" value="Send" />
+</form>
+<div id="messages"></div>
+<a class="btn" href="{{ path('principal') }}">Home</a>
+</div>
+
 	<p id="activeEnemy" hidden>{{ enemics[0].id }}e</p>
 	<p id="activeWeamon" hidden>{{ weamons[0].id }}</p>
 	<p id="deadEnemies" hidden>0</p>

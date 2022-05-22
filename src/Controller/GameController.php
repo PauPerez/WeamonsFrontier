@@ -18,16 +18,16 @@ use App\Repository\WeamonRepository;
 class GameController extends AbstractController
 {
     /**
-     * @Route("/user/game", name="game")
+     * @Route("/user/game/{id}", name="game")
      */
-    public function game()
+    public function game($id)
     {
         $user = $this->getUser();
         $username = $user->getUsername();
-        $equip = $user->getEquips()[0];
-        if ($equip == null) {
-            return $this->render("principal.html.twig", ["username"=>$user->getUsername()]);
-        }
+        $equip = $this->getDoctrine()
+        ->getRepository(Equip::class)
+        ->find($id);
+
         $weamons = $this->getDoctrine()
             ->getRepository(Weamon::class)
             ->findAll();
@@ -53,6 +53,6 @@ class GameController extends AbstractController
             
         }
 
-        return $this->render('game/game.html.twig',["weamons"=>$equip->getWeamons(), "enemics"=>$enemics, 'username'=>$username]);
+        return $this->render('user/game.html.twig',["weamons"=>$equip->getWeamons(), "enemics"=>$enemics, 'username'=>$username]);
     }
 }

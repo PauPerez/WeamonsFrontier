@@ -1,16 +1,11 @@
-.relleno {
-    width: 500px;
-    height: 500px;
-}
-
 body {
     background-color: rgb(4, 34, 43);
-    background-image: url(../img/fondos/weadex2.png);
+    background-image: url(../img/fondos/fondo_paginas2.png);
 }
 
 .inicio_principal {
     margin-top: 8em;
-    background-image: url(../img/fondos/principal7.jpg);
+    background-image: url(../img/fondos/fondo_principal.jpg);
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
@@ -139,15 +134,18 @@ body {
 .botones_principal {
     background-color: rgb(29, 214, 205);
     height: 3em;
-    font-weight: bold;
-    color: rgb(4, 34, 43);
     border-color: rgb(29, 214, 205);
 }
 
+.botones_principal a {
+    text-decoration: none;
+    font-weight: bold;
+    color: rgb(4, 34, 43);
+}
+
 .botones_principal:hover {
-    background-color: rgb(22, 47, 54);
-    color: rgb(29, 214, 205);
-    border-color: rgb(4, 34, 43);
+    background-color: rgb(21, 189, 180);
+    border-color: rgb(21, 189, 180);
 }
 
 /* Tablet and mobile */
@@ -167,10 +165,20 @@ body {
     }
 
     .div_texto_principal {
-        margin-top: 4em;
+        margin-top: 0em;
         width: 100%;
         padding: 3em;
         min-width: 10em;
         text-align: center;
+    }
+}
+
+@media all and (max-width: 500px) {
+    .div_texto_principal p {
+        font-size: 1em;
+    }
+
+    .div_texto_principal h2 {
+        font-size: 2em;
     }
 }

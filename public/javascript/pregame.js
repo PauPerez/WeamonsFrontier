@@ -51,12 +51,16 @@ var equipoS = $('#equipoSelec');
 
 function showEquipoSelec() {
     for (let i = 1; i <= N_EQUIPS; i++) {
-        if (i == parseInt($("#equipoSelec option:selected").text()))
+        if (i == parseInt($("#equipoSelec option:selected").text().substr(-1)))
             $(`#equipo${i}`).css({'display': 'block'});
         else
             $(`#equipo${i}`).css({'display': 'none'});
     }
 
+}
+
+function weamon_info(id) {
+    window.location = "../user/weamon-info/" + id;
 }
 
 $(document).ready(showEquipoSelec);

@@ -97,7 +97,7 @@ class MasterController extends AbstractController
             ->to($_POST['email'])
             ->subject('Verificar creación cuenta Weamon Frontiers')
             ->text('Sending emails is fun again!')
-            ->htmlTemplate('sendVerificationToken.twig')
+            ->htmlTemplate('sendVerificationToken.html.twig')
             ->context(['link' => $this->getParameter('link_servidor'),
               'token' => $usuari->getVerificationToken(),
               'mail' => $usuari->getEmail()]);
@@ -151,7 +151,7 @@ class MasterController extends AbstractController
           $equip->setUsuari($usuari);
           $equip->setUsuari2($usuari);
           for ($j=1; $j <= count($allWeamons); $j++) {
-            if (count($equip->getWeamons()) < 4 && $allWeamons[$j]->getNEvolucion() % 3 == 0)
+            if (count($equip->getWeamons()) < 4)
               $equip->addWeamon($allWeamons[$j]);
           }
             $entityManager->persist($equip);
@@ -405,26 +405,38 @@ class MasterController extends AbstractController
                 switch ($weamon->getNEvolucion()) {
                     case 1:
                         $primera = $weamons[$i];
-                        if ($weamons[$i+1]->getNEvolucion() == 2) {
-                            $segunda = $weamons[$i+1];
-                            if ($weamons[$i+2]->getNEvolucion() == 3)
-                                $tercera = $weamons[$i+2];
+                        if ($i + 1 < count($weamons)) {
+                          if ($weamons[$i+1]->getNEvolucion() == 2) {
+                              $segunda = $weamons[$i+1];
+                              if ($i + 2 < count($weamons)) {
+                                if ($weamons[$i+2]->getNEvolucion() == 3)
+                                    $tercera = $weamons[$i+2];
+                                }
+                          }
                         }
                         break;
                     case 2:
                         $segunda = $weamons[$i];
-                        if ($weamons[$i-1]->getNEvolucion() == 1)
-                            $primera = $weamons[$i-1];
+                        if ($i - 1 > 0) {
+                          if ($weamons[$i-1]->getNEvolucion() == 1)
+                              $primera = $weamons[$i-1];
+                        }
     
-                        if ($weamons[$i+1]->getNEvolucion() == 3)
-                                $tercera = $weamons[$i+1];
+    			 if ($i + 1 < count($weamons)) {
+                          if ($weamons[$i+1]->getNEvolucion() == 3)
+                                  $tercera = $weamons[$i+1];
+                        }
                         break;
                     case 3:
                         $tercera = $weamons[$i];
-                        if ($weamons[$i-1]->getNEvolucion() == 2) {
-                            $segunda = $weamons[$i-1];
-                            if ($weamons[$i-2]->getNEvolucion() == 1)
-                                $primera = $weamons[$i-2];
+                        if ($i - 1 > 0) {
+                          if ($weamons[$i-1]->getNEvolucion() == 2) {
+                              $segunda = $weamons[$i-1];
+                              if ($i - 2 > 0) {
+                                if ($weamons[$i-2]->getNEvolucion() == 1)
+                                    $primera = $weamons[$i-2];
+                              }
+                          }
                         }
                         break;
                 }        

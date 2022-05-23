@@ -25,21 +25,6 @@ class UsuariType extends AbstractType
             ->add('username', TextType::class, ['attr'=>['class'=>'form-control']])
             ->add('email', TextType::class, ['attr'=>['class'=>'form-control']])
             ->add('password', PasswordType::class, ['attr'=>['class'=>'form-control']])
-            ->add('img', FileType::class, [
-                'label' => 'Imatge de perfil',
-                'mapped' => false,
-                'required' => false,
-                'constraints' => [
-                    new File([
-                        'maxSize' => '1024k',
-                        'mimeTypes' => [
-                            'image/png',
-                            'image/jpeg'
-                        ],
-                        'mimeTypesMessage' => "Només s'accepten imatges png/jpeg de 1024k o menys",
-                    ])
-                ],
-            ])
             ->add('Roles', ChoiceType::class, [
                 'choices'  => [
                     'Admin' => "ROLE_ADMIN",

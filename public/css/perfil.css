@@ -198,6 +198,11 @@ button[type="submit"]:focus {
     background-color: rgb(255, 61, 13);
 }
 
+.tipo_Electrico_perfil {
+    background-color: rgb(255, 219, 17);
+    color: black;
+}
+
 .tipo_Agua_perfil {
     background-color: rgb(13, 158, 255);
 }

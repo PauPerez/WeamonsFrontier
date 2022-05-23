@@ -10,7 +10,7 @@ window.onload = function () {
     document.getElementById(document.getElementById("activeWeamon").innerHTML+"atacMenu").style.display = "flex";
 
     //CHAT
-    let host = "localhost";
+    /*let host = "localhost";
   let urlws = `ws://${host}:8080/ws`;
   let api = `http://${host}:8080/api`;
   let socket = new WebSocket(urlws);;
@@ -44,7 +44,7 @@ window.onload = function () {
     document.getElementById('messages').prepend(messageElem);
   }
 
-  setTimeout(connect, 200);
+  setTimeout(connect, 200);*/
 }
 
 function attack() {

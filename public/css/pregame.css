@@ -110,7 +110,7 @@ body {
 
 .bestWeamons_pregame {
     background-color: rgb(228, 228, 228);
-    background-image: url(../img/fondos/pregame2.png);
+    background-image: url(../img/fondos/fondo_paginas.png);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -173,6 +173,11 @@ body {
 
 .tipo_Fuego_pregame {
     background-color: rgb(255, 61, 13);
+}
+
+.tipo_Electrico_pregame {
+    background-color: rgb(255, 219, 17);
+    color: black;
 }
 
 .tipo_Agua_pregame {

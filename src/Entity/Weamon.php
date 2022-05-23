@@ -70,16 +70,6 @@ class Weamon
      */
     private $nEvolucion;
 
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $preevolucio;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $evolucio;
-
     public function __construct()
     {
         $this->Moviments = new ArrayCollection();
@@ -222,27 +212,4 @@ class Weamon
         return $this;
     }
 
-    public function getPreevolucio(): ?string
-    {
-        return $this->preevolucio;
-    }
-
-    public function setPreevolucio(?string $preevolucio): self
-    {
-        $this->preevolucio = $preevolucio;
-
-        return $this;
-    }
-
-    public function getEvolucio(): ?string
-    {
-        return $this->evolucio;
-    }
-
-    public function setEvolucio(?string $evolucio): self
-    {
-        $this->evolucio = $evolucio;
-
-        return $this;
-    }
 }

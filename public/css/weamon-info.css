@@ -48,6 +48,10 @@ body {
     background-image: url(../img/fondos/Fuego_weamonInfo.png);
 }
 
+.cabecera_Electrico_weamonInfo {
+    background-image: url(../img/fondos/Electrico_weamonInfo.png);
+}
+
 .cabecera_Agua_weamonInfo {
     background-image: url(../img/fondos/Agua_weamonInfo.png);
 }
@@ -124,6 +128,11 @@ body {
     background-color: rgb(255, 61, 13);
 }
 
+.tipo_Electrico_weamonInfo {
+    background-color: rgb(255, 219, 17);
+    color: black;
+}
+
 .tipo_Agua_weamonInfo {
     background-color: rgb(13, 158, 255);
 }
@@ -192,6 +201,10 @@ body {
 
 .moviment_Fuego_weamonInfo {
     background-color: rgb(255, 61, 13);
+}
+
+.moviment_Electrico_weamonInfo {
+    background-color: rgb(255, 219, 17);
 }
 
 .moviment_Agua_weamonInfo {

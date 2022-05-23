@@ -97,7 +97,6 @@ class HistorialController extends AbstractController
 
     $historial->setUsuari($user);
     $historial->setUsuariP($user);
-    $historial->setContrincant($user);
     $historial->setResultat($victory);
 
     $notification ="";

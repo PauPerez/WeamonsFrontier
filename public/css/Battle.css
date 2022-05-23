@@ -153,9 +153,15 @@ transition: width .5s linear;
 }
 
 .tipus[tipus="Fuego"]{
-    color: red;
-    background-color: yellow;
+    color: yellow;
+    background-color: red;
     border: 1px solid orange;
+}
+
+.tipus[tipus="Electrico"]{
+    color: pink;
+    background-color: purple;
+    border: 1px solid pink;
 }
 
 .tipus[tipus="Agua"]{

@@ -12,7 +12,9 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 use App\Entity\Usuari;
 use App\Entity\Equip;
+use App\Entity\Weamon;
 use App\Repository\UsuariRepository;
+use App\Repository\WeamonRepository;
 use App\Form\UsuariType;
 
 use Symfony\Component\Mailer\MailerInterface;
@@ -51,7 +53,7 @@ class UsuariController extends AbstractController
     /**
     * @Route("/admin/usuari/new", name="usuari_new")
     */
-    public function new(Request $request, FileUploader $fileUploader)
+    public function new(Request $request, FileUploader $fileUploader, UserPasswordHasherInterface $passwordHasher)
     {
         $usuari = new Usuari();
         //podem personalitzar el text del botó passant una opció 'submit' al builder de la classe usuariType
@@ -60,25 +62,36 @@ class UsuariController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-
+	$allWeamons = $this->getDoctrine()
+          ->getRepository(Weamon::class)
+          ->findAll();
           // recollim els camps del formulari en l'objecte usuari
-            $usuari = $form->getData();
+            $usuari->setUsername($form->get('username')->getData());
+        $usuari->setEmail($form->get('email')->getData());
+        $usuari->setRoles($form->get('Roles')->getData());
+        $usuari->setImg("avatares/trainer_male_C.png");
+        $usuari->setIsVerified($form->get('is_verified')->getData());
 
-            $brochureFile = $form->get('img')->getData();
-            if ($brochureFile) {
-                $brochureFileName = $fileUploader->upload($brochureFile, $usuari->getUsername(), "avatares/");
-                $usuari->setImg("avatares/".$brochureFileName);
-            }else{
-                $this->addFlash(
-                    'notice',
-                    "has d'afegir una imatge!"
-                );
-                return $this->redirectToRoute('usuari_new');
-            }
+            $hashedPassword = $passwordHasher->hashPassword(
+          $usuari,
+          $form->get('password')->getData()
+        );
+        $usuari->setPassword($hashedPassword);
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($usuari);
             $entityManager->flush();
 
+for ($i=0; $i < 4; $i++) { 
+          $equip = new Equip();
+          $equip->setUsuari($usuari);
+          $equip->setUsuari2($usuari);
+          for ($j=1; $j <= count($allWeamons); $j++) {
+            if (count($equip->getWeamons()) < 4)
+              $equip->addWeamon($allWeamons[$j]);
+          }
+            $entityManager->persist($equip);
+            $entityManager->flush();
+        }
             $this->addFlash(
                 'notice',
                 'Nou usuari '.$usuari->getId().' creat!'
@@ -132,7 +145,7 @@ class UsuariController extends AbstractController
     /**
      * @Route("/admin/usuari/edit/{id<\d+>}", name="usuari_edit")
      */
-    public function edit($id, Request $request, FileUploader $fileUploader)
+    public function edit($id, Request $request, FileUploader $fileUploader,UserPasswordHasherInterface $passwordHasher)
     {
         $usuariRepository = $this->getDoctrine()
         ->getRepository(Usuari::class);
@@ -146,14 +159,16 @@ class UsuariController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
 
             // recollim els camps del formulari en l'objecte usuari
-            $usuari = $form->getData();
-
-            $brochureFile = $form->get('img')->getData();
-            if ($brochureFile) {
-                $brochureFileName = $fileUploader->upload($brochureFile, $usuari->getUsername(), "avatares/");
-                $usuari->setImg("avatares/".$brochureFileName);
-            }
-
+            $usuari->setUsername($form->get('username')->getData());
+        $usuari->setEmail($form->get('email')->getData());
+        $usuari->setRoles($form->get('Roles')->getData());
+        $usuari->setIsVerified($form->get('is_verified')->getData());
+            
+      $hashedPassword = $passwordHasher->hashPassword(
+          $usuari,
+          $form->get('password')->getData()
+        );
+        $usuari->setPassword($hashedPassword);
             $status = $usuariRepository
                 ->add($usuari);
 
